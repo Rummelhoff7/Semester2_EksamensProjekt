@@ -15,6 +15,9 @@
   <div class="form-container">
     <h2>Login</h2>
     <form th:action="@{/login}" th:object="${user}" method="post">
+      <div th:if="${errorMessage}" class="error-message">
+        <p th:text="${errorMessage}"></p>
+      </div>
       <label for="username">Brugernavn:</label>
       <input type="text" id="username" name="username" placeholder="Indtast dit brugernavn her" required>
 
