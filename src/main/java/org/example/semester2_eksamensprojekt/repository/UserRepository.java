@@ -16,13 +16,14 @@ public class UserRepository {
     private DataSource dataSource;
 
     public String authenticateUser(String name, String password) {
+        //her finder den role ud fra name og password
         String sql = "SELECT role FROM user WHERE name = ? AND password = ?";
 
         // Connect til database
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            // ? placeholders bliver sat ind i statements
+            // placeholders bliver sat ind i statements
             statement.setString(1, name);
             statement.setString(2, password);
 
