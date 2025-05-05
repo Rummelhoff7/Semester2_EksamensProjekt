@@ -1,5 +1,6 @@
 package org.example.semester2_eksamensprojekt.controller;
 
+import org.example.semester2_eksamensprojekt.model.Car;
 import org.example.semester2_eksamensprojekt.repository.BusinessDeveloperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,12 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+
 
 @Controller
 public class BusinessDeveloperController {
 
     @Autowired
     private BusinessDeveloperRepository businessDeveloperRepository;
+
 
     @GetMapping("/businessDeveloper")
     public String businessDeveloperPage(@RequestParam("user_role") String user_role, Model model) {
@@ -23,6 +27,11 @@ public class BusinessDeveloperController {
 
             double totalAmount = businessDeveloperRepository.totalamount();
             model.addAttribute("totalAmount", totalAmount);
+
+            ArrayList<Car> carList = businessDeveloperRepository.getAllRentedCars();
+            model.addAttribute("carList", carList);
+
+
 
             return "businessDeveloper";
         } else {
