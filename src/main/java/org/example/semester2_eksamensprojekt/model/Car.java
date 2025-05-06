@@ -2,7 +2,7 @@ package org.example.semester2_eksamensprojekt.model;
 
 public class Car {
     private int id;
-    private int framenumber;
+    private String framenumber;
     private String color;
     private String brand;
     private String model;
@@ -14,7 +14,7 @@ public class Car {
     private String status;
     private String img;
 
-    public Car(int id, int framenumber, String color, String brand, String model, int equipment_level, double steel_price, double registrationFee, double CO2_emissions, boolean limited, String status, String img) {
+    public Car(int id, String framenumber, String color, String brand, String model, int equipment_level, double steel_price, double registrationFee, double CO2_emissions, boolean limited, String status, String img) {
         this.id = id;
         this.framenumber = framenumber;
         this.color = color;
@@ -29,6 +29,10 @@ public class Car {
         this.img = img;
     }
 
+    public Car(){
+
+    }
+
     public int getId() {
         return id;
     }
@@ -37,11 +41,11 @@ public class Car {
         this.id = id;
     }
 
-    public int getFramenumber() {
+    public String getFramenumber() {
         return framenumber;
     }
 
-    public void setFramenumber(int framenumber) {
+    public void setFramenumber(String framenumber) {
         this.framenumber = framenumber;
     }
 
