@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Auto repair</title>
-</head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <body>
-<h1>Auto repair</h1>
-</body>
-</html>
+<div class="container">
+    <div class="square">
+        <form th:action="@{/createDamageReport}" th:object="${damagereport}" method="post">
+        <div>
+            <label for="car_id">Bil ID:</label>
+            <span>Bil ID</span>
+            <input type="text" id="car_id" name="car_id" placeholder="Indtast bilens id her" required>
+        </div>
+        <div>
+            <label for="date">Dato:</label>
+            <span>Dato</span>
+            <input type="date" id="date" name="date" placeholder="Indtast dato her" required>
+
+        </div>
+        <div class="button-row">
+            <button class="btn" type="submit">Opret Skadesrapport</button>
+        </div>
+        </form>
+    </div>
+
+</div>

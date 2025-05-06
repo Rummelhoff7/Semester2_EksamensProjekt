@@ -1,6 +1,8 @@
 package org.example.semester2_eksamensprojekt.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
+
 
 public class DamageReport {
     private int id;
