@@ -4,8 +4,6 @@ CREATE DATABASE BilabonnementDatabase;
 
 USE BilabonnementDatabase;
 
-
-
 CREATE TABLE leasing (
                          id INT AUTO_INCREMENT PRIMARY KEY,
                          car_id INT NOT NULL,
