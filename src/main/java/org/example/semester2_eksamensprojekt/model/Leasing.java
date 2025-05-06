@@ -9,7 +9,16 @@ public class Leasing {
     private LocalDate end_date;
     private double price;
     private boolean status;
-    private String customer;
+    private String customer_info;
+
+    public Leasing(int car_id, LocalDate start_date, LocalDate end_date, double price, boolean status, String customer) {
+        this.car_id = car_id;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.price = price;
+        this.status = status;
+        this.customer_info = customer;
+    }
 
     public Leasing(int id, int car_id, LocalDate start_date, LocalDate end_date, double price, boolean status, String customer) {
         this.id = id;
@@ -18,7 +27,7 @@ public class Leasing {
         this.end_date = end_date;
         this.price = price;
         this.status = status;
-        this.customer = customer;
+        this.customer_info = customer;
     }
 
     public int getId() {
@@ -69,11 +78,11 @@ public class Leasing {
         this.status = status;
     }
 
-    public String getCustomer() {
-        return customer;
+    public String getCustomer_info() {
+        return customer_info;
     }
 
-    public void setCustomer(String customer) {
-        this.customer = customer;
+    public void setCustomer_info(String customer_info) {
+        this.customer_info = customer_info;
     }
 }
