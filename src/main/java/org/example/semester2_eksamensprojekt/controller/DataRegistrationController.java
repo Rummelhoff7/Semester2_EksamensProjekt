@@ -3,6 +3,7 @@ package org.example.semester2_eksamensprojekt.controller;
 import ch.qos.logback.core.model.Model;
 import org.example.semester2_eksamensprojekt.model.Leasing;
 import org.example.semester2_eksamensprojekt.repository.DataRegistrationRepository;
+import org.example.semester2_eksamensprojekt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +16,19 @@ import java.time.LocalDate;
 public class DataRegistrationController {
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     DataRegistrationRepository dataRegistrationRepository;
 
     @GetMapping("/dataRegistration")
-    public String mainPage(){
-        return "dataRegistration";
+    public String mainPage(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
+        if(user_role.equals("data_registration") || user_role.equals("admin")) {
+            return "dataRegistration";
+        } else
+
+        model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
+        return "index";
     }
 
 
