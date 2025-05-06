@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS BilabonnementDatabase;
+DROP DATABASE IF EXISTS BilabonnementDatabase2;
 
-CREATE DATABASE BilabonnementDatabase;
+CREATE DATABASE BilabonnementDatabase2;
 
-USE BilabonnementDatabase;
+USE BilabonnementDatabase2;
 
 CREATE TABLE user (
                       id INT AUTO_INCREMENT PRIMARY KEY,
