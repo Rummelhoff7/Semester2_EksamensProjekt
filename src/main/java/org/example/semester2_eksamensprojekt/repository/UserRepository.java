@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 @Repository
 public class UserRepository {
+
     @Autowired
     private DataSource dataSource;
 

@@ -41,7 +41,7 @@ public class AutoRepairController {
 
         DamageReport damageReport = new DamageReport(car_id, date);
         autoRepairRepository.save(damageReport);
-        return "redirect:/autoRepair";
+        return "autoRepair";
 
 
 
