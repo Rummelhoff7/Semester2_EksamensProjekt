@@ -7,10 +7,10 @@
 <body>
 <div class="container">
     <div class="square">
-        <form th:action="@{/createDamageReport}" th:object="${damagereport}" method="post">
+        <form th:action="@{/saveDamageReport}"  method="post">
         <div>
             <label for="car_id">Bil ID:</label>
-            <span>Bil ID</span>
+
             <input type="text" id="car_id" name="car_id" placeholder="Indtast bilens id her" required>
         </div>
         <div>

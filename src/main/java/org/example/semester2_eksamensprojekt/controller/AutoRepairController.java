@@ -25,11 +25,10 @@ public class AutoRepairController {
     }
 
     @PostMapping ("/saveDamageReport")
-    public String saveDamageReport(@RequestParam ("id")int id,
-                                   @RequestParam ("car_id") int car_id,
+    public String saveDamageReport(@RequestParam ("car_id") int car_id,
                                    @RequestParam ("date") LocalDate date){
 
-        DamageReport damageReport = new DamageReport(id, car_id, date);
+        DamageReport damageReport = new DamageReport(car_id, date);
         autoRepairRepository.save(damageReport);
         return "redirect:/autoRepair";
 

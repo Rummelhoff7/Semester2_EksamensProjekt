@@ -17,13 +17,12 @@ public class AutoRepairRepository {
     private DataSource dataSource;
 
     public void save (DamageReport damageReport) {
-        String sql = "INSERT INTO damagereport(, id, car_id,current_date) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO damagereport( car_id,date) VALUES ( ?, ?)";
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, damageReport.getId());
-            statement.setInt(2, damageReport.getCar_id());
-            statement.setDate(3, damageReport.getDate());
+            statement.setInt(1, damageReport.getCar_id());
+            statement.setDate(2,java.sql.Date.valueOf( damageReport.getDate()));
 
             statement.executeUpdate();
 

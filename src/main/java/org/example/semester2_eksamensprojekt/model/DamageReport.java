@@ -14,6 +14,10 @@ public class DamageReport {
         this.car_id = car_id;
         this.date = date;
     }
+    public DamageReport(int car_id, LocalDate date) {
+        this.car_id = car_id;
+        this.date = date;
+    }
 
     public int getId() {
         return id;

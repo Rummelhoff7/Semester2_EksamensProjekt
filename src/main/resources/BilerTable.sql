@@ -31,7 +31,7 @@ INSERT INTO leasing (car_id, start_date, end_date, price, status, customer_info)
 CREATE TABLE damagereport (
                               id INT AUTO_INCREMENT PRIMARY KEY,
                               car_id INT NOT NULL,
-                              date DATE
+                              date DATE NOT NULL
     /*  FOREIGN KEY (car_id)
      REFERENCES car(id) */
 );
@@ -119,3 +119,4 @@ INSERT INTO cars(id, framenumber, color, brand, model, equipment_level, steel_pr
                                                                                                                                                 (25, 'ZFF67NFA4D0200025', 'Black', 'Ferrari', 'Portofino M', 4, 1000000.00, 1700000.00, 270.00, FALSE, 'Leased', 'ferrariblack.webp');
 
 ;
+INSERT INTO damagereport( car_id,date) VALUES ( 4,'2025-02-02');
