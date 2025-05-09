@@ -1,6 +1,8 @@
 package org.example.semester2_eksamensprojekt.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
+
 
 public class DamageReport {
     private int id;
@@ -9,6 +11,10 @@ public class DamageReport {
 
     public DamageReport(int id, int car_id, LocalDate date) {
         this.id = id;
+        this.car_id = car_id;
+        this.date = date;
+    }
+    public DamageReport(int car_id, LocalDate date) {
         this.car_id = car_id;
         this.date = date;
     }

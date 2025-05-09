@@ -4,8 +4,6 @@ CREATE DATABASE BilabonnementDatabase2;
 
 USE BilabonnementDatabase2;
 
-
-
 CREATE TABLE leasing (
                          id INT AUTO_INCREMENT PRIMARY KEY,
                          car_id INT NOT NULL,
@@ -19,13 +17,13 @@ CREATE TABLE leasing (
 );
 
 INSERT INTO leasing (car_id, start_date, end_date, price, status, customer_info) VALUES
-                                                                                     (1, '2025-05-02', '2025-09-02',40000.00, false, 'Markus Johansen'),
-                                                                                     (2, '2025-05-02', '2025-10-02',75000.00, false, 'Jakob Hansen'),
-                                                                                     (3, '2025-05-02', '2025-09-01',62000.00, false, 'Martin Gunnersen'),
-                                                                                     (4, '2025-05-02', '2025-10-02',56000.00, true, 'Alexander Frandsen'),
-                                                                                     (5, '2025-05-02', '2025-10-02',60000.00, true, 'Lukas Lucasson'),
-                                                                                     (6, '2025-05-02', '2025-11-01',80000.00, false, 'Sofie Jakobsen'),
-                                                                                     (7, '2025-05-02', '2025-12-24',88000.00, false, 'Amir Zakariasen')
+                        (1, '2025-05-02', '2025-09-02',40000.00, false, 'Markus Johansen'),
+                        (2, '2025-05-02', '2025-10-02',75000.00, false, 'Jakob Hansen'),
+                        (3, '2025-05-02', '2025-09-01',62000.00, false, 'Martin Gunnersen'),
+                        (4, '2025-05-02', '2025-10-02',56000.00, true, 'Alexander Frandsen'),
+                        (5, '2025-05-02', '2025-10-02',60000.00, true, 'Lukas Lucasson'),
+                        (6, '2025-05-02', '2025-11-01',80000.00, false, 'Sofie Jakobsen'),
+                        (7, '2025-05-02', '2025-12-24',88000.00, false, 'Amir Zakariasen')
 ;
 
 CREATE TABLE damagereport (
@@ -55,10 +53,6 @@ INSERT INTO damageitem (dmg_id, description, cost) VALUES
 ;
 
 
-
-
-
-
 CREATE TABLE user (
                       id INT AUTO_INCREMENT PRIMARY KEY,
                       name VARCHAR(100) NOT NULL UNIQUE,
@@ -70,7 +64,7 @@ INSERT INTO user(name, password, role) VALUES
                     ('demo', 'demo', 'admin'),
                     ('Mads','1234', 'data_registration'),
                     ('guney','1234','mechanic'),
-                    ('thamid','1234','business_developer')
+                    ('thamied','1234','business_developer')
 ;
 
 
@@ -117,5 +111,4 @@ INSERT INTO cars(id, framenumber, color, brand, model, equipment_level, steel_pr
                (23, 'YV1TS92D521000023', 'Blue', 'Volvo', 'XC60', 4, 210000.00, 300000.00, 135.00, TRUE, 'Leased', 'volvoxc60blue.jpg'),
                (24, 'VF1JZ1J0C567000024', 'White', 'Renault', 'Captur', 1, 90000.00, 170000.00, 120.00, FALSE, 'Available', 'renaultcapturwhite.webp'),
                (25, 'ZFF67NFA4D0200025', 'Black', 'Ferrari', 'Portofino M', 4, 1000000.00, 1700000.00, 270.00, FALSE, 'Leased', 'ferrariblack.webp');
-
 ;
