@@ -50,6 +50,31 @@ public class DataRegistrationController {
         // Kalder metode fra repository, som gemmer objektet i databasen.
         dataRegistrationRepository.save(leasing);
         // Returnerer til dataRegistration siden.
-        return "redirect:/dataRegistration";
+        return "/dataRegistration";
     }
+
+
+    @PostMapping("/deleteLeasing")
+    public String deleteLeasing(@RequestParam("id") int id){
+        dataRegistrationRepository.delete(id);
+
+        return "/dataRegistration";
+    }
+
+
+    @PostMapping("/saveUpdateLeasing")
+    public String postUpdateLeasing (@RequestParam("id") int id,
+                                     @RequestParam("car_id") int car_id,
+                                     @RequestParam("start_date") LocalDate start_date,
+                                     @RequestParam("end_date") LocalDate end_date,
+                                     @RequestParam("price") double price,
+                                     @RequestParam("status") boolean status,
+                                     @RequestParam("customer_info") String customer_info){
+
+        Leasing leasing = new Leasing (id, car_id, start_date, end_date, price, status, customer_info);
+        dataRegistrationRepository.update(leasing);
+
+        return "/dataRegistration";
+    }
+
 }
