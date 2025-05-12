@@ -6,14 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.Date;
-
-
 
 @Controller
 public class AutoRepairController {
@@ -42,9 +38,6 @@ public class AutoRepairController {
         DamageReport damageReport = new DamageReport(car_id, date);
         autoRepairRepository.save(damageReport);
         return "autoRepair";
-
-
-
 
     }
 }
