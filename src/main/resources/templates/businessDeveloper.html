@@ -17,8 +17,48 @@
         </div>
     </div>
 </div>
+<h1>Udlejet biler</h1>
 <div class="container">
-    <div class="square" th:each="car : ${carList}">
+    <div class="square" th:each="car : ${rentedCarList}">
+        <img th:src="@{'/img/'+${car.img}}" alt="Wish image"/>
+        <div>
+            <p>Vogn nummer: <span th:text="${car.id}"></span></p>
+        </div>
+        <div>
+            <p>Stel nummer: <span th:text="${car.framenumber}"></span></p>
+        </div>
+        <div>
+            <p>Farve: <span th:text="${car.color}"></span></p>
+        </div>
+        <div>
+            <p>Mærke: <span th:text="${car.brand}"></span></p>
+        </div>
+        <div>
+            <p>Model: <span th:text="${car.model}"></span></p>
+        </div>
+        <div>
+            <p>Udstyrs niveau: <span th:text="${car.equipment_level}"></span></p>
+        </div>
+        <div>
+            <p>Stål pris: <span th:text="${car.steel_price}"></span>kr</p>
+        </div>
+        <div>
+            <p>Registrerings pris: <span th:text="${car.registration_fee}"></span>kr</p>
+        </div>
+        <div>
+            <p>CO2 udledning : <span th:text="${car.CO2_emissions}"></span>g/km</p>
+        </div>
+        <div>
+            <p>Limited : <span th:text="${car.limited}"></span></p>
+        </div>
+        <div>
+            <p>Status : <span th:text="${car.status}"></span></p>
+        </div>
+    </div>
+</div>
+<h1>ledige  biler</h1>
+<div class="container">
+    <div class="square" th:each="car : ${availablecarList}">
         <img th:src="@{'/img/'+${car.img}}" alt="Wish image"/>
         <div>
             <p>Vogn nummer: <span th:text="${car.id}"></span></p>

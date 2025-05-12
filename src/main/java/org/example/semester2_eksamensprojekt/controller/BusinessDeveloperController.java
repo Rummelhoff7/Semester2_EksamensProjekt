@@ -28,9 +28,11 @@ public class BusinessDeveloperController {
             double totalAmount = businessDeveloperRepository.totalamount();
             model.addAttribute("totalAmount", totalAmount);
 
-            ArrayList<Car> carList = businessDeveloperRepository.getAllRentedCars();
-            model.addAttribute("carList", carList);
+            ArrayList<Car> rentedCarList = businessDeveloperRepository.getAllRentedCars();
+            model.addAttribute("rentedCarList", rentedCarList);
 
+            ArrayList<Car> availablecarList = businessDeveloperRepository.getAllAvailableCars();
+            model.addAttribute("availablecarList", availablecarList);
 
 
             return "businessDeveloper";
