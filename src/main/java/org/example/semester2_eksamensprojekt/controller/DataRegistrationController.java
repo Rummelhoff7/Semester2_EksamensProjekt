@@ -16,9 +16,6 @@ import java.time.LocalDate;
 public class DataRegistrationController {
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     DataRegistrationRepository dataRegistrationRepository;
 
     @GetMapping("/dataRegistration")
