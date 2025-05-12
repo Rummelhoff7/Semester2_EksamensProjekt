@@ -18,14 +18,14 @@ public class BusinessDeveloperRepository {
     private DataSource dataSource;
 
     public int rentedcars() {
-        //her finder den role ud fra name og password
+        //Her tæller vi alle de biler som er blevet lejet ud
         String sql = "SELECT COUNT(*) AS total_leased_cars FROM cars WHERE status = 'Leased'";
 
         // Connect til database
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-
+            //Her putter vi alle informationen fra databasen ind i vores attribute
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return resultSet.getInt("total_leased_cars");
@@ -38,14 +38,14 @@ public class BusinessDeveloperRepository {
     }
 
     public double totalamount(){
-        //her finder den role ud fra name og password
-        String sql = "SELECT SUM(price) AS total_amount FROM leasing WHERE status = true";
+        //her ligger vi alle price sammen, for udlejet biler
+        String sql = "SELECT SUM(price) AS total_amount FROM leasing WHERE status = 'Leased'";
 
         // Connect til database
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-
+            //Her putter vi alle informationen fra databasen ind i vores attribute
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return resultSet.getDouble("total_amount");
@@ -59,11 +59,13 @@ public class BusinessDeveloperRepository {
 
     public ArrayList<Car> getAllRentedCars(){
         ArrayList<Car> carList = new ArrayList<>();
+        //Her vælger vi alle biler som har status leased.
         String sql = "SELECT * FROM cars WHERE status = 'Leased'";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
+            //Her putter vi alle informationen fra databasen ind i vores model og derefter ind i vore Array
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Car car = new Car();
@@ -92,11 +94,13 @@ public class BusinessDeveloperRepository {
 
     public ArrayList<Car> getAllAvailableCars(){
         ArrayList<Car> carList = new ArrayList<>();
+        //Her vælger vi alle de biler som har status Available
         String sql = "SELECT * FROM cars WHERE status = 'Available'";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
+            //Her putter vi alle informationen fra databasen ind i vores model og derefter ind i vore Array
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Car car = new Car();

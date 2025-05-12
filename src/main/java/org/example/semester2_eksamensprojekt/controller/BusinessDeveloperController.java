@@ -22,15 +22,20 @@ public class BusinessDeveloperController {
     public String businessDeveloperPage(@RequestParam("user_role") String user_role, Model model) {
         //Her tjekker den om url har den rigtig user_role og sender en tilbage til start siden hvis den ikke har. Med en errorMessage
         if(user_role.equals("admin") || user_role.equals("business_developer")) {
+
+            // Her ser vi hvor mange biler der er udlejet og får tallet fra rentedcars metoden
             int totalRentedCars = businessDeveloperRepository.rentedcars();
             model.addAttribute("totalRentedCars", totalRentedCars);
 
+            // Her ligger vi alle leasing aftalers indtjening sammen i totalamount og får total indtjeningen.
             double totalAmount = businessDeveloperRepository.totalamount();
             model.addAttribute("totalAmount", totalAmount);
 
+            // Her får vi et Array med alle de udlejet biler
             ArrayList<Car> rentedCarList = businessDeveloperRepository.getAllRentedCars();
             model.addAttribute("rentedCarList", rentedCarList);
 
+            // Her får vi et Array med alle ledige biler
             ArrayList<Car> availablecarList = businessDeveloperRepository.getAllAvailableCars();
             model.addAttribute("availablecarList", availablecarList);
 
