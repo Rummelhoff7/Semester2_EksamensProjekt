@@ -9,16 +9,17 @@
 
 <div class="login-container">
   <div class="form-container">
-    <h2>Register</h2>
+    <h2>Login</h2>
     <form th:action="@{/login}" th:object="${user}" method="post">
       <div th:if="${errorMessage}" class="error-message">
         <p th:text="${errorMessage}"></p>
       </div>
-      <label for="email">Brugernavn:</label>
-      <input type="text" id="email" name="email" placeholder="Indtast din Email her" required>
+      <label for="username">Brugernavn:</label>
+      <input type="text" id="username" name="username" placeholder="Indtast dit brugernavn her" required>
 
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" placeholder="Indtast dit password her" required>
+
 
       <div class="button-row">
         <button class="btn" type="submit">Login</button>
@@ -28,5 +29,7 @@
 </div>
 
 </body>
+
+</html>
 
 </html>
