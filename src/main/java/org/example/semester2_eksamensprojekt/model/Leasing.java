@@ -12,6 +12,14 @@ public class Leasing {
     private String customer_info;
 
     public Leasing(int car_id, LocalDate start_date, LocalDate end_date, double price, boolean status, String customer) {
+        /*
+        if (end_date.isBefore(start_date)) {
+            throw new IllegalArgumentException("End date cannot be before start date");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+         */
         this.car_id = car_id;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -28,6 +36,10 @@ public class Leasing {
         this.price = price;
         this.status = status;
         this.customer_info = customer;
+    }
+
+    public Leasing() {
+
     }
 
     public int getId() {

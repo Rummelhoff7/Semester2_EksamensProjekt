@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @Repository
 public class DataRegistrationRepository {
@@ -73,7 +75,7 @@ public class DataRegistrationRepository {
     // Denne metode bliver kaldt fra DateRegistrationController, og den skal bruges til at OPDATERE en leasing i databasen.
     public void update (Leasing updatedLeasing) {
         // SQL-streng, der opdaterer alle de skrevne attributter fra leasing, som har dette id.
-        String sql = "UPDATE leasing SET car_id, start_date = ?, end_date = ?, price = ?, status = ?, customer_info = ? WHERE id = ?";
+        String sql = "UPDATE leasing SET car_id = ?, start_date = ?, end_date = ?, price = ?, status = ?, customer_info = ? WHERE id = ?";
 
         // Her laver vi en ny Connection til databasen.
         // PreparedStatement hjælper med at stoppe SQL injections.
@@ -100,6 +102,32 @@ public class DataRegistrationRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Leasing> getAllLeasings() {
+        ArrayList<Leasing> leasingList = new ArrayList<>();
+        String sql = "SELECT * FROM leasing";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Leasing leasing = new Leasing();
+                leasing.setId(resultSet.getInt("id"));
+                leasing.setCar_id(resultSet.getInt("car_id"));
+                leasing.setStart_date(resultSet.getDate("start_date").toLocalDate());
+                leasing.setEnd_date(resultSet.getDate("end_date").toLocalDate());
+                leasing.setPrice(resultSet.getDouble("price"));
+                leasing.setStatus(resultSet.getBoolean("status"));
+                leasing.setCustomer_info(resultSet.getString("customer_info"));
+                leasingList.add(leasing);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return leasingList;
     }
 }
 
