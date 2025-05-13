@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>index</title>
-  <link rel="stylesheet" th:href="@{style.css}">
 </head>
 
 <body>
@@ -15,12 +14,11 @@
       <div th:if="${errorMessage}" class="error-message">
         <p th:text="${errorMessage}"></p>
       </div>
-      <label for="email">Email:</label>
+      <label for="email">Brugernavn:</label>
       <input type="text" id="email" name="email" placeholder="Indtast din Email her" required>
 
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" placeholder="Indtast dit password her" required>
-
 
       <div class="button-row">
         <button class="btn" type="submit">Login</button>
