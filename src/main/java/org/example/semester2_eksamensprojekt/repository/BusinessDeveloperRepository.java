@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @Repository
 
-public class BusinessDeveloperRepository {
+public class BusinessDeveloperRepository{
     @Autowired
     private DataSource dataSource;
 

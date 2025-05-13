@@ -1,5 +1,5 @@
 package org.example.semester2_eksamensprojekt.controller;
-
+import org.example.semester2_eksamensprojekt.model.Car;
 import org.springframework.ui.Model;
 import org.example.semester2_eksamensprojekt.model.Leasing;
 import org.example.semester2_eksamensprojekt.repository.DataRegistrationRepository;
@@ -18,9 +18,13 @@ public class DataRegistrationController {
     @Autowired
     DataRegistrationRepository dataRegistrationRepository;
 
-    @GetMapping("/dataRegistration")
+        @GetMapping("/dataRegistration")
     public String mainPage(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
         if(user_role.equals("data_registration") || user_role.equals("admin")) {
+
+            ArrayList<Leasing> limitedLeasing = dataRegistrationRepository.getAllLimitedLeasing();
+            model.addAttribute("limitedLeasing", limitedLeasing);
+
             return "dataRegistration";
         } else
 

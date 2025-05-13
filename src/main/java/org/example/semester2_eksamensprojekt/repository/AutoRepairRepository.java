@@ -3,7 +3,6 @@ package org.example.semester2_eksamensprojekt.repository;
 import org.example.semester2_eksamensprojekt.model.DamageReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +16,7 @@ public class AutoRepairRepository {
     private DataSource dataSource;
 
     public void save (DamageReport damageReport) {
-        String sql = "INSERT INTO damagereport( car_id,date) VALUES ( ?, ?)";
+        String sql = "INSERT INTO damagereport(car_id,date) VALUES ( ?, ?)";
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
