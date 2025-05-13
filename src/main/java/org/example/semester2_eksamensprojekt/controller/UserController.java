@@ -1,9 +1,7 @@
 package org.example.semester2_eksamensprojekt.controller;
-
 import org.example.semester2_eksamensprojekt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +19,6 @@ public class UserController {
             return "admin";
         } else if (user_role.equals("mechanic")) {
             return "admin";
-
         } else
             model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
             return "index";

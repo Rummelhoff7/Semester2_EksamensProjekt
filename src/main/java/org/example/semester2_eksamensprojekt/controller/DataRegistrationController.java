@@ -1,9 +1,8 @@
 package org.example.semester2_eksamensprojekt.controller;
-
-import ch.qos.logback.core.model.Model;
+import org.example.semester2_eksamensprojekt.model.Car;
+import org.springframework.ui.Model;
 import org.example.semester2_eksamensprojekt.model.Leasing;
 import org.example.semester2_eksamensprojekt.repository.DataRegistrationRepository;
-import org.example.semester2_eksamensprojekt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,19 +10,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Controller
 public class DataRegistrationController {
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     DataRegistrationRepository dataRegistrationRepository;
 
-    @GetMapping("/dataRegistration")
+        @GetMapping("/dataRegistration")
     public String mainPage(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
         if(user_role.equals("data_registration") || user_role.equals("admin")) {
+
+            ArrayList<Car> carForSale = dataRegistrationRepository.getAllLimitedLeasing();
+            model.addAttribute("carForSale", carForSale);
+
             return "dataRegistration";
         } else
 
@@ -51,5 +52,37 @@ public class DataRegistrationController {
         dataRegistrationRepository.save(leasing);
         // Returnerer til dataRegistration siden.
         return "redirect:/dataRegistration";
+    }
+
+
+    @PostMapping("/deleteLeasing")
+    public String deleteLeasing(@RequestParam("id") int id){
+        dataRegistrationRepository.delete(id);
+
+        return "redirect:/dataRegistration";
+    }
+
+
+    @PostMapping("/saveUpdateLeasing")
+    public String postUpdateLeasing (@RequestParam("id") int id,
+                                     @RequestParam("car_id") int car_id,
+                                     @RequestParam("start_date") LocalDate start_date,
+                                     @RequestParam("end_date") LocalDate end_date,
+                                     @RequestParam("price") double price,
+                                     @RequestParam("status") boolean status,
+                                     @RequestParam("customer_info") String customer_info){
+
+        Leasing leasing = new Leasing (id, car_id, start_date, end_date, price, status, customer_info);
+        dataRegistrationRepository.update(leasing);
+
+        return "redirect:/dataRegistration";
+    }
+
+    @GetMapping("/AlleLeasingsNavnSkalÆndres")
+    public String allLeasingPage(Model model){
+        ArrayList<Leasing> leasingList;
+        leasingList = dataRegistrationRepository.getAllLeasings();
+        model.addAttribute("leasingList", leasingList);
+        return "allLeasingPage";
     }
 }
