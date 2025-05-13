@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tilføj Skader</title>
+</head>
+<body>
+
+<h2></h2>
+
+<form th:action="@{/saveDamageItems}" method="post">
+
+    <input type="hidden" name="dmg_id" th:value="${dmg_id}" />
+
+
+        <label>Beskrivelse:</label>
+        <input type="text" name="description" placeholder="Beskrivelse af skade">
+
+        <label>Pris:</label>
+        <input type="number" name="cost" placeholder="Pris i DKK">
+        <br><br>
+    </div>
+
+    <button type="submit">Gem skade</button>
+</form>
+
+</body>
+</html>
