@@ -25,12 +25,11 @@ public class AdvanceCarSaleController {
     public String postCreateAdvanceCarSale(@RequestParam("car_id")int car_id,
                                             @RequestParam ("terms") String terms,
                                             @RequestParam ("exceeded_kilometers") int exceeded_kilometers,
-                                           @RequestParam ("buying_price") double buying_price,
                                            @RequestParam ("collection_point") String collection_point)
     {
 
 
-        AdvanceCarSale advanceCarSale = new AdvanceCarSale(car_id, terms, exceeded_kilometers, buying_price, collection_point);
+        AdvanceCarSale advanceCarSale = new AdvanceCarSale(car_id, terms, exceeded_kilometers, collection_point);
 
         advanceCarSaleRepository.save(advanceCarSale);
         return "redirect:/dataRegistration?user_role=" + "data_registration";

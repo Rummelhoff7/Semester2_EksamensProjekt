@@ -35,7 +35,11 @@ CREATE TABLE damagereport (
 );
 
 INSERT INTO damagereport (car_id, date) VALUES
-    (8,'2025-05-02')
+    (8,'2025-05-02'),
+    (2,'2025-05-06'),
+    (5,'2025-06-02'),
+    (7,'2025-08-10')
+;
 /*  Damagereport skal kun være på biler der er færdige med leasing */
 ;
 
@@ -49,7 +53,13 @@ CREATE TABLE damageitem (
 );
 
 INSERT INTO damageitem (dmg_id, description, cost) VALUES
-    (1, 'Manglende sidespejl', 5000.00)
+    (1, 'Manglende sidespejl', 5000.00),
+    (2, 'Manglende sidespejl', 5000.00),
+    (2, 'Manglende måtte', 500.00),
+    (2, 'Rise i lakken', 20000.00),
+    (1, 'Manglende sidespejl', 5000.00),
+    (1, 'Manglende sidespejl', 5000.00);
+
 ;
 
 

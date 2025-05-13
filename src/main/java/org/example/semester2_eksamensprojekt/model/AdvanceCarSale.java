@@ -16,6 +16,18 @@ public class AdvanceCarSale {
         this.collection_point = collection_point;
     }
 
+    public AdvanceCarSale(int car_id, String terms, int exceeded_kilometers, String collection_point) {
+        this.car_id = car_id;
+        this.terms = terms;
+        this.exceeded_kilometers = exceeded_kilometers;
+        this.collection_point = collection_point;
+    }
+
+    public AdvanceCarSale(int car_id, double buying_price) {
+        this.car_id = car_id;
+        this.buying_price = buying_price;
+    }
+
     public int getId() {
         return id;
     }

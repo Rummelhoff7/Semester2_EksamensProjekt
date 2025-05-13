@@ -41,9 +41,7 @@
 <div class="container">
 
     <div class="square" th:each="car : ${carForSale}">
-        <!--/*
         <img th:src="@{'/img/'+${car.img}}" alt="Wish image"/>
-        */-->
         <div>
             <p>Vogn nummer: <span th:text="${car.id}"></span></p>
         </div>
@@ -80,8 +78,6 @@
         <a th:href="@{/advanceCarSale(car_id=${car.id})}" class="btn">
             Opret Forhåndssalg
         </a>
-        <br />
-        <br />
     </div>
 </div>
 </body>
