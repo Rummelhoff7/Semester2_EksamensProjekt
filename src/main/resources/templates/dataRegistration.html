@@ -35,5 +35,28 @@
         </form>
     </div>
 </div>
+
+
+<h1>ledige  biler</h1>
+<div class="container">
+    <div class="square" th:each="leasing : ${limitedLeasing}">
+        <div>
+            <p>Start dato: <span th:text="${leasing.start_date}"></span></p>
+        </div>
+        <div>
+            <p>Slut dato: <span th:text="${leasing.end_date}"></span></p>
+        </div>
+        <div>
+            <p>Pris: <span th:text="${leasing.price}"></span>kr</p>
+        </div>
+        <div>
+            <p>Status: <span th:text="${leasing.status}"></span></p>
+        </div>
+        <div>
+            <p>Kunde info: <span th:text="${leasing.customer_info}"></span></p>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

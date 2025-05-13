@@ -129,6 +129,33 @@ public class DataRegistrationRepository {
         }
         return leasingList;
     }
+
+    public ArrayList<Leasing> getAllLimitedLeasing() {
+        ArrayList<Leasing> leasingList = new ArrayList<>();
+        //Her tæller vi alle de biler som er blevet lejet ud
+        String sql = "SELECT * FROM leasing WHERE DATEDIFF(end_date, start_date) = 153";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Leasing leasing = new Leasing();
+                leasing.setId(resultSet.getInt("id"));
+                leasing.setCar_id(resultSet.getInt("car_id"));
+                leasing.setStart_date(resultSet.getDate("start_date").toLocalDate());
+                leasing.setEnd_date(resultSet.getDate("end_date").toLocalDate());
+                leasing.setPrice(resultSet.getDouble("price"));
+                leasing.setStatus(resultSet.getBoolean("status"));
+                leasing.setCustomer_info(resultSet.getString("customer_info"));
+                leasingList.add(leasing);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return leasingList;
+    }
 }
 
 

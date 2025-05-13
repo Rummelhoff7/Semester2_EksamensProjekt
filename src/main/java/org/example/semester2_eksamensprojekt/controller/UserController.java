@@ -1,5 +1,4 @@
 package org.example.semester2_eksamensprojekt.controller;
-
 import org.example.semester2_eksamensprojekt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
