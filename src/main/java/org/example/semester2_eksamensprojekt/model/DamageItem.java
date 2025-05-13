@@ -6,6 +6,14 @@ public class DamageItem {
     private String description;
     private double cost;
 
+    // Constructor til at oprette nye damage items (uden id)
+    public DamageItem(int dmg_id, String description, double cost) {
+        this.dmg_id = dmg_id;
+        this.description = description;
+        this.cost = cost;
+    }
+
+    // Full constructor (bruges fx hvis du henter data fra databasen)
     public DamageItem(int id, int dmg_id, String description, double cost) {
         this.id = id;
         this.dmg_id = dmg_id;
@@ -13,6 +21,7 @@ public class DamageItem {
         this.cost = cost;
     }
 
+    // Getters og setters
     public int getId() {
         return id;
     }

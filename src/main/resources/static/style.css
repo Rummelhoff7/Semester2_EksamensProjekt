@@ -88,12 +88,12 @@ input[type="password"] {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.order-form {
+.form-container {
     width: 100%;
-    text-align: center;
+
 }
 
-.order-form h2 {
+.form-container h2 {
     margin-top: 0;
     margin-bottom: 1.5rem;
 }
@@ -135,4 +135,49 @@ input[type="text"] {
 
 .submit-button:hover {
     background-color: #333333;
+}
+
+
+
+.square {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.square img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.square > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex: 1;
+}
+
+.square > div > div {
+    flex: 1 1 45%;
+}
+
+.square p {
+    margin: 2px 0;
+    font-size: 14px;
+    line-height: 1.3;
+}
+.square p {
+    color: #000;
+    font-weight: 600;
+}
+
+.square p span {
+    color: #333;
+    font-weight: normal;
 }
