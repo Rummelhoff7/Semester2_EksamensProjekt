@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{style.css}">
+</head>
+<body>
+
+<h1>Forhånds Salg</h1>
+<div class="container">
+    <div class="form-container">
+        <h2>Lav salg af bilen</h2>
+        <form th:action="@{/saveCreateAdvanceCarSale}" method="post">
+            <input type="hidden" name="car_id" th:value="${param.car_id}" />
+
+            <label for="terms">Vilkår</label>
+            <input id="terms" name="terms" type="text" required>
+
+            <label for="exceeded_kilometers">Overskredet kilometer</label>
+            <input id="exceeded_kilometers" name="exceeded_kilometers" type="number" required>
+
+
+            <label for="buying_price">Købs pris</label>
+            <input id="buying_price" name="buying_price" type="number" required>
+
+
+            <label for="collection_point">Købs sted</label>
+            <input id="collection_point" name="collection_point" type="text" required>
+
+            <button type="submit">opret salg</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

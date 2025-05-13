@@ -121,7 +121,7 @@ CREATE TABLE advance_car_sale(
     buying_price double,
     collection_point VARCHAR(100),
     FOREIGN KEY (car_id)
-        REFERENCES damagereport(id)
+        REFERENCES cars(id)
                          );
 
 INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, collection_point) VALUES

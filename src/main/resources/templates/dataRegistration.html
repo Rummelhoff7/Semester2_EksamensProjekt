@@ -77,11 +77,9 @@
         <div>
             <p>Status : <span th:text="${car.status}"></span></p>
         </div>
-        <div class="btn">
-            <a th:href="@{/getCreateAdvanceCarSale(car_id=${car.id})}" class="btn">
-                Opret Forhåndssalg
-            </a>
-        </div>
+        <a th:href="@{/advanceCarSale(car_id=${car.id})}" class="btn">
+            Opret Forhåndssalg
+        </a>
         <br />
         <br />
     </div>
