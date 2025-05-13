@@ -22,8 +22,8 @@ public class DataRegistrationController {
     public String mainPage(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
         if(user_role.equals("data_registration") || user_role.equals("admin")) {
 
-            ArrayList<Leasing> limitedLeasing = dataRegistrationRepository.getAllLimitedLeasing();
-            model.addAttribute("limitedLeasing", limitedLeasing);
+            ArrayList<Car> carForSale = dataRegistrationRepository.getAllLimitedLeasing();
+            model.addAttribute("carForSale", carForSale);
 
             return "dataRegistration";
         } else

@@ -1,5 +1,6 @@
 package org.example.semester2_eksamensprojekt.repository;
 
+import org.example.semester2_eksamensprojekt.model.Car;
 import org.example.semester2_eksamensprojekt.model.Leasing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -130,31 +131,42 @@ public class DataRegistrationRepository {
         return leasingList;
     }
 
-    public ArrayList<Leasing> getAllLimitedLeasing() {
-        ArrayList<Leasing> leasingList = new ArrayList<>();
+    public ArrayList<Car> getAllLimitedLeasing() {
+        ArrayList<Car> carList = new ArrayList<>();
         //Her tæller vi alle de biler som er blevet lejet ud
-        String sql = "SELECT * FROM leasing WHERE DATEDIFF(end_date, start_date) = 153";
+        String sql ="SELECT cars.* "+
+                "FROM leasing "+
+                "JOIN cars ON leasing.car_id = cars.id " +
+                "WHERE DATEDIFF(leasing.end_date, leasing.start_date) >= 153;";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-             ResultSet resultSet = statement.executeQuery()) {
+            //Her putter vi alle informationen fra databasen ind i vores model og derefter ind i vore Array
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Car car = new Car();
+                    car.setId(resultSet.getInt("id"));
+                    car.setFramenumber(resultSet.getString("framenumber"));
+                    car.setColor(resultSet.getString("color"));
+                    car.setBrand(resultSet.getString("brand"));
+                    car.setModel(resultSet.getString("model"));
+                    car.setEquipment_level(resultSet.getInt("equipment_level"));
+                    car.setSteel_price(resultSet.getDouble("steel_price"));
+                    car.setRegistration_fee(resultSet.getDouble("registration_fee"));
+                    car.setCO2_emissions(resultSet.getDouble("co2_emissions"));
+                    car.setLimited(resultSet.getBoolean("limited"));
+                    car.setStatus(resultSet.getString("status"));
+                    car.setImg(resultSet.getString("img"));
 
-            while (resultSet.next()) {
-                Leasing leasing = new Leasing();
-                leasing.setId(resultSet.getInt("id"));
-                leasing.setCar_id(resultSet.getInt("car_id"));
-                leasing.setStart_date(resultSet.getDate("start_date").toLocalDate());
-                leasing.setEnd_date(resultSet.getDate("end_date").toLocalDate());
-                leasing.setPrice(resultSet.getDouble("price"));
-                leasing.setStatus(resultSet.getBoolean("status"));
-                leasing.setCustomer_info(resultSet.getString("customer_info"));
-                leasingList.add(leasing);
+                    carList.add(car);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return leasingList;
+
+        return carList;
     }
 }
 

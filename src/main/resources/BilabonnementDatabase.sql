@@ -115,17 +115,22 @@ INSERT INTO cars(framenumber, color, brand, model, equipment_level, steel_price,
 
 CREATE TABLE advance_car_sale(
     id int AUTO_INCREMENT PRIMARY KEY ,
-    dmg_id INT NOT NULL,
+    car_id INT NOT NULL,
     terms VARCHAR(1000),
     exceeded_kilometers int,
     buying_price double,
     collection_point VARCHAR(100),
-    FOREIGN KEY (dmg_id)
+    FOREIGN KEY (car_id)
         REFERENCES damagereport(id)
                          );
 
-INSERT INTO advance_car_sale(dmg_id, terms, exceeded_kilometers, buying_price, collection_point) VALUES
-    (1,'no terms lol', 200, 20000.00, 'Valby');
+INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, collection_point) VALUES
+    (1,'no terms lol', 200, 20000.00, 'Garage A');
 ;
 
-SELECT * FROM leasing WHERE DATEDIFF(end_date, start_date) = 153;
+SELECT * FROM leasing WHERE DATEDIFF(end_date, start_date) >= 153;
+
+SELECT cars.*
+FROM leasing
+         JOIN cars ON leasing.car_id = cars.id
+WHERE DATEDIFF(leasing.end_date, leasing.start_date) >= 153;
