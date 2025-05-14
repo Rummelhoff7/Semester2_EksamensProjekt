@@ -158,6 +158,8 @@ public class DataRegistrationRepository {
         }
         return leasing;
     }
+
+
 }
 
 
