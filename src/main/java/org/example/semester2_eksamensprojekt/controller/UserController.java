@@ -30,7 +30,7 @@ public class UserController {
 
         // her tjekker switch hvilken rolle user har og sender dem til den rigtig side med dens userRole i url
         switch (userRole) {
-            case "data_registration": return "redirect:/dataRegistration?user_role="+userRole;
+            case "data_registration": return "redirect:/dataRegistrationHomePage?user_role="+userRole;
             case "business_developer": return "redirect:/businessDeveloper?user_role="+userRole;
             case "mechanic": return "redirect:/autoRepair?user_role="+userRole;
             case "admin": return "redirect:/admin?user_role="+userRole;
