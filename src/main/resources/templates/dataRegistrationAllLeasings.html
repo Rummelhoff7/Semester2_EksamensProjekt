@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" th:href="@{style.css}">
+  <title>Dataregistrering All Leasing</title>
+</head>
+<body>
+<h1>Alle Registrerede Leasingaftaler</h1>
+
+<div class="container">
+  <div class="square" th:each="leasing : ${leasingList}">
+    <div>
+      <label>Bilens ID:</label>
+      <span th:text="${leasing.id}">ID</span>
+    </div>
+    <div>
+      <label>Startdato for leasing:</label>
+      <span th:text="${leasing.start_date}">Startdato</span>
+    </div>
+    <div>
+      <label>Slutdato for leasing:</label>
+      <span th:text="${leasing.end_date}">Slutdato</span>
+    </div>
+    <div>
+      <label>Pris:</label>
+      <span th:text="${leasing.price}">Pris</span>
+    </div>
+    <div>
+      <label>Status:</label>
+      <span th:text="${leasing.status}">Status</span>
+    </div>
+    <div>
+      <label>Førerens navn:</label>
+      <span th:text="${leasing.customer_info}">Kundeinformation</span>
+    </div>
+    <form th:action="@{/deleteLeasing}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette denne leasingaftale?');">
+      <input type="hidden" name="id" th:value="${leasing.id}" />
+      <button type="submit">Slet Leasing</button>
+    </form>
+    <form th:action="@{/getUpdateLeasing}" method="get">
+      <input type="hidden" name="id" th:value="${leasing.id}" />
+      <button type="submit">Opdater Leasing</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
