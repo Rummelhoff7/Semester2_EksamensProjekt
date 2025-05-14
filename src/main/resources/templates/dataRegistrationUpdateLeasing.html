@@ -25,8 +25,9 @@
             <label for="price">Pris:</label>
             <input type="number" id="price" name="price" placeholder="Indtast pris på leasingen" th:value="${leasing.price}" required>
 
-            <label for="status">Er abonnement limited?:</label>
-            <input type="checkbox" id="status" name="status" th:checked="${leasing.status}">
+            <label for="status">Er abonnement limited?</label>
+            <!-- Boolean har skabt fejl, når checkboxen ikke er markeret. Primitive typer(boolean, int osv) må ikke være null eller manglende -->
+            <input type="checkbox" id="status" name="status" value="true" th:checked="${leasing.status}" />
 
             <label for="customer_info"> Førerens navn </label>
             <input type="text" id="customer_info" name="customer_info" placeholder="Indtast for- og efternavn" th:value="${leasing.customer_info}" required>
@@ -37,3 +38,4 @@
 </div>
 </body>
 </html>
+

@@ -18,14 +18,19 @@ public class DataRegistrationController {
     @Autowired
     DataRegistrationRepository dataRegistrationRepository;
 
-    @GetMapping("/dataRegistration")
+    @GetMapping("/dataRegistrationHomePage")
     public String mainPage(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
         if(user_role.equals("data_registration") || user_role.equals("admin")) {
-            return "dataRegistration";
+            return "dataRegistrationHomePage";
         } else
 
         model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
         return "index";
+    }
+
+    @GetMapping("/dataRegistration")
+    public String dataRegistrationPage(){
+        return "dataRegistration";
     }
 
 
@@ -65,8 +70,15 @@ public class DataRegistrationController {
                                      @RequestParam("start_date") LocalDate start_date,
                                      @RequestParam("end_date") LocalDate end_date,
                                      @RequestParam("price") double price,
-                                     @RequestParam("status") boolean status,
+                                     // Denne linje kode har været nødvendig, for at undgå whitelabel error. value attributten specificerer navnet på RequestParam.
+                                     // dvs. "value = "status" matcher med name="status" i dataRegistrationUpdateLeasing.html.
+                                     // defaultValue = "false" sikrer, at hvis "status" ikke sendes fra formularen, bliver den automatisk sat til false i metoden.(det var her whitelabel error var et problem)
+                                     // boolean status modtager derfor enten true (checked) eller false (unchecked).
+                                     @RequestParam(value = "status", defaultValue = "false") boolean status,
                                      @RequestParam("customer_info") String customer_info){
+
+        //Logger for respons fra terminalen
+        System.out.println("Status:" + status);
 
         Leasing leasing = new Leasing (id, car_id, start_date, end_date, price, status, customer_info);
         dataRegistrationRepository.update(leasing);
@@ -85,7 +97,7 @@ public class DataRegistrationController {
     @GetMapping("/getUpdateLeasing")
     public String updateLeasing(@RequestParam("id") int id, Model model) {
         Leasing leasing = dataRegistrationRepository.getLeasingByID(id);
-        model.addAttribute(leasing);
+        model.addAttribute("leasing",leasing);
         return "dataRegistrationUpdateLeasing";
     }
 }

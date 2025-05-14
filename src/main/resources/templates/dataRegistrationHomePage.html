@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" th:href="@{style.css}">
+    <link rel="stylesheet" th:href="@{/style.css}">
     <title>Data Registration HomePage</title>
 </head>
 <body>
 <h1>Data Registration HomePage</h1>
 
-<a th:href="@{/dataRegistration?user_role=admin}"> Date registration</a>
+<a th:href="@{/dataRegistration}">Data Registration</a>
+<a th:href="@{/dataRegistrationAllLeasings}">Registrerede leasingsaftaler</a>
 
-</div>
 </body>
 </html>
