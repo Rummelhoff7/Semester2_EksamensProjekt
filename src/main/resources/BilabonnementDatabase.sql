@@ -124,8 +124,8 @@ INSERT INTO cars(framenumber, color, brand, model, equipment_level, steel_price,
 ;
 
 CREATE TABLE advance_car_sale(
-    id int AUTO_INCREMENT PRIMARY KEY ,
-    car_id INT NOT NULL,
+    id int AUTO_INCREMENT PRIMARY KEY UNIQUE ,
+    car_id INT NOT NULL UNIQUE ,
     terms VARCHAR(1000),
     exceeded_kilometers int,
     buying_price double,
@@ -137,10 +137,64 @@ CREATE TABLE advance_car_sale(
 INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, collection_point) VALUES
     (1,'no terms lol', 200, 20000.00, 'Garage A');
 ;
-
+/*
 SELECT * FROM leasing WHERE DATEDIFF(end_date, start_date) >= 153;
 
 SELECT cars.*
 FROM leasing
          JOIN cars ON leasing.car_id = cars.id
 WHERE DATEDIFF(leasing.end_date, leasing.start_date) >= 153;
+
+
+-- I subtract all the damageitem cost from a cars price
+
+SELECT
+    c.id,
+    c.steel_price,
+    SUM(COALESCE(di.cost, 0)) AS total_damage_cost,
+    c.steel_price - SUM(COALESCE(di.cost, 0)) AS steel_price_minus_total_cost,
+    acs.exceeded_kilometers,
+    acs.buying_price
+FROM cars c
+         JOIN damagereport dr ON c.id = dr.car_id
+         JOIN advance_car_sale acs on c.id = acs.car_id
+         LEFT JOIN damageitem di ON dr.id = di.dmg_id
+WHERE c.id = 2
+GROUP BY c.id, c.steel_price;
+
+SELECT
+    c.id,
+    c.steel_price,
+    SUM(COALESCE(di.cost, 0)) AS total_damage_cost,
+    acs.exceeded_kilometers,
+    c.steel_price - SUM(COALESCE(di.cost, 0)) AS steel_price_minus_total_cost,
+    acs.exceeded_kilometers * 2.95 AS exceeded_km_cost,
+    (c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 2.95) AS final_price
+FROM cars c
+         JOIN damagereport dr ON c.id = dr.car_id
+         JOIN advance_car_sale acs ON c.id = acs.car_id
+         LEFT JOIN damageitem di ON dr.id = di.dmg_id
+WHERE c.id = 2
+GROUP BY c.id, c.steel_price, acs.exceeded_kilometers;
+
+UPDATE advance_car_sale acs
+SET buying_price = (
+    SELECT
+        (c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 2.95)
+    FROM cars c
+             JOIN damagereport dr ON c.id = dr.car_id
+             LEFT JOIN damageitem di ON dr.id = di.dmg_id
+    WHERE c.id = acs.car_id
+    GROUP BY c.steel_price
+)
+WHERE acs.car_id = 2;
+
+SELECT
+    di.description,
+    di.cost
+FROM cars c
+         JOIN damagereport dr ON c.id = dr.car_id
+         LEFT JOIN damageitem di ON dr.id = di.dmg_id
+WHERE c.id = 2
+
+ */

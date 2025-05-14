@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{style.css}">
+</head>
+<body>
+
+<h1>Forhånds Salg</h1>
+<div class="container">
+    <div class="form-container">
+        <h1>Skader:</h1>
+        <div class="container">
+            <div class="square" th:each="damageitem : ${DamageitemList}">
+                <input type="hidden" name="car_id" th:value="${param.car_id}" />
+                <div>
+                    <p><span th:text="${damageitem.description}"></span></p>
+                </div>
+                <div>
+                    <p>pris: <span th:text="${damageitem.cost}"></span></p>
+                </div>
+            </div>
+        </div>
+        <h1>Overkørte kilometer</h1>
+        <form  method="post">
+            <input type="hidden" name="car_id" th:value="${param.car_id}" />
+            <div>
+                <p><span th:text="${exceeded_kilometers}"></span>km * 2.95 = <span th:text="${exceeded_km_cost}"></span>kr</p>
+            </div>
+        </form>
+        <h1>Total pris</h1>
+        <form  th:action="@{/saveTotalPrice}" method="post">
+            <input type="hidden" name="car_id" th:value="${param.car_id}" />
+            <input type="hidden" name="total_price" th:value="${total_price}" />
+            <div>
+                <p><span th:text="${total_price}"></span>kr</p>
+            </div>
+
+            <button type="submit">opret salg</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

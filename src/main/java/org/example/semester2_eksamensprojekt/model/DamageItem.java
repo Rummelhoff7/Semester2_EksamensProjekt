@@ -21,6 +21,11 @@ public class DamageItem {
         this.cost = cost;
     }
 
+    public DamageItem() {
+
+    }
+
+
     // Getters og setters
     public int getId() {
         return id;

@@ -26,10 +26,10 @@ public class DataRegistrationController {
             model.addAttribute("carForSale", carForSale);
 
             return "dataRegistration";
-        } else
-
-        model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
-        return "index";
+        } else {
+            model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
+            return "index";
+        }
     }
 
 
