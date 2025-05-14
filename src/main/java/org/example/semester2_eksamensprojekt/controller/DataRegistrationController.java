@@ -55,7 +55,7 @@ public class DataRegistrationController {
     public String deleteLeasing(@RequestParam("id") int id){
         dataRegistrationRepository.delete(id);
 
-        return "redirect:/dataRegistration";
+        return "redirect:/dataRegistrationAllLeasings";
     }
 
 
@@ -71,14 +71,21 @@ public class DataRegistrationController {
         Leasing leasing = new Leasing (id, car_id, start_date, end_date, price, status, customer_info);
         dataRegistrationRepository.update(leasing);
 
-        return "redirect:/dataRegistration";
+        return "redirect:/dataRegistrationAllLeasings";
     }
 
-    @GetMapping("/AlleLeasingsNavnSkalÆndres")
+    @GetMapping("/dataRegistrationAllLeasings")
     public String allLeasingPage(Model model){
         ArrayList<Leasing> leasingList;
         leasingList = dataRegistrationRepository.getAllLeasings();
         model.addAttribute("leasingList", leasingList);
-        return "allLeasingPage";
+        return "dataRegistrationAllLeasings";
+    }
+
+    @GetMapping("/getUpdateLeasing")
+    public String updateLeasing(@RequestParam("id") int id, Model model) {
+        Leasing leasing = dataRegistrationRepository.getLeasingByID(id);
+        model.addAttribute(leasing);
+        return "dataRegistrationUpdateLeasing";
     }
 }

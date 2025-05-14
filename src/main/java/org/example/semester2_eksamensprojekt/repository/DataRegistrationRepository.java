@@ -129,6 +129,35 @@ public class DataRegistrationRepository {
         }
         return leasingList;
     }
+
+
+    public Leasing getLeasingByID (int id) {
+        Leasing leasing = new Leasing();
+        // sql "id" strengen henvender sig til databasen. ? Er der hvor vi sætter id i metoden
+        String sql = "SELECT * FROM leasing WHERE id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, id);
+
+            // executeQuery = Forespørgsel til databasen om Leasing id
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    leasing.setId(resultSet.getInt("id"));
+                    leasing.setCar_id(resultSet.getInt ("car_id"));
+                    leasing.setStart_date(resultSet.getDate("start_date").toLocalDate());
+                    leasing.setEnd_date(resultSet.getDate("end_date").toLocalDate());
+                    leasing.setPrice(resultSet.getDouble("price"));
+                    leasing.setStatus(resultSet.getBoolean("status"));
+                    leasing.setCustomer_info(resultSet.getString("customer_info"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return leasing;
+    }
 }
 
 
