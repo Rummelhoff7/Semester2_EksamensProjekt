@@ -38,6 +38,7 @@ public class AdvanceCarSaleRepository {
         }
     }
 
+    // her sætter jeg total prisen ind i advance_car_sale
     public void saveTotalPrice(AdvanceCarSale advanceCarSale) {
         String sql = "UPDATE advance_car_sale SET buying_price = ? WHERE car_id = ?";
 
@@ -55,13 +56,16 @@ public class AdvanceCarSaleRepository {
     }
 
     public CarSalesInfo save_price(int car_id) {
+        //Her laver jeg en sql sætning som joiner damagereport(dr) med cars(c), damageitem(di) med damagereport(dr) og advance_car_sale(acs) med cars(c).
         String sql = "SELECT " +
                         "c.id, " +
                         "c.steel_price, " +
+                        // her ligger jeg cost fra alle damageitem sammen som variablen total_damage_cost
                         "SUM(COALESCE(di.cost, 0)) AS total_damage_cost, " +
                         "acs.exceeded_kilometers, " +
-                        "c.steel_price - SUM(COALESCE(di.cost, 0)) AS steel_price_minus_total_cost, " +
+                        // her gange jeg exceeded med 2.95(standard for overkørte kilometer) for at få hvad ekstra det koster)
                         "acs.exceeded_kilometers * 2.95 AS exceeded_km_cost, " +
+                        //Her fjerner jeg det hele fra steel_price
                         "(c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 2.95) AS final_price " +
                         "FROM cars c " +
                         "    JOIN damagereport dr ON c.id = dr.car_id " +
@@ -80,8 +84,9 @@ public class AdvanceCarSaleRepository {
             if (resultSet.next()) {
                 double finalPrice = resultSet.getDouble("final_price");
                 double exceededKmCost = resultSet.getDouble("exceeded_km_cost");
+                double totalDamageCost = resultSet.getDouble("total_damage_cost");
 
-                return new CarSalesInfo(finalPrice, exceededKmCost);
+                return new CarSalesInfo(finalPrice, exceededKmCost, totalDamageCost);
             }
 
 
