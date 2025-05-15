@@ -13,7 +13,7 @@
         <form th:action="@{/saveUpdateLeasing}" method="post">
             <input type="hidden" name="id" th:value="${leasing.id}" />
 
-            <label for="car_id">Bilens ID:</label>
+            <label for="car_id">Vognnummer:</label>
             <input type="number" id="car_id" name="car_id" placeholder="Indtast ID" th:value="${leasing.car_id}" required>
 
             <label for="start_date">Start dato for leasingen:</label>
