@@ -1,9 +1,11 @@
 package org.example.semester2_eksamensprojekt.controller;
 
 import org.example.semester2_eksamensprojekt.model.AdvanceCarSale;
+import org.example.semester2_eksamensprojekt.model.Car;
 import org.example.semester2_eksamensprojekt.model.CarSalesInfo;
 import org.example.semester2_eksamensprojekt.model.DamageItem;
 import org.example.semester2_eksamensprojekt.repository.AdvanceCarSaleRepository;
+import org.example.semester2_eksamensprojekt.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,26 @@ import java.util.ArrayList;
 public class AdvanceCarSaleController {
 
     @Autowired
+    CarRepository carRepository;
+
+    @Autowired
     AdvanceCarSaleRepository advanceCarSaleRepository;
+
+    @GetMapping("/advanceCarSaleShowing")
+    public String advanceCarSaleShowingPage(@RequestParam ("user_role") String user_role, Model model) {
+        if(user_role.equals("data_registration") || user_role.equals("admin")) {
+
+            ArrayList<Car> carForSale = carRepository.getAllLimitedLeasing();
+            model.addAttribute("carForSale", carForSale);
+
+            return "advanceCarSaleShowing";
+        } else {
+
+            model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
+            return "index";
+        }
+    }
+
 
     @GetMapping("/advanceCarSale")
     public String advanceCarSalePage() {

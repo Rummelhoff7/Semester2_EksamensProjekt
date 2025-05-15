@@ -42,13 +42,8 @@ public class DataRegistrationController {
         @GetMapping("/dataRegistration")
         public String dataRegistration(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
         if(user_role.equals("data_registration") || user_role.equals("admin")) {
-
-            ArrayList<Car> carForSale = carRepository.getAllLimitedLeasing();
-            model.addAttribute("carForSale", carForSale);
-
             return "dataRegistration";
         } else {
-
             model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
             return "index";
         }
