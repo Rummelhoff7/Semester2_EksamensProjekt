@@ -19,7 +19,7 @@ public class BusinessDeveloperRepository{
 
     public int rentedcars() {
         //Her tæller vi alle de biler som er blevet lejet ud
-        String sql = "SELECT COUNT(*) AS total_leased_cars FROM cars WHERE status = 'Leased'";
+        String sql = "SELECT COUNT(*) AS total_leased_cars FROM cars WHERE status = 'Udlejet'";
 
         // Connect til database
         try (Connection connection = dataSource.getConnection();
@@ -39,7 +39,7 @@ public class BusinessDeveloperRepository{
 
     public double totalamount(){
         //her ligger vi alle price sammen, for udlejet biler
-        String sql = "SELECT SUM(price) AS total_amount FROM leasing WHERE status = 'Leased'";
+        String sql = "SELECT SUM(price) AS total_amount FROM leasing WHERE status = 'Udlejet'";
 
         // Connect til database
         try (Connection connection = dataSource.getConnection();
@@ -60,7 +60,7 @@ public class BusinessDeveloperRepository{
     public ArrayList<Car> getAllRentedCars(){
         ArrayList<Car> carList = new ArrayList<>();
         //Her vælger vi alle biler som har status leased.
-        String sql = "SELECT * FROM cars WHERE status = 'Leased'";
+        String sql = "SELECT * FROM cars WHERE status = 'Udlejet'";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -95,7 +95,7 @@ public class BusinessDeveloperRepository{
     public ArrayList<Car> getAllAvailableCars(){
         ArrayList<Car> carList = new ArrayList<>();
         //Her vælger vi alle de biler som har status Available
-        String sql = "SELECT * FROM cars WHERE status = 'Available'";
+        String sql = "SELECT * FROM cars WHERE status = 'Ledig'";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
