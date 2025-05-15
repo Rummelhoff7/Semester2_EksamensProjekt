@@ -81,7 +81,7 @@ public class DataRegistrationController {
     public String deleteLeasing(@RequestParam("id") int id){
         dataRegistrationRepository.delete(id);
 
-        return "dataRegistrationAllLeasings";
+        return "redirect:/dataRegistrationAllLeasings?user_role=data_registration";
     }
 
 
