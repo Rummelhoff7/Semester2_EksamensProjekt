@@ -1,17 +1,17 @@
 package org.example.semester2_eksamensprojekt.model;
 
 public class Car {
-    private int id;
-    private String framenumber;
+    private int id; //Vognnummer
+    private String framenumber; //stelnummer
     private String color;
     private String brand;
     private String model;
-    private int equipment_level;
+    private int equipment_level; // equipment_level 1-4.
     private double steel_price;
     private double registration_fee;
     private double CO2_emissions;
-    private boolean limited;
-    private String status;
+    private boolean limited; //Ift. abonnement.
+    private String status; //Bilens tilgængelighed.
     private String img;
 
     public Car(int id, String framenumber, String color, String brand, String model, int equipment_level, double steel_price, double registrationFee, double CO2_emissions, boolean limited, String status, String img) {
@@ -128,4 +128,51 @@ public class Car {
     public void setImg(String img) {
         this.img = img;
     }
+
+    // Bilabonnement leaser også Elbiler.
+    // Her nedarver ElectricCar fra Car (det er et it-is forhold)
+    // ElectricCar har samme attributter som Car, dog med lidt ekstra som giver mening for en elbil.
+    public class ElectricCar extends Car{
+        private double batteryCapacity; // målt i kWh.
+        private double chargingTime; // målt i timer.
+        private double rangePerCharge; // målt i km.
+
+        public ElectricCar(double batteryCapacity, double chargingTime, double rangePerCharge) {
+            this.batteryCapacity = batteryCapacity;
+            this.chargingTime = chargingTime;
+            this.rangePerCharge = rangePerCharge;
+        }
+
+        public ElectricCar(int id, String framenumber, String color, String brand, String model, int equipment_level, double steel_price, double registrationFee, double CO2_emissions, boolean limited, String status, String img, double batteryCapacity, double chargingTime, double rangePerCharge) {
+            super(id, framenumber, color, brand, model, equipment_level, steel_price, registrationFee, CO2_emissions, limited, status, img);
+            this.batteryCapacity = batteryCapacity;
+            this.chargingTime = chargingTime;
+            this.rangePerCharge = rangePerCharge;
+        }
+
+        public double getBatteryCapacity() {
+            return batteryCapacity;
+        }
+
+        public void setBatteryCapacity(double batteryCapacity) {
+            this.batteryCapacity = batteryCapacity;
+        }
+
+        public double getChargingTime() {
+            return chargingTime;
+        }
+
+        public void setChargingTime(double chargingTime) {
+            this.chargingTime = chargingTime;
+        }
+
+        public double getRangePerCharge() {
+            return rangePerCharge;
+        }
+
+        public void setRangePerCharge(double rangePerCharge) {
+            this.rangePerCharge = rangePerCharge;
+        }
+    }
 }
+

@@ -8,8 +8,8 @@ public class Leasing {
     private LocalDate start_date;
     private LocalDate end_date;
     private double price;
-    private boolean status;
-    private String customer_info;
+    private boolean status; // true = limited, false = unlimited.
+    private String customer_info; // for- og efternavn på kunden. obs. ikke personfølsomt.
 
     public Leasing(int car_id, LocalDate start_date, LocalDate end_date, double price, boolean status, String customer) {
         /*

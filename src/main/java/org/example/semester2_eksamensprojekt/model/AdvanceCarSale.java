@@ -3,10 +3,10 @@ package org.example.semester2_eksamensprojekt.model;
 public class AdvanceCarSale {
     int id;
     int car_id;
-    String terms;
+    String terms; //Vilkår.
     int exceeded_kilometers;
     double buying_price;
-    String collection_point;
+    String collection_point; // Leveringssted.
 
     public AdvanceCarSale(int car_id, String terms, int exceeded_kilometers, double buying_price, String collection_point) {
         this.car_id = car_id;

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class DamageReport {
     private int id;
     private int car_id;
-    private LocalDate date;
+    private LocalDate date; //dato for oprettelse af rapport.
 
     public DamageReport(int id, int car_id, LocalDate date) {
         this.id = id;

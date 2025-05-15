@@ -3,7 +3,7 @@ package org.example.semester2_eksamensprojekt.model;
 public class DamageItem {
     private int id;
     private int dmg_id;
-    private String description;
+    private String description; // Beskrivelse på skaden.
     private double cost;
 
     // Constructor til at oprette nye damage items (uden id)
