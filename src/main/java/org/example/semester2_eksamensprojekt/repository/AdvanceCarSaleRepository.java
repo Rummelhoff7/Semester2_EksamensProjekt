@@ -1,7 +1,6 @@
 package org.example.semester2_eksamensprojekt.repository;
 
 import org.example.semester2_eksamensprojekt.model.AdvanceCarSale;
-import org.example.semester2_eksamensprojekt.model.Car;
 import org.example.semester2_eksamensprojekt.model.CarSalesInfo;
 import org.example.semester2_eksamensprojekt.model.DamageItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 @Repository
 public class AdvanceCarSaleRepository {
@@ -38,6 +35,7 @@ public class AdvanceCarSaleRepository {
         }
     }
 
+    // her sætter jeg total prisen ind i advance_car_sale
     public void saveTotalPrice(AdvanceCarSale advanceCarSale) {
         String sql = "UPDATE advance_car_sale SET buying_price = ? WHERE car_id = ?";
 
@@ -55,14 +53,14 @@ public class AdvanceCarSaleRepository {
     }
 
     public CarSalesInfo save_price(int car_id) {
+        //Her laver jeg en sql sætning som joiner damagereport(dr) med cars(c), damageitem(di) med damagereport(dr) og advance_car_sale(acs) med cars(c).
         String sql = "SELECT " +
-                        "c.id, " +
-                        "c.steel_price, " +
+                        // her ligger jeg cost fra alle damageitem sammen som variablen total_damage_cost
                         "SUM(COALESCE(di.cost, 0)) AS total_damage_cost, " +
-                        "acs.exceeded_kilometers, " +
-                        "c.steel_price - SUM(COALESCE(di.cost, 0)) AS steel_price_minus_total_cost, " +
-                        "acs.exceeded_kilometers * 2.95 AS exceeded_km_cost, " +
-                        "(c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 2.95) AS final_price " +
+                        // her gange jeg exceeded med 0.75 for at få hvad ekstra det koster)
+                        "acs.exceeded_kilometers * 0.75 AS exceeded_km_cost, " +
+                        //Her fjerner jeg det hele fra steel_price
+                        "(c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 0.75) AS final_price " +
                         "FROM cars c " +
                         "    JOIN damagereport dr ON c.id = dr.car_id " +
                         "    JOIN advance_car_sale acs ON c.id = acs.car_id " +
@@ -80,12 +78,10 @@ public class AdvanceCarSaleRepository {
             if (resultSet.next()) {
                 double finalPrice = resultSet.getDouble("final_price");
                 double exceededKmCost = resultSet.getDouble("exceeded_km_cost");
+                double totalDamageCost = resultSet.getDouble("total_damage_cost");
 
-                return new CarSalesInfo(finalPrice, exceededKmCost);
+                return new CarSalesInfo(finalPrice, exceededKmCost, totalDamageCost);
             }
-
-
-
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -102,7 +98,7 @@ public class AdvanceCarSaleRepository {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, car_id);  // Set the parameter value
+            statement.setInt(1, car_id);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -130,7 +126,7 @@ public class AdvanceCarSaleRepository {
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, car_id);  // Set the parameter value
+            statement.setInt(1, car_id);
             //Her putter vi alle informationen fra databasen ind i vores model og derefter ind i vore Array
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {

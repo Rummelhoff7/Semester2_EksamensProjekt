@@ -4,7 +4,7 @@ public class Users {
     private int id;
     private String username;
     private String password;
-    private String role;
+    private String role; // Admin, data registration, mechanic, business_developer
 
     public Users(int id, String username, String password, String role) {
         this.id = id;

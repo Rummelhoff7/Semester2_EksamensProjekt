@@ -13,7 +13,7 @@
     <div class="form-container">
         <h2>Registrer ny leasing</h2>
         <form th:action="@{/createLeasing}" method="post">
-            <label type="car_id"> Bilens ID</label>
+            <label type="car_id"> Vognnummer</label>
             <input type="number" name="car_id" placeholder="Indtast ID" required/>
 
             <label for="start_date"> Start dato for leasingen</label>
@@ -33,51 +33,6 @@
 
             <button type="submit">Opret leasing</button>
         </form>
-    </div>
-</div>
-
-<h1>Biler der kan forhånds sælges</h1>
-
-<div class="container">
-
-    <div class="square" th:each="car : ${carForSale}">
-        <img th:src="@{'/img/'+${car.img}}" alt="Wish image"/>
-        <div>
-            <p>Vogn nummer: <span th:text="${car.id}"></span></p>
-        </div>
-        <div>
-            <p>Stel nummer: <span th:text="${car.framenumber}"></span></p>
-        </div>
-        <div>
-            <p>Farve: <span th:text="${car.color}"></span></p>
-        </div>
-        <div>
-            <p>Mærke: <span th:text="${car.brand}"></span></p>
-        </div>
-        <div>
-            <p>Model: <span th:text="${car.model}"></span></p>
-        </div>
-        <div>
-            <p>Udstyrs niveau: <span th:text="${car.equipment_level}"></span></p>
-        </div>
-        <div>
-            <p>Stål pris: <span th:text="${car.steel_price}"></span>kr</p>
-        </div>
-        <div>
-            <p>Registrerings pris: <span th:text="${car.registration_fee}"></span>kr</p>
-        </div>
-        <div>
-            <p>CO2 udledning : <span th:text="${car.CO2_emissions}"></span>g/km</p>
-        </div>
-        <div>
-            <p>Limited : <span th:text="${car.limited}"></span></p>
-        </div>
-        <div>
-            <p>Status : <span th:text="${car.status}"></span></p>
-        </div>
-        <a th:href="@{/advanceCarSale(car_id=${car.id})}" class="btn">
-            Opret Forhåndssalg
-        </a>
     </div>
 </div>
 </body>

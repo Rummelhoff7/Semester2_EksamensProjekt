@@ -1,5 +1,6 @@
 package org.example.semester2_eksamensprojekt.controller;
 
+import org.example.semester2_eksamensprojekt.model.Car;
 import org.example.semester2_eksamensprojekt.model.DamageItem;
 import org.example.semester2_eksamensprojekt.model.DamageReport;
 import org.example.semester2_eksamensprojekt.repository.AutoRepairRepository;
@@ -64,7 +65,6 @@ public class AutoRepairController {
     @PostMapping("/saveDamageReport")
     public String saveDamageReport(@RequestParam("car_id") int car_id,
                                    @RequestParam("date") LocalDate date) {
-
         DamageReport damageReport = new DamageReport(car_id, date);
         autoRepairRepository.save(damageReport);
         return "redirect:/damageItems?car_id="+car_id;
