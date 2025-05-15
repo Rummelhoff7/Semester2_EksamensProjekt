@@ -22,6 +22,9 @@
                 </div>
             </div>
         </div>
+        <div>
+            <p>Alle skader pris: <span th:text="${total_damage_cost}"></span>kr</p>
+        </div>
         <h1>Overkørte kilometer</h1>
         <form  method="post">
             <input type="hidden" name="car_id" th:value="${param.car_id}" />

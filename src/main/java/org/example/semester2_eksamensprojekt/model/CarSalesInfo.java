@@ -3,10 +3,12 @@ package org.example.semester2_eksamensprojekt.model;
 public class CarSalesInfo {
         private double finalPrice;
         private double exceededKmCost;
+        private double totalDamageCost;
 
-        public CarSalesInfo(double finalPrice, double exceededKmCost) {
+        public CarSalesInfo(double finalPrice, double exceededKmCost, double totalDamageCost) {
             this.finalPrice = finalPrice;
             this.exceededKmCost = exceededKmCost;
+            this.totalDamageCost= totalDamageCost;
         }
 
         public double getFinalPrice() {
@@ -17,4 +19,7 @@ public class CarSalesInfo {
             return exceededKmCost;
         }
 
+        public double getTotalDamageCost() {
+            return totalDamageCost;
+        }
 }
