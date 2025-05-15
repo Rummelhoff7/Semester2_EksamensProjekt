@@ -18,7 +18,7 @@
         </div>
     </div>
 </div>
-<h1>Udlejet biler</h1>
+<h1>Udlejede biler</h1>
 <div class="container">
     <div class="square" th:each="car : ${rentedCarList}">
         <img th:src="@{'/img/'+${car.img}}" alt="Wish image"/>
@@ -57,7 +57,7 @@
         </div>
     </div>
 </div>
-<h1>ledige  biler</h1>
+<h1>Ledige  biler</h1>
 <div class="container">
     <div class="square" th:each="car : ${availablecarList}">
         <img th:src="@{'/img/'+${car.img}}" alt="Wish image"/>
