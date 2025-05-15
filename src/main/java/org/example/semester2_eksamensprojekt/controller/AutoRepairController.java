@@ -19,8 +19,21 @@ public class AutoRepairController {
     @Autowired
     AutoRepairRepository autoRepairRepository;
 
-    @GetMapping("/autoRepair")
+    @GetMapping("/autoRepairHomePage")
     public String autoRepairPage(@RequestParam("user_role") String user_role, Model model) {
+        // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
+        if (user_role.equals("admin")) {
+            return "autoRepairHomePage";
+        } else if (user_role.equals("mechanic")) {
+            return "autoRepairHomePage";
+        } else {
+            model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvede at komme ind på");
+            return "index";
+        }
+    }
+
+    @GetMapping("/autoRepair")
+    public String autoRepair(@RequestParam("user_role") String user_role, Model model) {
         // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
         if (user_role.equals("admin")) {
             return "autoRepair";
@@ -31,7 +44,23 @@ public class AutoRepairController {
             return "index";
         }
     }
-// får besked fra frontend om at gemme Skadesrapport via to parametre, og metoden bliver kaldt i repository
+
+    @GetMapping("/showDamagereports")
+    public String showDamgeReports(@RequestParam("user_role") String user_role, Model model) {
+        // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
+        if (user_role.equals("admin")) {
+            return "showDamagereports";
+        } else if (user_role.equals("mechanic")) {
+            return "showDamagereports";
+        } else {
+            model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvede at komme ind på");
+            return "index";
+        }
+    }
+
+
+
+    // får besked fra frontend om at gemme Skadesrapport via to parametre, og metoden bliver kaldt i repository
     @PostMapping("/saveDamageReport")
     public String saveDamageReport(@RequestParam("car_id") int car_id,
                                    @RequestParam("date") LocalDate date) {
