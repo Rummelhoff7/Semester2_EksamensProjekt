@@ -50,6 +50,18 @@ INSERT INTO cars(framenumber, color, brand, model, equipment_level, steel_price,
     ('ZFF67NFA4D0200025', 'Sort', 'Ferrari', 'Portofino M', 4, 1000000.00, 1700000.00, 270.00, FALSE, 'Udlejet', 'ferrariblack.webp');
 ;
 
+CREATE TABLE electric_car (
+    id INT PRIMARY KEY,
+    battery_capacity DECIMAL(5,2),
+    charging_time DECIMAL(4,2),
+    range_per_charge DECIMAL(6,2),
+        FOREIGN KEY (id)
+        REFERENCES cars(id)
+);
+
+INSERT INTO electric_car (id, battery_capacity, charging_time, range_per_charge) VALUES
+    (1, 78.1, 8.15,514),
+    (14,100, 7, 529);
 
 CREATE TABLE leasing (
                          id INT AUTO_INCREMENT PRIMARY KEY UNIQUE ,
