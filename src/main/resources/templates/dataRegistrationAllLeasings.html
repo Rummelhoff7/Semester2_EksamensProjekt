@@ -37,11 +37,11 @@
     </div>
     <form th:action="@{/deleteLeasing}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette denne leasingaftale?');">
       <input type="hidden" name="id" th:value="${leasing.id}" />
-      <button type="submit">Slet Leasing</button>
+      <button type="submit" class="btn">Slet Leasing</button>
     </form>
     <form th:action="@{/getUpdateLeasing}" method="get">
       <input type="hidden" name="id" th:value="${leasing.id}" />
-      <button type="submit">Opdater Leasing</button>
+      <button type="submit" class="btn">Opdater Leasing</button>
     </form>
   </div>
 </div>
