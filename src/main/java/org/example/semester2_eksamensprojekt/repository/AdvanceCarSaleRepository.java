@@ -65,7 +65,7 @@ public class AdvanceCarSaleRepository {
                         "(c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 2.95) AS final_price " +
                         "FROM cars c " +
                         "    JOIN damagereport dr ON c.id = dr.car_id " +
-                        "JOIN advance_car_sale acs ON c.id = acs.car_id " +
+                        "    JOIN advance_car_sale acs ON c.id = acs.car_id " +
                         "    LEFT JOIN damageitem di ON dr.id = di.dmg_id " +
                         "WHERE c.id = ? " +
                         "GROUP BY c.id, c.steel_price, acs.exceeded_kilometers;";

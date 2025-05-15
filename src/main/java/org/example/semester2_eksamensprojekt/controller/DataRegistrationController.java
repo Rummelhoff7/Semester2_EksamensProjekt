@@ -81,7 +81,7 @@ public class DataRegistrationController {
     public String deleteLeasing(@RequestParam("id") int id){
         dataRegistrationRepository.delete(id);
 
-        return "dataRegistrationAllLeasings";
+        return "redirect:/dataRegistrationAllLeasings?user_role=data_registration";
     }
 
 
@@ -91,14 +91,22 @@ public class DataRegistrationController {
                                      @RequestParam("start_date") LocalDate start_date,
                                      @RequestParam("end_date") LocalDate end_date,
                                      @RequestParam("price") double price,
-                                     @RequestParam("status") boolean status,
+                                     // Denne linje kode har været nødvendig, for at undgå whitelabel error. value attributten specificerer navnet på RequestParam.
+                                     // dvs. "value = "status" matcher med name="status" i dataRegistrationUpdateLeasing.html.
+                                     // defaultValue = "false" sikrer, at hvis "status" ikke sendes fra formularen, bliver den automatisk sat til false i metoden.(det var her whitelabel error var et problem)
+                                     // boolean status modtager derfor enten true (checked) eller false (unchecked).
+                                     @RequestParam(value = "status", defaultValue = "false") boolean status,
                                      @RequestParam("customer_info") String customer_info){
+
+        //Logger for respons fra terminalen
+        System.out.println("Status:" + status);
 
         Leasing leasing = new Leasing (id, car_id, start_date, end_date, price, status, customer_info);
         dataRegistrationRepository.update(leasing);
 
-        return "dataRegistrationAllLeasings";
+        return "redirect:/dataRegistrationAllLeasings?user_role=data_registration";
     }
+
 
     @GetMapping("/dataRegistrationAllLeasings")
     public String dataRegistrationAllLeasings(@RequestParam ("user_role") String user_role, Model model){
@@ -112,5 +120,14 @@ public class DataRegistrationController {
             return "index";
         }
 
+    }
+
+
+
+    @GetMapping("/getUpdateLeasing")
+    public String updateLeasing(@RequestParam("id") int id, Model model) {
+        Leasing leasing = dataRegistrationRepository.getLeasingByID(id);
+        model.addAttribute("leasing",leasing);
+        return "dataRegistrationUpdateLeasing";
     }
 }
