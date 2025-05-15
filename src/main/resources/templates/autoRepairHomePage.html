@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+      <html lang="en" xmlns:th="http://www.thymeleaf.org">
+      <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" th:href="@{/style.css}">
+      <title>AutoRepair HomePage</title>
+</head>
+<body>
+<h1>AutoRepair HomePage</h1>
+
+<a th:href="@{/autoRepair(user_role=${param.user_role})}">Opret en Skadesrapport</a>
+<a th:href="@{/showDamagereports(user_role=${param.user_role})}">Se Skadesrapporter</a>
+
+</body>
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>
