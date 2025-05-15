@@ -24,7 +24,7 @@ public class DataRegistrationController {
     CarRepository carRepository;
 
     @GetMapping("/dataRegistrationHomePage")
-    public String mainPage(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
+    public String mainPage(@RequestParam ("user_role") String user_role, Model model){
         if(user_role.equals("data_registration") || user_role.equals("admin")) {
 
             ArrayList<Car> carForSale = carRepository.getAllLimitedLeasing();
