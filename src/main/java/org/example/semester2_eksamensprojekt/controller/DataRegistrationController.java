@@ -104,7 +104,7 @@ public class DataRegistrationController {
         Leasing leasing = new Leasing (id, car_id, start_date, end_date, price, status, customer_info);
         dataRegistrationRepository.update(leasing);
 
-        return "redirect:/dataRegistrationAllLeasings";
+        return "redirect:/dataRegistrationAllLeasings?user_role=data_registration";
     }
 
 
