@@ -114,19 +114,24 @@ public class DataRegistrationController {
 
         if (!dataRegistrationRepository.carExists(car_id)) {
             model.addAttribute("errorMessage", "Der findes ikke en bil med dette vognnummer");
-            return "dataRegistration";
+            model.addAttribute("leasing", new Leasing(id, car_id, start_date, end_date, price, status, customer_info));
+            return "dataRegistrationUpdateLeasing";
         }
 
-        if (dataRegistrationRepository.leasingExistsForCar(car_id)) {
+
+        if (dataRegistrationRepository.leasingExistsForCarExcludingId(car_id, id)) {
             model.addAttribute("errorMessage", "Der findes allerede en leasing på denne bil");
-            return "dataRegistration";
+            model.addAttribute("leasing", new Leasing(id, car_id, start_date, end_date, price, status, customer_info));
+            return "dataRegistrationUpdateLeasing";
         }
+
 
         try {
             end_date = dataRegistrationRepository.calculateEndDate(start_date, end_date, status);
         } catch (IllegalArgumentException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "dataRegistration";
+            model.addAttribute("errorMessage", "Abonnement skal minimum være på 3 måneder fra startdatoen.");
+            model.addAttribute("leasing", new Leasing(id, car_id, start_date, end_date, price, status, customer_info));
+            return "dataRegistrationUpdateLeasing";
         }
 
 

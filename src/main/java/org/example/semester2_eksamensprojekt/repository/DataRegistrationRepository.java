@@ -171,7 +171,7 @@ public class DataRegistrationRepository {
             // Unlimited subscription: given endDate if valid, else min 3 months
             LocalDate minEndDate = startDate.plusMonths(3);
             if (givenEndDate == null || givenEndDate.isBefore(minEndDate)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Den rolle passer ikke til den side du prøvet at komme ind på");
             }
             return givenEndDate;
         }
@@ -214,6 +214,26 @@ public class DataRegistrationRepository {
         }
         return false;
     }
+
+    public boolean leasingExistsForCarExcludingId(int car_id, int excludeLeasingId) {
+        String sql = "SELECT COUNT(*) FROM leasing WHERE car_id = ? AND id <> ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, car_id);
+            statement.setInt(2, excludeLeasingId);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
 
 
