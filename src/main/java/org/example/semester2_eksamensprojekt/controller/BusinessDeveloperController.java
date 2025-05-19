@@ -36,8 +36,8 @@ public class BusinessDeveloperController {
             model.addAttribute("rentedCarList", rentedCarList);
 
             // Her får vi et Array med alle ledige biler
-            ArrayList<Car> availablecarList = businessDeveloperRepository.getAllAvailableCars();
-            model.addAttribute("availablecarList", availablecarList);
+            ArrayList<Car> availableCarList = businessDeveloperRepository.getAllAvailableCars();
+            model.addAttribute("availableCarList", availableCarList);
 
 
             return "businessDeveloper";

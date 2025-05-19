@@ -21,7 +21,7 @@
 <h1>Udlejede biler</h1>
 <div class="container">
     <div class="square" th:each="car : ${rentedCarList}">
-        <img th:src="@{'/img/'+${car.img}}" alt="Wish image"/>
+        <img th:src="@{'/img/'+${car.img}}" alt="Car image"/>
         <div>
             <p>Vogn nummer: <span th:text="${car.id}"></span></p>
         </div>
@@ -54,13 +54,20 @@
         </div>
         <div>
             <p>Status : <span th:text="${car.status}"></span></p>
+        </div>
+        <!-- Elbil specifik info -->
+        <div th:if="${car.electric}">
+            <p><strong> Elbil specifikationer:</strong></p>
+            <p>Batteri kapacitet: <span th:text="${car.batteryCapacity}"></span> kWh</p>
+            <p>Ladetid: <span th:text="${car.chargingTime}"></span> timer</p>
+            <p>Rækkevidde: <span th:text="${car.rangePerCharge}"></span> km</p>
         </div>
     </div>
 </div>
 <h1>Ledige  biler</h1>
 <div class="container">
-    <div class="square" th:each="car : ${availablecarList}">
-        <img th:src="@{'/img/'+${car.img}}" alt="Wish image"/>
+    <div class="square" th:each="car : ${availableCarList}">
+        <img th:src="@{'/img/'+${car.img}}" alt="Car image"/>
         <div>
             <p>Vogn nummer: <span th:text="${car.id}"></span></p>
         </div>
@@ -93,6 +100,13 @@
         </div>
         <div>
             <p>Status : <span th:text="${car.status}"></span></p>
+        </div>
+        <!-- Elbil specifik info -->
+        <div th:if="${car.electric}">
+            <p><strong> Elbil specifikationer:</strong></p>
+            <p>Batteri kapacitet: <span th:text="${car.batteryCapacity}"></span> kWh</p>
+            <p>Ladetid: <span th:text="${car.chargingTime}"></span> timer</p>
+            <p>Rækkevidde: <span th:text="${car.rangePerCharge}"></span> km</p>
         </div>
     </div>
 </div>

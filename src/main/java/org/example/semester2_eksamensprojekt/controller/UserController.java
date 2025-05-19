@@ -32,7 +32,7 @@ public class UserController {
         switch (userRole) {
             case "data_registration": return "redirect:/dataRegistrationHomePage?user_role="+userRole;
             case "business_developer": return "redirect:/businessDeveloper?user_role="+userRole;
-            case "mechanic": return "redirect:/autoRepair?user_role="+userRole;
+            case "mechanic": return "redirect:/autoRepairHomePage?user_role="+userRole;
             case "admin": return "redirect:/admin?user_role="+userRole;
 
             // Hvis brugeren eller password er forkert får man en errorMessage

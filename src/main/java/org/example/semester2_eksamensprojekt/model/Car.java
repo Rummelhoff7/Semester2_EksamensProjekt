@@ -11,7 +11,7 @@ public class Car {
     private double registration_fee;
     private double CO2_emissions;
     private boolean limited; //Ift. abonnement.
-    private String status; //Bilens tilgængelighed.
+    private String status; //Bilens tilgængelighed. - Kunne også være ENUMS, men indtil videre bruger vi string.
     private String img;
 
     public Car(int id, String framenumber, String color, String brand, String model, int equipment_level, double steel_price, double registrationFee, double CO2_emissions, boolean limited, String status, String img) {
@@ -127,6 +127,13 @@ public class Car {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    // instanceof ElectricCar = Refererer til subklassen
+    // Returnerer true with Objektet er en elbil.
+    // Hjælper med polymorfi.
+    public boolean isElectric() {
+        return this instanceof ElectricCar;
     }
 }
 

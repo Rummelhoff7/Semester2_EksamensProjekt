@@ -52,15 +52,33 @@ public class DataRegistrationController {
 
     // PostMapping hånder HTTP Post-anmodninger. Her opretter vi en ny leasing og gemmer den i databasen.
     // Vi bruger en metode fra DataRegistrationRepository for at gemme.
-    @PostMapping("createLeasing")
+    @PostMapping("/createLeasing")
     // Connecter RequestParameter med leasing attributer.
     public String createLeasing(@RequestParam ("car_id") int car_id,
                                 @RequestParam ("start_date") LocalDate start_date,
-                                @RequestParam ("end_date") LocalDate end_date,
+                                @RequestParam(value = "end_date", required = false) LocalDate end_date,
                                 @RequestParam ("price") double price,
-                                @RequestParam ("status") boolean status,
+                                @RequestParam(value = "status", defaultValue = "false") boolean status,
                                 @RequestParam ("customer_info") String customer,
                                 Model model) {
+
+        if (!dataRegistrationRepository.carExists(car_id)) {
+            model.addAttribute("errorMessage", "Der findes ikke en bil med dette vognnummer");
+            return "dataRegistration";
+        }
+
+        if (dataRegistrationRepository.leasingExistsForCar(car_id)) {
+            model.addAttribute("errorMessage", "Der findes allerede en leasing på denne bil");
+            return "dataRegistration";
+        }
+
+
+        try {
+            end_date = dataRegistrationRepository.calculateEndDate(start_date, end_date, status);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", "Abonnement skal minimum være på 3 måneder fra startdatoen.");
+            return "dataRegistration";
+        }
 
         // Opretter en ny Leasing-objekt, som indeholder de nye attributer.
         Leasing leasing = new Leasing(car_id,start_date, end_date, price, status, customer);
@@ -68,7 +86,7 @@ public class DataRegistrationController {
         // Kalder metode fra repository, som gemmer objektet i databasen.
         dataRegistrationRepository.save(leasing);
         // Returnerer til dataRegistration siden.
-        return "redirect:/dataRegistration";
+        return "redirect:/dataRegistrationHomePage?user_role=admin";
     }
 
 
@@ -84,17 +102,38 @@ public class DataRegistrationController {
     public String postUpdateLeasing (@RequestParam("id") int id,
                                      @RequestParam("car_id") int car_id,
                                      @RequestParam("start_date") LocalDate start_date,
-                                     @RequestParam("end_date") LocalDate end_date,
+                                     @RequestParam(value = "end_date", required = false) LocalDate end_date,
                                      @RequestParam("price") double price,
                                      // Denne linje kode har været nødvendig, for at undgå whitelabel error. value attributten specificerer navnet på RequestParam.
                                      // dvs. "value = "status" matcher med name="status" i dataRegistrationUpdateLeasing.html.
                                      // defaultValue = "false" sikrer, at hvis "status" ikke sendes fra formularen, bliver den automatisk sat til false i metoden.(det var her whitelabel error var et problem)
                                      // boolean status modtager derfor enten true (checked) eller false (unchecked).
                                      @RequestParam(value = "status", defaultValue = "false") boolean status,
-                                     @RequestParam("customer_info") String customer_info){
+                                     @RequestParam("customer_info") String customer_info,
+                                     Model model){
 
-        //Logger for respons fra terminalen
-        System.out.println("Status:" + status);
+        if (!dataRegistrationRepository.carExists(car_id)) {
+            model.addAttribute("errorMessage", "Der findes ikke en bil med dette vognnummer");
+            model.addAttribute("leasing", new Leasing(id, car_id, start_date, end_date, price, status, customer_info));
+            return "dataRegistrationUpdateLeasing";
+        }
+
+
+        if (dataRegistrationRepository.leasingExistsForCarExcludingId(car_id, id)) {
+            model.addAttribute("errorMessage", "Der findes allerede en leasing på denne bil");
+            model.addAttribute("leasing", new Leasing(id, car_id, start_date, end_date, price, status, customer_info));
+            return "dataRegistrationUpdateLeasing";
+        }
+
+
+        try {
+            end_date = dataRegistrationRepository.calculateEndDate(start_date, end_date, status);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", "Abonnement skal minimum være på 3 måneder fra startdatoen.");
+            model.addAttribute("leasing", new Leasing(id, car_id, start_date, end_date, price, status, customer_info));
+            return "dataRegistrationUpdateLeasing";
+        }
+
 
         Leasing leasing = new Leasing (id, car_id, start_date, end_date, price, status, customer_info);
         dataRegistrationRepository.update(leasing);

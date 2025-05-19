@@ -9,9 +9,14 @@ public class ElectricCar extends Car{
     private double rangePerCharge; // målt i km.
 
     public ElectricCar(double batteryCapacity, double chargingTime, double rangePerCharge) {
+        super();
         this.batteryCapacity = batteryCapacity;
         this.chargingTime = chargingTime;
         this.rangePerCharge = rangePerCharge;
+    }
+
+    public ElectricCar() {
+        super();
     }
 
     public ElectricCar(int id, String framenumber, String color, String brand, String model, int equipment_level, double steel_price, double registrationFee, double CO2_emissions, boolean limited, String status, String img, double batteryCapacity, double chargingTime, double rangePerCharge) {
@@ -44,4 +49,10 @@ public class ElectricCar extends Car{
     public void setRangePerCharge(double rangePerCharge) {
         this.rangePerCharge = rangePerCharge;
     }
+
+    @Override
+    public boolean isElectric() {
+        return true;
+    }
+
 }
