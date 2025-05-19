@@ -7,6 +7,9 @@
       <title>AutoRepair HomePage</title>
 </head>
 <body>
+<div class="header-nav">
+      <a th:href="@{/index}" class="btn">Log out</a>
+</div>
 <h1>AutoRepair HomePage</h1>
 
 <a th:href="@{/autoRepair(user_role=${param.user_role})}">Opret en Skadesrapport</a>

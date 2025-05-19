@@ -194,3 +194,10 @@ input[type="text"] {
     color: #333;
     font-weight: normal;
 }
+
+.header-nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
