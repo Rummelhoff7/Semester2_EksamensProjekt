@@ -41,6 +41,18 @@ public class AutoRepairRepository {
             e.printStackTrace();
         }
     }
+    public void deleteDamageItem(int id) {
+        String sql = "DELETE FROM damageitem WHERE dmg_id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void saveDamageItem(DamageItem damageItem) {
         String sql = "INSERT INTO damageitem (dmg_id, description, cost) VALUES (?, ?, ?)";

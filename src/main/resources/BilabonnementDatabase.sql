@@ -21,7 +21,7 @@ CREATE TABLE cars(
 
 );
 
-SHOW CREATE TABLE damageitem;
+
 
 
 
@@ -96,9 +96,8 @@ CREATE TABLE damagereport (
                                   REFERENCES cars(id)
 );
 
-ALTER TABLE damagereport
-    ADD COLUMN total_price DOUBLE,
-    ADD COLUMN isFixed BOOLEAN DEFAULT FALSE;
+
+
 
 
 INSERT INTO damagereport (car_id, date) VALUES
@@ -112,7 +111,7 @@ INSERT INTO damagereport (car_id, date) VALUES
 
 CREATE TABLE damageitem (
                             id INT AUTO_INCREMENT PRIMARY KEY UNIQUE ,
-                            dmg_id INT NOT NULL,
+                            dmg_id INT,
                             description TEXT,
                             cost DOUBLE,
                             FOREIGN KEY (dmg_id)
@@ -230,3 +229,5 @@ FROM cars c
          LEFT JOIN damageitem di ON dr.id = di.dmg_id
 WHERE c.id = 2
 GROUP BY c.id, c.steel_price;
+/*
+DELETE FROM damageitem WHERE dmg_id= 2

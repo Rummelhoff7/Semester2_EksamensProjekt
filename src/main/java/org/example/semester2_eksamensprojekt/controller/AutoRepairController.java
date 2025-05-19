@@ -95,6 +95,7 @@ public class AutoRepairController {
 
     @PostMapping("/deleteDamageReport")
     public String deleteDamageReport(@RequestParam("id") int id) {
+        autoRepairRepository.deleteDamageItem(id);
         autoRepairRepository.delete(id);
         return "redirect:/showDamagereports?user_role=admin";
     }
