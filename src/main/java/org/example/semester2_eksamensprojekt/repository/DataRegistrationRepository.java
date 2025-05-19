@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Repository
@@ -32,10 +33,11 @@ public class DataRegistrationRepository {
             // Sætter vores VALUES ind i placeholderne ?
             statement.setInt(1,leasing.getCar_id());
 
+            LocalDate endDate = calculateEndDate(leasing.getStart_date(), leasing.getEnd_date(), leasing.isStatus());
+
             //PreparedStatement klassen har ikke en setLocalDate metode, så her konverterer LocalDate til java.sql.Date
             statement.setDate(2, java.sql.Date.valueOf(leasing.getStart_date()));
-            statement.setDate(3, java.sql.Date.valueOf(leasing.getEnd_date()));
-
+            statement.setDate(3, java.sql.Date.valueOf(endDate));
             statement.setDouble(4,leasing.getPrice());
             statement.setBoolean(5,leasing.isStatus());
             statement.setString(6,leasing.getCustomer_info());
@@ -87,7 +89,9 @@ public class DataRegistrationRepository {
 
             // Ligesom før, så har PreparedStatement klassen ikke en setLocalDate metode, så her konverterer LocalDate til java.sql.Date
             statement.setDate(2, java.sql.Date.valueOf(updatedLeasing.getStart_date()));
-            statement.setDate(3, java.sql.Date.valueOf(updatedLeasing.getEnd_date()));
+
+            LocalDate endDate = calculateEndDate(updatedLeasing.getStart_date(), updatedLeasing.getEnd_date(), updatedLeasing.isStatus());
+            statement.setDate(3, java.sql.Date.valueOf(endDate));
 
             //Sætter resten af VALUES ind, med getmetoder fra Leasing klassen i model-package.
             statement.setDouble(4, updatedLeasing.getPrice());
@@ -159,6 +163,76 @@ public class DataRegistrationRepository {
         return leasing;
     }
 
+    public LocalDate calculateEndDate(LocalDate startDate, LocalDate givenEndDate, boolean status) throws IllegalArgumentException {
+        if (status) {
+            // Limited subscription: fixed 5 months from startDate
+            return startDate.plusMonths(5);
+        } else {
+            // Unlimited subscription: given endDate if valid, else min 3 months
+            LocalDate minEndDate = startDate.plusMonths(3);
+            if (givenEndDate == null || givenEndDate.isBefore(minEndDate)) {
+                throw new IllegalArgumentException("Den rolle passer ikke til den side du prøvet at komme ind på");
+            }
+            return givenEndDate;
+        }
+    }
+
+    public boolean leasingExistsForCar(int car_id) {
+        String sql = "SELECT COUNT(*) FROM leasing WHERE car_id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1,car_id);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean carExists(int car_id) {
+        String sql = "SELECT COUNT(*) FROM cars WHERE id = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1,car_id);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()){
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean leasingExistsForCarExcludingId(int car_id, int excludeLeasingId) {
+        String sql = "SELECT COUNT(*) FROM leasing WHERE car_id = ? AND id <> ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, car_id);
+            statement.setInt(2, excludeLeasingId);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }
 
