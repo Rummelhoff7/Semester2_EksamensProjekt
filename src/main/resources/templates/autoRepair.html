@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" th:href="@{/style.css}">
-    <title>Opret Skadesrapport</title>
+    <title>autoRepair</title>
 </head>
 <body>
+<h1>Opret skadesrapport</h1>
+
 <div class="container">
     <div class="square">
         <form th:action="@{/saveDamageReport}" method="post">
@@ -23,15 +25,7 @@
             </div>
         </form>
 
-        <form th:action="@{/deleteDamageReport}" method="post">
-            <div>
-                <label for="car_id_to_delete">Bil ID til sletning:</label>
-                <input type="text" id="car_id_to_delete" name="car_id" placeholder="Indtast bilens id for sletning" required>
-            </div>
-            <div class="button-row">
-                <button class="btn" type="submit">Slet Skadesrapport</button>
-            </div>
-        </form>
+
 
     </div>
 </div>

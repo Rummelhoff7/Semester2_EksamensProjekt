@@ -1,23 +1,41 @@
 package org.example.semester2_eksamensprojekt.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
-
+import java.util.List;
 
 public class DamageReport {
     private int id;
     private int car_id;
-    private LocalDate date; //dato for oprettelse af rapport.
+    private LocalDate date;
+    private List<DamageItem> damageItems;
 
     public DamageReport(int id, int car_id, LocalDate date) {
         this.id = id;
         this.car_id = car_id;
         this.date = date;
     }
+
     public DamageReport(int car_id, LocalDate date) {
         this.car_id = car_id;
         this.date = date;
     }
+
+    public DamageReport() {
+    }
+
+    private String imageUrl;
+
+    // Getter og Setter
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+
+    // getters og setters
 
     public int getId() {
         return id;
@@ -42,4 +60,13 @@ public class DamageReport {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public List<DamageItem> getDamageItems() {
+        return damageItems;
+    }
+
+    public void setDamageItems(List<DamageItem> damageItems) {
+        this.damageItems = damageItems;
+    }
 }
+

@@ -1,36 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Opdater Skadesrapport</title>
     <link rel="stylesheet" th:href="@{style.css}">
-    <title>AutoRepair Update DamageReport</title>
 </head>
 <body>
 <div class="container">
     <div class="form-container">
         <h1>Opdater Skadesrapport</h1>
         <form th:action="@{/saveUpdateDamageReport}" method="post">
-            <input type="hidden" name="id" th:value="${leasing.id}" />
 
-            <label for="dmg_id">Skadesrapportens ID:</label>
-            <input type="number" id="dmg_id" name="car_id" th:value="${leasing.car_id}" required>
 
-            <label for="car_id">Vognummer:</label>
-            <input type="number" id="car_id" name="car_id" placeholder="Indsæt vognnummer" th:value="${leasing.start_date}" required>
+            <input type="hidden" name="id" th:value="${damageReport.id}" />
 
-            <label for="description">Beskrivelse af skaderne:</label>
-            <input type="text" id="description" name="end_date" placeholder="Indsæt beskrivelse af skaderne" th:value="${leasing.end_date}" required>
+            <label for="car_id">Vognnummer:</label>
+            <input type="number" id="car_id" name="car_id" placeholder="Indsæt vognnummer" th:value="${damageReport.car_id}" required />
 
-            <label for="price">Samlet pris:</label>
-            <input type="number" id="price" name="price" placeholder="Indtast pris på leasingen" th:value="${leasing.price}" required>
-
-            <label for="status">Er skaderne udbedret?</label>
-
-            <input type="checkbox" id="status" name="status" value="true" th:checked="${leasing.status}" />
-
-            <label for="customer_info"> Førerens navn </label>
-            <input type="text" id="customer_info" name="customer_info" placeholder="Indtast for- og efternavn" th:value="${leasing.customer_info}" required>
+            <label for="date">Dato:</label>
+            <input type="date" id="date" name="date" th:value="${damageReport.date}" required />
 
             <button type="submit">Gem ændringer</button>
         </form>
@@ -38,4 +26,3 @@
 </div>
 </body>
 </html>
-

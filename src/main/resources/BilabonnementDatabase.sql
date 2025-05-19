@@ -21,6 +21,9 @@ CREATE TABLE cars(
 
 );
 
+SHOW CREATE TABLE damageitem;
+
+
 
 INSERT INTO cars(framenumber, color, brand, model, equipment_level, steel_price, registration_fee, CO2_emissions, limited, status, img) VALUES
     ('5YJSA1E26HF000001', 'Hvid', 'Tesla', 'Model Y', 1, 240000.00, 0.00, 0.00, TRUE, 'Udlejet', 'teslayhvid.jpeg'),
@@ -81,6 +84,11 @@ CREATE TABLE damagereport (
                                   REFERENCES cars(id)
 );
 
+ALTER TABLE damagereport
+    ADD COLUMN total_price DOUBLE,
+    ADD COLUMN isFixed BOOLEAN DEFAULT FALSE;
+
+
 INSERT INTO damagereport (car_id, date) VALUES
     (8,'2025-05-02'),
     (2,'2025-05-06'),
@@ -134,6 +142,8 @@ CREATE TABLE advance_car_sale(
     FOREIGN KEY (car_id)
         REFERENCES cars(id)
                          );
+
+
 
 INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, collection_point) VALUES
     (1,'no terms lol', 200, 20000.00, 'Garage A');

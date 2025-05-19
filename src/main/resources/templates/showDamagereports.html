@@ -2,47 +2,50 @@
 <html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alle Skadesrapporter</title>
   <link rel="stylesheet" th:href="@{style.css}">
-  <title>AutoRepair all damagereports</title>
 </head>
 <body>
 <h1>Alle Skadesrapporter</h1>
 
 <div class="container">
-  <div class="square" th:each="leasing : ${leasingList}">
+  <div class="square" th:each="report : ${reportList}">
+
     <div>
-      <label>Skadesrapport ID:</label>
-      <span th:text="${leasing.id}">ID</span>
+      <label>Rapport ID:</label>
+      <span th:text="${report.id}">ID</span>
     </div>
     <div>
       <label>Vognnummer:</label>
-      <span th:text="${leasing.start_date}">Vognnummer</span>
+      <span th:text="${report.car_id}">Car ID</span>
     </div>
     <div>
-      <label>Beskrivelse af skader:</label>
-      <span th:text="${leasing.end_date}">Beskrivelse</span>
+      <label>Dato:</label>
+      <span th:text="${report.date}">Dato</span>
     </div>
+
     <div>
-      <label>Samlet pris :</label>
-      <span th:text="${leasing.price}">Pris</span>
+      <h4>Skader:</h4>
+      <ul>
+        <li th:each="item : ${report.damageItems}">
+          Beskrivelse: <span th:text="${item.description}"></span>,
+          Pris: <span th:text="${item.cost}"></span> DKK
+        </li>
+      </ul>
     </div>
-    <div>
-      <label>Status:</label>
-      <span th:text="${leasing.status}">Status</span>
-    </div>
-    <div>
-      <label>Førerens navn:</label>
-      <span th:text="${leasing.customer_info}">Kundeinformation</span>
-    </div>
-    <form th:action="@{/deleteLeasing}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette denne leasingaftale?');">
-      <input type="hidden" name="id" th:value="${leasing.id}" />
-      <button type="submit">Slet Skadesrapport</button>
+
+    <form th:action="@{/deleteDamageReport}" method="post"
+          onsubmit="return confirm('Er du sikker på, at du vil slette denne skadesrapport?');">
+      <input type="hidden" name="id" th:value="${report.id}" />
+      <button type="submit">Slet Rapport</button>
     </form>
-    <form th:action="@{/getUpdateLeasing}" method="get">
-      <input type="hidden" name="id" th:value="${leasing.id}" />
-      <button type="submit">Opdater Skadesrapport</button>
+
+    <form th:action="@{/updateDamageReport}" method="get" style="display:inline;">
+      <input type="hidden" name="id" th:value="${report.id}" />
+      <button type="submit">Opdater</button>
     </form>
+
+
   </div>
 </div>
 </body>
