@@ -113,6 +113,8 @@
         </div>
     </div>
 </div>
-
+<br/><div th:if="${adminBtn}">
+    <a class="button-row" th:href="@{/admin(user_role=admin)}">Gå tilbage</a>
+</div>
 </body>
 </html>

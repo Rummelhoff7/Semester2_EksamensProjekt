@@ -13,9 +13,11 @@
 </div>
 <h1>Data Registration HomePage</h1>
 
-<a class="button-row" th:href="@{/dataRegistration(user_role=${param.user_role})}">Data Registration</a>
+<a class="button-row" th:href="@{/dataRegistration(user_role=${param.user_role})}">Lav leasing aftale</a>
 <a class="button-row" th:href="@{/dataRegistrationAllLeasings(user_role=${param.user_role})}">Registrerede leasingsaftaler</a>
 <a class="button-row" th:href="@{/advanceCarSaleShowing(user_role=${param.user_role})}">Forhånds salg</a>
-
+<br/><div th:if="${adminBtn}">
+    <a class="button-row" th:href="@{/admin(user_role=admin)}">Gå tilbage</a>
+</div>
 </body>
 </html>

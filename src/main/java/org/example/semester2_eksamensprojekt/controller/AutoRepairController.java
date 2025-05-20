@@ -22,10 +22,12 @@ public class AutoRepairController {
     public String autoRepairPage(@RequestParam("user_role") String user_role, Model model) {
         // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
         if (user_role.equals("admin")) {
+            model.addAttribute("adminBtn", "<a class=button-row th:href=@{/admin(user_role=admin)}>Gå tilbage</a>");
             return "autoRepairHomePage";
-        } else if (user_role.equals("mechanic")) {
+        }
+        else if (user_role.equals("mechanic")){
             return "autoRepairHomePage";
-        } else {
+        }else {
             model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvede at komme ind på");
             return "index";
         }

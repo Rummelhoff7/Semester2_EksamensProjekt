@@ -12,14 +12,11 @@
 </div>
 <h1>AutoRepair HomePage</h1>
 
-<a th:href="@{/autoRepair(user_role=${param.user_role})}">Opret en Skadesrapport</a>
-<a th:href="@{/showDamagereports(user_role=${param.user_role})}">Se Skadesrapporter</a>
+<a class="button-row" th:href="@{/autoRepair(user_role=${param.user_role})}">Opret en Skadesrapport</a>
+<a class="button-row" th:href="@{/showDamagereports(user_role=${param.user_role})}">Se Skadesrapporter</a>
 
-</body>
-</html>
-</title>
-</head>
-<body>
-
+<br/><div th:if="${adminBtn}">
+      <a class="button-row" th:href="@{/admin(user_role=admin)}">Gå tilbage</a>
+</div>
 </body>
 </html>
