@@ -10,5 +10,10 @@ public class PageController {
     public String mainPage(){
         return "index";
     }
+
+    @GetMapping("/index")
+    public String logOut(){
+        return "index";
+    }
 }
 
