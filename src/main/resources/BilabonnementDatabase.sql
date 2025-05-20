@@ -119,12 +119,17 @@ CREATE TABLE damageitem (
 );
 
 INSERT INTO damageitem (dmg_id, description, cost) VALUES
-    (1, 'Manglende sidespejl', 5000.00),
-    (2, 'Manglende sidespejl', 5000.00),
-    (2, 'Manglende måtte', 500.00),
-    (2, 'Rise i lakken', 20000.00),
-    (1, 'Manglende sidespejl', 5000.00),
-    (1, 'Manglende sidespejl', 5000.00);
+    (1, 'Manglende sidespejl', 500.00),
+    (1, 'Underlig lugt fra AC', 750.00),
+    (2, 'Forsvundet måtte', 500.00),
+    (2, '14 Ridser i lakken', 20000.00),
+    (3, 'Smadret sidespejl', 5000.00),
+    (3, 'Manglende gearstang', 8000.00),
+    (4, 'Babymos på bagsædet', 950.00),
+    (4, 'Radioaktiv udstødningsrøg', 9000.00),
+    (4, 'Flækket vindueshvisker', 8000.00)
+
+;
 
 ;
 
@@ -160,78 +165,3 @@ INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, c
     (1,'no terms lol', 200, 20000.00, 'Garage A');
 ;
 
-/*
-SELECT * FROM leasing WHERE DATEDIFF(end_date, start_date) >= 153;
-
-SELECT cars.*
-FROM leasing
-         JOIN cars ON leasing.car_id = cars.id
-WHERE DATEDIFF(leasing.end_date, leasing.start_date) >= 153;
-
-
--- I subtract all the damageitem cost from a cars price
-
-SELECT
-    c.id,
-    c.steel_price,
-    SUM(COALESCE(di.cost, 0)) AS total_damage_cost,
-    c.steel_price - SUM(COALESCE(di.cost, 0)) AS steel_price_minus_total_cost,
-    acs.exceeded_kilometers,
-    acs.buying_price
-FROM cars c
-         JOIN damagereport dr ON c.id = dr.car_id
-         JOIN advance_car_sale acs on c.id = acs.car_id
-         LEFT JOIN damageitem di ON dr.id = di.dmg_id
-WHERE c.id = 2
-GROUP BY c.id, c.steel_price;
-
-SELECT
-    c.id,
-    c.steel_price,
-    SUM(COALESCE(di.cost, 0)) AS total_damage_cost,
-    acs.exceeded_kilometers,
-    c.steel_price - SUM(COALESCE(di.cost, 0)) AS steel_price_minus_total_cost,
-    acs.exceeded_kilometers * 2.95 AS exceeded_km_cost,
-    (c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 2.95) AS final_price
-FROM cars c
-         JOIN damagereport dr ON c.id = dr.car_id
-         JOIN advance_car_sale acs ON c.id = acs.car_id
-         LEFT JOIN damageitem di ON dr.id = di.dmg_id
-WHERE c.id = 2
-GROUP BY c.id, c.steel_price, acs.exceeded_kilometers;
-
-UPDATE advance_car_sale acs
-SET buying_price = (
-    SELECT
-        (c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 2.95)
-    FROM cars c
-             JOIN damagereport dr ON c.id = dr.car_id
-             LEFT JOIN damageitem di ON dr.id = di.dmg_id
-    WHERE c.id = acs.car_id
-    GROUP BY c.steel_price
-)
-WHERE acs.car_id = 2;
-
-SELECT
-    di.description,
-    di.cost
-FROM cars c
-         JOIN damagereport dr ON c.id = dr.car_id
-         LEFT JOIN damageitem di ON dr.id = di.dmg_id
-WHERE c.id = 2
-
- */
-
-SELECT
-    di.description,
-
-di.cost
-
-FROM cars c
-         JOIN damagereport dr ON c.id = dr.car_id
-         LEFT JOIN damageitem di ON dr.id = di.dmg_id
-WHERE c.id = 2
-;
-
-/*
-DELETE FROM damageitem WHERE dmg_id= 2

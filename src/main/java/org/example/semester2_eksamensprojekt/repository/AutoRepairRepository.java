@@ -49,7 +49,7 @@ public class AutoRepairRepository {
         }
     }
     public void deleteDamageItem(int id) {
-        String sql = "DELETE FROM damagereport WHERE car_id = ?";
+        String sql = "DELETE FROM damageitem WHERE dmg_id = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
