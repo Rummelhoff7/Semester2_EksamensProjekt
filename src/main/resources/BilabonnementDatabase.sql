@@ -222,12 +222,15 @@ WHERE c.id = 2
  */
 
 SELECT
-    SUM(COALESCE(di.cost, 0)) AS total_damage_cost
+    di.description,
+
+di.cost
 
 FROM cars c
          JOIN damagereport dr ON c.id = dr.car_id
          LEFT JOIN damageitem di ON dr.id = di.dmg_id
 WHERE c.id = 2
-GROUP BY c.id, c.steel_price;
+;
+
 /*
 DELETE FROM damageitem WHERE dmg_id= 2

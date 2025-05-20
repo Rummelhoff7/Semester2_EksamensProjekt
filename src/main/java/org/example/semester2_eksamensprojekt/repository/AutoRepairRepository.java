@@ -17,17 +17,24 @@ public class AutoRepairRepository {
     @Autowired
     private DataSource dataSource;
 
-    public void save(DamageReport damageReport) {
+    public int save(DamageReport damageReport) {
         String sql = "INSERT INTO damagereport(car_id, date) VALUES (?, ?)";
+        int generatedId = -1;
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, damageReport.getCar_id());
             statement.setDate(2, java.sql.Date.valueOf(damageReport.getDate()));
             statement.executeUpdate();
+
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                generatedId = generatedKeys.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return generatedId;
     }
 
     public void delete(int id) {
@@ -42,7 +49,7 @@ public class AutoRepairRepository {
         }
     }
     public void deleteDamageItem(int id) {
-        String sql = "DELETE FROM damageitem WHERE dmg_id = ?";
+        String sql = "DELETE FROM damagereport WHERE car_id = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {

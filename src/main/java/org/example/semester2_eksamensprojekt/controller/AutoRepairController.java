@@ -75,21 +75,22 @@ public class AutoRepairController {
     public String saveDamageReport(@RequestParam("car_id") int car_id,
                                    @RequestParam("date") LocalDate date) {
         DamageReport damageReport = new DamageReport(car_id, date);
-        autoRepairRepository.save(damageReport);
-        return "redirect:/damageItems?car_id=" + car_id;
+        int Damagereport_id= autoRepairRepository.save(damageReport);
+        return "redirect:/damageItems?dmg_id=" + Damagereport_id;
     }
 
     @PostMapping("/saveDamageItems")
     public String saveDamageItem(@RequestParam("dmg_id") int dmg_id,
                                  @RequestParam("description") String description,
                                  @RequestParam("cost") double cost) {
+
         DamageItem damageItem = new DamageItem(dmg_id, description, cost);
         autoRepairRepository.saveDamageItem(damageItem);
-        return "redirect:/damageItems?car_id=" + dmg_id;
+        return "redirect:/damageItems?dmg_id=" + dmg_id;
     }
 
     @GetMapping("/damageItems")
-    public String showDamageItemForm(@RequestParam("car_id") int dmg_id, Model model) {
+    public String showDamageItemForm(@RequestParam("dmg_id") int dmg_id, Model model) {
         model.addAttribute("dmg_id", dmg_id);
         return "damageItems";
     }
