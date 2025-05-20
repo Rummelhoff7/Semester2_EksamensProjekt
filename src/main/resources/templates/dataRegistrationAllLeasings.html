@@ -7,6 +7,9 @@
   <title>Dataregistrering All Leasing</title>
 </head>
 <body>
+<div class="header-nav">
+  <a th:href="@{/index}" class="btn">Log out</a>
+</div>
 <h1>Alle Registrerede Leasingaftaler</h1>
 
 <div class="container">
@@ -45,5 +48,6 @@
     </form>
   </div>
 </div>
+<a class="button-row" th:href="@{/dataRegistrationHomePage(user_role=${param.user_role})}">Gå tilbage</a>
 </body>
 </html>

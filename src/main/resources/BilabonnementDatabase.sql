@@ -159,6 +159,7 @@ CREATE TABLE advance_car_sale(
 INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, collection_point) VALUES
     (1,'no terms lol', 200, 20000.00, 'Garage A');
 ;
+
 /*
 SELECT * FROM leasing WHERE DATEDIFF(end_date, start_date) >= 153;
 

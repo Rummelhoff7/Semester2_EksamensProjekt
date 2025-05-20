@@ -6,6 +6,9 @@
     <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
+<div class="header-nav">
+    <a th:href="@{/index}" class="btn">Log out</a>
+</div>
 <div class="container">
     <div class="form-container">
         <h1>Opdater Skadesrapport</h1>
@@ -24,5 +27,7 @@
         </form>
     </div>
 </div>
+<a class="button-row" th:href="@{/autoRepairHomePage(user_role=admin)}">Gå tilbage</a>
+
 </body>
 </html>

@@ -6,6 +6,9 @@
     <title>Title</title>
 </head>
 <body>
+<div class="header-nav">
+    <a th:href="@{/index}" class="btn">Log out</a>
+</div>
 <h1>Admin</h1>
 <a class="button-row" th:href="@{/businessDeveloper?user_role=admin}"> Business developer</a>
 <a class="button-row" th:href="@{/dataRegistrationHomePage?user_role=admin}"> Data registration</a>

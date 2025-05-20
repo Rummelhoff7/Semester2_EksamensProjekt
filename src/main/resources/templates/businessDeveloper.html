@@ -6,6 +6,9 @@
     <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
+<div class="header-nav">
+    <a th:href="@{/index}" class="btn">Log out</a>
+</div>
 <h1>Business developer</h1>
 
 <div class="container">
@@ -110,6 +113,8 @@
         </div>
     </div>
 </div>
-
+<br/><div th:if="${adminBtn}">
+    <a class="button-row" th:href="@{/admin(user_role=admin)}">Gå tilbage</a>
+</div>
 </body>
 </html>

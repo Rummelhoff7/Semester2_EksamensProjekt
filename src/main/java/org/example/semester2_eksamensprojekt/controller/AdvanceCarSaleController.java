@@ -98,6 +98,6 @@ public class AdvanceCarSaleController {
         // her putter jeg total_price ind i advanceCarSale table
         advanceCarSaleRepository.saveTotalPrice(advanceCarSale);
 
-        return  "redirect:/dataRegistration?user_role=data_registration";
+        return  "redirect:/advanceCarSaleShowing?user_role=data_registration";
     }
 }

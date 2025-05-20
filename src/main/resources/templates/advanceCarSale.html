@@ -6,7 +6,9 @@
     <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
-
+<div class="header-nav">
+    <a th:href="@{/index}" class="btn">Log out</a>
+</div>
 <h1>Forhånds Salg</h1>
 <div class="container">
     <div class="form-container">
@@ -27,5 +29,7 @@
         </form>
     </div>
 </div>
+<a class="button-row" th:href="@{/advanceCarSaleShowing(user_role=admin)}">Gå tilbage</a>
+
 </body>
 </html>

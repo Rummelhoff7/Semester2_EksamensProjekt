@@ -25,13 +25,18 @@ public class DataRegistrationController {
 
     @GetMapping("/dataRegistrationHomePage")
     public String mainPage(@RequestParam ("user_role") String user_role, Model model){
-        if(user_role.equals("data_registration") || user_role.equals("admin")) {
+        if(user_role.equals("admin")) {
 
             ArrayList<Car> carForSale = carRepository.getAllLimitedLeasing();
             model.addAttribute("carForSale", carForSale);
-
+            model.addAttribute("adminBtn", "<a class=button-row th:href=@{/admin(user_role=admin)}>Gå tilbage</a>");
             return "dataRegistrationHomePage";
-        } else {
+        }
+        else if(user_role.equals("data_registration")){
+            ArrayList<Car> carForSale = carRepository.getAllLimitedLeasing();
+            model.addAttribute("carForSale", carForSale);
+            return "dataRegistrationHomePage";
+        }else {
 
             model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
             return "index";
