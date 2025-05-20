@@ -37,12 +37,12 @@
     <form th:action="@{/deleteDamageReport}" method="post"
           onsubmit="return confirm('Er du sikker på, at du vil slette denne skadesrapport?');">
       <input type="hidden" name="id" th:value="${report.id}" />
-      <button type="submit">Slet Rapport</button>
+      <button class="btn" type="submit">Slet Rapport</button>
     </form>
 
     <form th:action="@{/updateDamageReport}" method="get" style="display:inline;">
       <input type="hidden" name="id" th:value="${report.id}" />
-      <button type="submit">Opdater</button>
+      <button class="btn" type="submit">Opdater</button>
     </form>
 
 
