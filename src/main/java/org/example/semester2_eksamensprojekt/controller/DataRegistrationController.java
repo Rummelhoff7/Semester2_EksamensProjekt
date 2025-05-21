@@ -25,10 +25,11 @@ public class DataRegistrationController {
 
     @GetMapping("/dataRegistrationHomePage")
     public String mainPage(@RequestParam ("user_role") String user_role, Model model){
+        // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
         if(user_role.equals("admin")) {
-
             ArrayList<Car> carForSale = carRepository.getAllLimitedLeasing();
             model.addAttribute("carForSale", carForSale);
+            //Her sørger vi for der er en knap der får en tilbage på admin.html hvis de er admin
             model.addAttribute("adminBtn", "<a class=button-row th:href=@{/admin(user_role=admin)}>Gå tilbage</a>");
             return "dataRegistrationHomePage";
         }
@@ -46,7 +47,8 @@ public class DataRegistrationController {
 
         @GetMapping("/dataRegistration")
         public String dataRegistration(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
-        if(user_role.equals("data_registration") || user_role.equals("admin")) {
+            // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
+            if(user_role.equals("data_registration") || user_role.equals("admin")) {
             return "dataRegistration";
         } else {
             model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
@@ -91,7 +93,7 @@ public class DataRegistrationController {
         // Kalder metode fra repository, som gemmer objektet i databasen.
         dataRegistrationRepository.save(leasing);
         // Returnerer til dataRegistration siden.
-        return "redirect:/dataRegistrationHomePage?user_role=admin";
+        return "redirect:/dataRegistrationHomePage?user_role=data_registration";
     }
 
 
@@ -149,6 +151,7 @@ public class DataRegistrationController {
 
     @GetMapping("/dataRegistrationAllLeasings")
     public String dataRegistrationAllLeasings(@RequestParam ("user_role") String user_role, Model model){
+        // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
         if(user_role.equals("data_registration") || user_role.equals("admin")) {
             ArrayList<Leasing> leasingList;
             leasingList = dataRegistrationRepository.getAllLeasings();

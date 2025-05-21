@@ -38,6 +38,8 @@ public class BusinessDeveloperController {
             // Her får vi et Array med alle ledige biler
             ArrayList<Car> availableCarList = businessDeveloperRepository.getAllAvailableCars();
             model.addAttribute("availableCarList", availableCarList);
+
+            //Her sørger vi for der er en knap der får en tilbage på admin.html hvis de er admin
             model.addAttribute("adminBtn", "<a class=button-row th:href=@{/admin(user_role=admin)}>Gå tilbage</a>");
 
             return "businessDeveloper";

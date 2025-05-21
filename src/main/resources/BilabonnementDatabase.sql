@@ -151,7 +151,7 @@ INSERT INTO user(name, password, role) VALUES
 CREATE TABLE advance_car_sale(
     id int AUTO_INCREMENT PRIMARY KEY UNIQUE ,
     car_id INT NOT NULL UNIQUE ,
-    terms VARCHAR(1000),
+    terms TEXT,
     exceeded_kilometers int,
     buying_price double,
     collection_point VARCHAR(100),

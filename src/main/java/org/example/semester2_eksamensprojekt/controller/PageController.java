@@ -11,6 +11,7 @@ public class PageController {
         return "index";
     }
 
+    //Denne Getmapping er for vores logout button
     @GetMapping("/index")
     public String logOut(){
         return "index";
