@@ -29,7 +29,7 @@ public class AdvancedCarSaleController_UnitTest {
     public void saveTotalPrice_HappyFlow_Test() {
         //Assumptions
 
-        //Excecution
+        //Execution
 
         //Validation
     }
@@ -39,7 +39,7 @@ public class AdvancedCarSaleController_UnitTest {
     public void saveTotalPrice_ExceptionFlow_Test() {
         //Assumptions
 
-        //Excecution
+        //Execution
 
         //Validation
     }
