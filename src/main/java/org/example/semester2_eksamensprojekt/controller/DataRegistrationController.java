@@ -152,6 +152,12 @@ public class DataRegistrationController {
         if(user_role.equals("data_registration") || user_role.equals("admin")) {
             ArrayList<Leasing> leasingList;
             leasingList = dataRegistrationRepository.getAllLeasings();
+
+            //bruges med exception flow test.
+            if (leasingList == null || leasingList.isEmpty() ) {
+                return "redirect:/dataRegistrationHomePage?user_role=" + user_role;
+            }
+
             model.addAttribute("leasingList", leasingList);
             return "dataRegistrationAllLeasings";
         } else {
@@ -166,6 +172,9 @@ public class DataRegistrationController {
     @GetMapping("/getUpdateLeasing")
     public String updateLeasing(@RequestParam("id") int id, Model model) {
         Leasing leasing = dataRegistrationRepository.getLeasingByID(id);
+        if (leasing == null) {
+            return "redirect:/dataRegistrationAllLeasings?user_role=data_registration";
+        }
         model.addAttribute("leasing",leasing);
         return "dataRegistrationUpdateLeasing";
     }
