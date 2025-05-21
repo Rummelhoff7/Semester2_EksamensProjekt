@@ -32,7 +32,7 @@ public class AutoRepairController_UnitTest {
 
         //Assumptions
 
-        //Excecution
+        //Execution
 
         //Validation
     }
@@ -42,7 +42,7 @@ public class AutoRepairController_UnitTest {
     public void showDamageItemForm_ExceptionFlow_Test() {
 //Assumptions
 
-        //Excecution
+        //Execution
 
         //Validation
     }

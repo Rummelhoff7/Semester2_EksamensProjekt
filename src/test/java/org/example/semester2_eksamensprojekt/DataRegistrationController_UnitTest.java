@@ -34,7 +34,7 @@ public class DataRegistrationController_UnitTest {
     @Test
     @DisplayName("deleteLeasing Happy flow test")
     public void deleteLeasingHappyFlow_Test(){
-        //Assumptions;
+        //Assumptions
         int leasingId = 1;
         //Execution
         String result = dataRegistrationController.deleteLeasing(leasingId);
@@ -46,7 +46,7 @@ public class DataRegistrationController_UnitTest {
     @Test
     @DisplayName("deleteLeasing Exception flow test")
     public void deleteLeasingExceptionFlow_Test(){
-        // Assumptions;
+        // Assumptions
         int leasingId = 1;
         //given(dataRegistrationController.deleteLeasing(leasingId)).willReturn(null);
 
@@ -67,7 +67,7 @@ public class DataRegistrationController_UnitTest {
 
         when(dataRegistrationRepository.getLeasingByID(leasingId)).thenReturn(leasing);
 
-        //Excecution
+        //Execution
         String result = dataRegistrationController.updateLeasing(leasingId,model);
 
         //Validation
@@ -82,7 +82,7 @@ public class DataRegistrationController_UnitTest {
         int leasingId = 1;
         when(dataRegistrationRepository.getLeasingByID(leasingId)).thenReturn(null);
 
-        //Excecution
+        //Execution
         String result = dataRegistrationController.updateLeasing(leasingId,model);
 
         //Validation
@@ -91,7 +91,7 @@ public class DataRegistrationController_UnitTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("All Leasings Happy Flow test")
     public void dataRegistrationAllLeasings_HappyFlow_Test() {
         //Assumptions
         String user_role = "data_registration";
@@ -101,7 +101,7 @@ public class DataRegistrationController_UnitTest {
         mockLeasingList.add(new Leasing(2,10,LocalDate.of(2025,05,20), LocalDate.of(2025,10,20), 100000, false, "test2"));
         when(dataRegistrationRepository.getAllLeasings()).thenReturn(mockLeasingList);
 
-        //Excecution
+        //Execution
         String result = dataRegistrationController.dataRegistrationAllLeasings(user_role, model);
 
         //Validation
@@ -110,14 +110,14 @@ public class DataRegistrationController_UnitTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("All Leasings Exception Flow Test")
     public void dataRegistrationAllLeasings_ExceptionFlow_Test() {
         //Assumptions
         String user_role = "data_registration";
 
         when(dataRegistrationRepository.getAllLeasings()).thenReturn(null);
 
-        //Excecution
+        //Execution
         String result = dataRegistrationController.dataRegistrationAllLeasings(user_role, model);
 
 
