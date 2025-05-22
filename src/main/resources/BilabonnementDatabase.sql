@@ -103,8 +103,15 @@ CREATE TABLE damagereport (
 INSERT INTO damagereport (car_id, date) VALUES
     (8,'2025-05-02'),
     (2,'2025-05-06'),
-    (5,'2025-06-02'),
-    (7,'2025-08-10')
+    (5,'2025-05-06'),
+    (9,'2025-06-02'),
+    (10,'2025-05-06'),
+    (14,'2025-06-02'),
+    (3,'2025-06-02'),
+    (15,'2025-05-06'),
+    (12,'2025-06-02'),
+    (4,'2025-06-02'),
+    (20,'2025-08-10')
 ;
 /*  Damagereport skal kun være på biler der er færdige med leasing */
 ;
@@ -126,9 +133,27 @@ INSERT INTO damageitem (dmg_id, description, cost) VALUES
     (3, 'Smadret sidespejl', 5000.00),
     (3, 'Manglende gearstang', 8000.00),
     (4, 'Babymos på bagsædet', 950.00),
+
+    (5, 'Forsvundet måtte', 500.00),
+    (6, '14 Ridser i lakken', 20000.00),
+    (5, 'Smadret sidespejl', 5000.00),
+    (6, 'Manglende gearstang', 8000.00),
+    (5, 'Babymos på bagsædet', 950.00),
+
+    (6, 'Forsvundet måtte', 500.00),
+    (7, '14 Ridser i lakken', 20000.00),
+    (8, 'Smadret sidespejl', 5000.00),
+    (7, 'Manglende gearstang', 8000.00),
+    (8, 'Babymos på bagsædet', 950.00),
+
+    (7, 'Forsvundet måtte', 500.00),
+    (8, '14 Ridser i lakken', 20000.00),
+    (9, 'Smadret sidespejl', 5000.00),
+    (9, 'Manglende gearstang', 8000.00),
+    (9, 'Babymos på bagsædet', 950.00),
+
     (4, 'Radioaktiv udstødningsrøg', 9000.00),
     (4, 'Flækket vindueshvisker', 8000.00)
-
 ;
 
 ;
@@ -162,7 +187,8 @@ CREATE TABLE advance_car_sale(
 
 
 INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, collection_point) VALUES
-    (1,'Har ikke snedæk', 200, 20560.20, 'Garage A');
+    (1,'Garanti op til 6 måned', 200, 20560.20, 'Garage A'),
+    (3,'ingen', 1000, 30560.20, 'Garage A'),
+    (8,'Gratis vinterdæk', 2000, 510560.20, 'Garage C'),
+    (10,'Gratis vinterdæk', 2050, 90560.20, 'Garage B')
 ;
-
-SELECT * FROM advance_car_sale;
