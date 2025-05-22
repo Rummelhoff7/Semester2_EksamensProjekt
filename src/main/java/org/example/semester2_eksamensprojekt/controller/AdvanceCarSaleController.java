@@ -27,8 +27,10 @@ public class AdvanceCarSaleController {
 
     @GetMapping("/advanceCarSaleShowing")
     public String advanceCarSaleShowingPage(@RequestParam ("user_role") String user_role, Model model) {
+        //Tjekker om man er data_registration eller admin
         if(user_role.equals("data_registration") || user_role.equals("admin")) {
 
+            //Laver en ArrayList med alle biler der kan sælges(lejet i 5månder eller mere)
             ArrayList<Car> carForSale = carRepository.getAllLimitedLeasing();
             model.addAttribute("carForSale", carForSale);
 
@@ -54,28 +56,24 @@ public class AdvanceCarSaleController {
                                            @RequestParam ("collection_point") String collection_point)
     {
 
-
+        //Gemmer de fleste af attributterne i advance_car_sale
         AdvanceCarSale advanceCarSale = new AdvanceCarSale(car_id, terms, exceeded_kilometers, collection_point);
 
         advanceCarSaleRepository.save(advanceCarSale);
+        //Sender car_id med på den url
         return "redirect:/advanceCarSalePrice?car_id=" + car_id;
 
     }
 
     @GetMapping("/advanceCarSalePrice")
     public String advanceCarSalePricePage(@RequestParam("car_id")int car_id, Model model) {
-        // her har jeg lavet en ny model som jeg kan putte finalPrice og exceededKmCost ind i, så jeg ikke behøver at kalde functionen 2 gange.
+        // her har jeg lavet en ny model som jeg kan putte finalPrice og exceededKmCost ind i, så jeg ikke behøver at kalde funktionen flere gange.
         CarSalesInfo salesInfo = advanceCarSaleRepository.save_price(car_id);
 
-        if (salesInfo != null) {
             model.addAttribute("total_price", salesInfo.getFinalPrice());
             model.addAttribute("exceeded_km_cost", salesInfo.getExceededKmCost());
             model.addAttribute("total_damage_cost", salesInfo.getTotalDamageCost());
-        } else {
-            model.addAttribute("total_price", 0);
-            model.addAttribute("exceeded_km_cost", 0);
-            model.addAttribute("total_damage_cost", 0);
-        }
+
 
         //Her henter jeg exceeded kilometers.
         int exceeded_kilometers = advanceCarSaleRepository.exceeded_kilometers(car_id);

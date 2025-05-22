@@ -60,6 +60,7 @@ public class AutoRepairController {
     // Viser alle skadesrapporter og tilføjer tilhørende skader til hver rapport
     @GetMapping("/showDamagereports")
     public String showAllDamageReports(@RequestParam("user_role") String user_role, Model model) {
+        // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
         if (!(user_role.equals("admin") || user_role.equals("mechanic"))) {
             model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvede at komme ind på");
             return "index";

@@ -20,6 +20,7 @@ public class AdvanceCarSaleRepository {
     private DataSource dataSource;
 
     public void save (AdvanceCarSale advanceCarSale) {
+        //Her putter jeg alt anden end buying_price in i advance_car_sale
         String sql = "INSERT INTO advance_car_sale(car_id,terms, exceeded_kilometers, collection_point) VALUES ( ?, ?, ?, ?)";
 
         try(Connection connection = dataSource.getConnection();
@@ -37,6 +38,7 @@ public class AdvanceCarSaleRepository {
 
     // her sætter jeg total prisen ind i advance_car_sale
     public void saveTotalPrice(AdvanceCarSale advanceCarSale) {
+        //Her putter jeg buying_price ind
         String sql = "UPDATE advance_car_sale SET buying_price = ? WHERE car_id = ?";
 
         try (Connection connection = dataSource.getConnection();
@@ -57,7 +59,7 @@ public class AdvanceCarSaleRepository {
         String sql = "SELECT " +
                         // her ligger jeg cost fra alle damageitem sammen som variablen total_damage_cost
                         "SUM(COALESCE(di.cost, 0)) AS total_damage_cost, " +
-                        // her gange jeg exceeded med 0.75 for at få hvad ekstra det koster)
+                        // her gange jeg exceeded med 0.75 for at få hvad ekstra det koster
                         "acs.exceeded_kilometers * 0.75 AS exceeded_km_cost, " +
                         //Her fjerner jeg det hele fra steel_price
                         "(c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 0.75) AS final_price " +
@@ -71,7 +73,7 @@ public class AdvanceCarSaleRepository {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, car_id);  // Set the parameter value
+            statement.setInt(1, car_id);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -91,6 +93,7 @@ public class AdvanceCarSaleRepository {
     }
 
     public int exceeded_kilometers(int car_id){
+        //Her finder jeg exceeded_kilometer så jeg kan vise der på advanceCarSalePrice.html
         String sql = "SELECT exceeded_kilometers FROM advance_car_sale WHERE id = ?";
 
         int exceeded_kilometers = 0;
@@ -112,6 +115,7 @@ public class AdvanceCarSaleRepository {
 
         return exceeded_kilometers;
     }
+
 
     public ArrayList<DamageItem> getAllDamageItemWithCarID(int car_id){
         ArrayList<DamageItem> DamageItemList = new ArrayList<>();
