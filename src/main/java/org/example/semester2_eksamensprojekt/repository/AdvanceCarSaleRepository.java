@@ -129,6 +129,7 @@ public class AdvanceCarSaleRepository {
                     AdvanceCarSale advanceCarSale = new AdvanceCarSale();
                     advanceCarSale.setCar_id(resultSet.getInt("car_id"));
                     advanceCarSale.setBuying_price(resultSet.getDouble("buying_price"));
+                    advanceCarSale.setTerms(resultSet.getString("terms"));
                     advanceCarSale.setCollection_point(resultSet.getString("collection_point"));
                     AdvanceCarSaleList.add(advanceCarSale);
                 }
