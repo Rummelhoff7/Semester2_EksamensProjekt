@@ -13,9 +13,9 @@
 <h1>Opret skadesrapport</h1>
 
 <div class="container">
-    <div class="square">
-        <form th:action="@{/saveDamageReport}" method="post">
-            <div>
+    <div class="square-form">
+        <form th:action="@{/saveDamageReport}" method="post" class="form-wrapper">
+        <div>
                 <label for="car_id">Vognnummer:</label>
                 <input type="text" id="car_id" name="car_id" placeholder="Indtast bilens vognnummer her" required>
             </div>

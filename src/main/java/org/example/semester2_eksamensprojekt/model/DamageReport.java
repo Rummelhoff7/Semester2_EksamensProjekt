@@ -68,5 +68,8 @@ public class DamageReport {
     public void setDamageItems(List<DamageItem> damageItems) {
         this.damageItems = damageItems;
     }
+
+
+
 }
 
