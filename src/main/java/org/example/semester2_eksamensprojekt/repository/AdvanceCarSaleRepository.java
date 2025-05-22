@@ -116,6 +116,30 @@ public class AdvanceCarSaleRepository {
         return exceeded_kilometers;
     }
 
+    public ArrayList<AdvanceCarSale> getallAdvanceCarSale(){
+        ArrayList<AdvanceCarSale> AdvanceCarSaleList = new ArrayList<>();
+
+        String sql = "SELECT * FROM advance_car_sale";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            //Her putter vi alle informationen fra databasen ind i vores model og derefter ind i vore Array
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    AdvanceCarSale advanceCarSale = new AdvanceCarSale();
+                    advanceCarSale.setCar_id(resultSet.getInt("car_id"));
+                    advanceCarSale.setBuying_price(resultSet.getDouble("buying_price"));
+                    advanceCarSale.setCollection_point(resultSet.getString("collection_point"));
+                    AdvanceCarSaleList.add(advanceCarSale);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return AdvanceCarSaleList;
+    }
 
     public ArrayList<DamageItem> getAllDamageItemWithCarID(int car_id){
         ArrayList<DamageItem> DamageItemList = new ArrayList<>();

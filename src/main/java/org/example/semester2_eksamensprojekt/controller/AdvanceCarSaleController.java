@@ -1,5 +1,4 @@
 package org.example.semester2_eksamensprojekt.controller;
-
 import org.example.semester2_eksamensprojekt.model.AdvanceCarSale;
 import org.example.semester2_eksamensprojekt.model.Car;
 import org.example.semester2_eksamensprojekt.model.CarSalesInfo;
@@ -33,6 +32,10 @@ public class AdvanceCarSaleController {
             //Laver en ArrayList med alle biler der kan sælges(lejet i 5månder eller mere)
             ArrayList<Car> carForSale = carRepository.getAllLimitedLeasing();
             model.addAttribute("carForSale", carForSale);
+
+            ArrayList<AdvanceCarSale> advance_car_sale_list = advanceCarSaleRepository.getallAdvanceCarSale();
+            model.addAttribute("advance_car_sale_list", advance_car_sale_list);
+
 
             return "advanceCarSaleShowing";
         } else {

@@ -165,3 +165,4 @@ INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, c
     (1,'Har ikke snedæk', 200, 20560.20, 'Garage A');
 ;
 
+SELECT * FROM advance_car_sale;

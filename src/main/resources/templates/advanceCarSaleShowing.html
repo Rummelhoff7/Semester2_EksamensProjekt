@@ -9,8 +9,20 @@
 <div class="header-nav">
     <a th:href="@{/index}" class="btn">Log out</a>
 </div>
+<h1>Solgte biler</h1>
+<div class="square" th:each="advance_car_sale : ${advance_car_sale_list}">
+    <div>
+        <p>Vogn nummer: <span th:text="${advance_car_sale.car_id}"></span></p>
+    </div>
+    <div>
+        <p>Solgt for: <span th:text="${advance_car_sale.buying_price}"></span>kr</p>
+    </div>
+    <div>
+        <p>Solgt ved: <span th:text="${advance_car_sale.collection_point}"></span></p>
+    </div>
+</div>
 
-<h1>Biler der kan forhånds sælges</h1>
+    <h1>Biler der kan forhånds sælges</h1>
 
 <div class="container">
 

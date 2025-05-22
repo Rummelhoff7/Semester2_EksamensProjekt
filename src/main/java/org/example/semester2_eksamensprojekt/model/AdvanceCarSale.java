@@ -28,6 +28,10 @@ public class AdvanceCarSale {
         this.buying_price = buying_price;
     }
 
+    public AdvanceCarSale() {
+
+    }
+
     public int getId() {
         return id;
     }
