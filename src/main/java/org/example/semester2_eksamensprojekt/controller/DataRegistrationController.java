@@ -69,16 +69,16 @@ public class DataRegistrationController {
                                 @RequestParam ("customer_info") String customer,
                                 Model model) {
 
+        // Metode der tjekker om bilen findes.
         if (!dataRegistrationRepository.carExists(car_id)) {
             model.addAttribute("errorMessage", "Der findes ikke en bil med dette vognnummer");
             return "dataRegistration";
         }
-
+        // Metode der tjekker om leasing allerede findes
         if (dataRegistrationRepository.leasingExistsForCar(car_id)) {
             model.addAttribute("errorMessage", "Der findes allerede en leasing på denne bil");
             return "dataRegistration";
         }
-
 
         try {
             end_date = dataRegistrationRepository.calculateEndDate(start_date, end_date, status);
