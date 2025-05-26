@@ -56,19 +56,15 @@ public class AdvanceCarSaleRepository {
 
     public CarSalesInfo save_price(int car_id) {
         //Her laver jeg en sql sætning som joiner damagereport(dr) med cars(c), damageitem(di) med damagereport(dr) og advance_car_sale(acs) med cars(c).
-        String sql = "SELECT " +
-                        // her ligger jeg cost fra alle damageitem sammen som variablen total_damage_cost
-                        "SUM(COALESCE(di.cost, 0)) AS total_damage_cost, " +
-                        // her gange jeg exceeded med 0.75 for at få hvad ekstra det koster
-                        "acs.exceeded_kilometers * 0.75 AS exceeded_km_cost, " +
-                        //Her fjerner jeg det hele fra steel_price
-                        "(c.registration_fee - (SUM(COALESCE(di.cost, 0)) + (acs.exceeded_kilometers * 0.75)) AS final_price " +
-                        "FROM cars c " +
-                        "    JOIN damagereport dr ON c.id = dr.car_id " +
-                        "    JOIN advance_car_sale acs ON c.id = acs.car_id " +
-                        "    LEFT JOIN damageitem di ON dr.id = di.dmg_id " +
-                        "WHERE c.id = ? " +
-                        "GROUP BY c.id, c.steel_price, acs.exceeded_kilometers;";
+        String sql = "SELECT SUM(COALESCE(di.cost, 0)) AS total_damage_cost, " +
+        "acs.exceeded_kilometers * 0.75 AS exceeded_km_cost, "+
+        "c.steel_price - (SUM(COALESCE(di.cost, 0)) + (acs.exceeded_kilometers * 0.75)) AS final_price"+
+        "FROM cars c"+
+        "JOIN damagereport dr ON c.id = dr.car_id"+
+        "JOIN advance_car_sale acs ON c.id = acs.car_id"+
+        "LEFT JOIN damageitem di ON dr.id = di.dmg_id"+
+        "WHERE c.id = ?"+
+        "GROUP BY c.id, c.steel_price, acs.exceeded_kilometers;";
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
