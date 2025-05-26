@@ -163,7 +163,7 @@ public class AutoRepairRepository {
                     damageReport.setCar_id(rs.getInt("car_id"));
                     damageReport.setDate(rs.getDate("date").toLocalDate());
 
-
+                  
                 }
             }
         } catch (SQLException e) {
