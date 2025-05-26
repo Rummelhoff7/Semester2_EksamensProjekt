@@ -41,7 +41,7 @@ public class AutoRepairController {
     public String updateDamageReport(@RequestParam("id") int id, Model model) {
         DamageReport damageReport = autoRepairRepository.getDamageReportById(id);
         model.addAttribute("damageReport", damageReport);
-        return "updateDamageReport";
+        return "updateDamagereport";
     }
 
     // Viser tom autioRepair-siden
