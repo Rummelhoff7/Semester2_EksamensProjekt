@@ -79,13 +79,13 @@ CREATE TABLE leasing (
 );
 
 INSERT INTO leasing (car_id, start_date, end_date, price, status, customer_info) VALUES
-                        (1, '2025-05-02', '2025-07-02',40000.00, false, 'Markus Johansen'),
+                        (1, '2025-05-05', '2025-08-02',40000.00, false, 'Markus Johansen'),
                         (2, '2025-05-02', '2025-10-02',75000.00, false, 'Jakob Hansen'),
-                        (3, '2025-05-02', '2025-09-01',62000.00, false, 'Martin Gunnersen'),
-                        (4, '2025-05-02', '2025-10-02',56000.00, true, 'Alexander Frandsen'),
-                        (5, '2025-05-02', '2025-10-02',60000.00, true, 'Lukas Lucasson'),
-                        (6, '2025-05-02', '2025-11-01',80000.00, false, 'Sofie Jakobsen'),
-                        (7, '2025-05-02', '2025-12-24',88000.00, false, 'Amir Zakariasen')
+                        (3, '2025-06-22', '2025-11-01',62000.00, false, 'Martin Gunnersen'),
+                        (4, '2025-08-12', '2026-01-12',56000.00, true, 'Alexander Frandsen'),
+                        (5, '2025-10-11', '2026-03-02',60000.00, true, 'Lukas Lucasson'),
+                        (6, '2025-09-29', '2026-11-01',80000.00, false, 'Sofie Jakobsen'),
+                        (7, '2025-01-02', '2026-01-24',88000.00, false, 'Amir Zakariasen')
 ;
 
 CREATE TABLE damagereport (
@@ -103,17 +103,15 @@ CREATE TABLE damagereport (
 INSERT INTO damagereport (car_id, date) VALUES
     (8,'2025-05-02'),
     (2,'2025-05-06'),
-    (5,'2025-05-06'),
-    (9,'2025-06-02'),
-    (10,'2025-05-06'),
-    (14,'2025-06-02'),
+    (4,'2025-05-06'),
+    (5,'2025-06-02'),
+    (6,'2025-05-06'),
+    (7,'2025-06-02'),
     (3,'2025-06-02'),
     (15,'2025-05-06'),
     (12,'2025-06-02'),
     (4,'2025-06-02'),
     (20,'2025-08-10')
-;
-/*  Damagereport skal kun være på biler der er færdige med leasing */
 ;
 
 CREATE TABLE damageitem (
