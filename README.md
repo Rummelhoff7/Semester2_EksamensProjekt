@@ -11,6 +11,7 @@ Softwaremæssige forudsætninger:
 Dette er en dynamisk hjemmeside, hvor man har fuld adgang til koden via dette GitHub repository. Der kræver ingen yderligere installation af software for at køre denne applikation.
 
 Applikationen starter med en log-in side hvor vi har disse brugere:
+
 Tilgængelige bruger: 
   demo (admin)
   Mads (Dataregistration) 
@@ -30,6 +31,7 @@ Admin bruger (System Login):
 
 
 System opbygning:
+
 Admin:
 Når man logger ind som admin, så har man adgang til hele hjemmesiden. En admin kan alt hvad alle medarbejdere kan gøre, men kan ikke sine egne ekstra features.
 
