@@ -58,12 +58,12 @@ public class AdvanceCarSaleRepository {
         //Her laver jeg en sql sætning som joiner damagereport(dr) med cars(c), damageitem(di) med damagereport(dr) og advance_car_sale(acs) med cars(c).
         String sql = "SELECT SUM(COALESCE(di.cost, 0)) AS total_damage_cost, " +
         "acs.exceeded_kilometers * 0.75 AS exceeded_km_cost, "+
-        "c.steel_price - (SUM(COALESCE(di.cost, 0)) + (acs.exceeded_kilometers * 0.75)) AS final_price"+
-        "FROM cars c"+
-        "JOIN damagereport dr ON c.id = dr.car_id"+
-        "JOIN advance_car_sale acs ON c.id = acs.car_id"+
-        "LEFT JOIN damageitem di ON dr.id = di.dmg_id"+
-        "WHERE c.id = ?"+
+        "c.steel_price - (SUM(COALESCE(di.cost, 0)) + (acs.exceeded_kilometers * 0.75)) AS final_price "+
+        "FROM cars c "+
+        "JOIN damagereport dr ON c.id = dr.car_id "+
+        "JOIN advance_car_sale acs ON c.id = acs.car_id "+
+        "LEFT JOIN damageitem di ON dr.id = di.dmg_id "+
+        "WHERE c.id = ? "+
         "GROUP BY c.id, c.steel_price, acs.exceeded_kilometers;";
 
         try(Connection connection = dataSource.getConnection();

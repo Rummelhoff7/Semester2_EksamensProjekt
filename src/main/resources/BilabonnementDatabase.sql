@@ -192,14 +192,3 @@ INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, c
     (8,'Gratis vinterdæk', 2000, 510560.20, 'Garage C'),
     (10,'Gratis vinterdæk', 2050, 90560.20, 'Garage B')
 ;
-
-
-SELECT SUM(COALESCE(di.cost, 0)) AS total_damage_cost,
-                        acs.exceeded_kilometers * 0.75 AS exceeded_km_cost,
-                        c.steel_price - (SUM(COALESCE(di.cost, 0)) + (acs.exceeded_kilometers * 0.75)) AS final_price
-                        FROM cars c
-                            JOIN damagereport dr ON c.id = dr.car_id
-                            JOIN advance_car_sale acs ON c.id = acs.car_id
-                            LEFT JOIN damageitem di ON dr.id = di.dmg_id
-                        WHERE c.id = 2
-                        GROUP BY c.id, c.steel_price, acs.exceeded_kilometers;
