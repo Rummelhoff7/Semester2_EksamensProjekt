@@ -10,17 +10,24 @@ URL: mysqlbilabonnementintern.mysql.database.azure.com
 
 jdbc:mysql://mysqlbilabonnementintern.mysql.database.azure.com:3306/BilabonnementDatabase
 
+------------
+
 Softwaremæssige forudsætninger:
 
 Dette er en dynamisk hjemmeside, hvor man har fuld adgang til koden via dette GitHub repository. Der kræver ingen yderligere installation af software for at køre denne applikation.
+
+------------
 
 Applikationen starter med en log-in side hvor vi har disse brugere:
 
 Tilgængelige bruger: 
 
   demo (admin)
+  
   Mads (Dataregistration) 
+  
   Güney (AutoRepair)
+  
   Thamied (BusinessDeveloper)
 
 Når man logger ind som en af disse brugere, så bliver man sendt til deres egen side.
@@ -28,13 +35,16 @@ Når man logger ind som en af disse brugere, så bliver man sendt til deres egen
 Password: 
 
   demo - demo
+  
   Andre brugere - 1234
   
 Admin bruger (System Login):
 
   Brugerid: demo
+  
   Password: demo
 
+------------
 
 System opbygning:
 
