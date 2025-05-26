@@ -6,6 +6,7 @@ Deployment URL (Azure): https://bilabonnementinterngruppe7-a5dxejh7b8e6dbb6.germ
 
 Database Adgang (Azure MySQL):
 URL: mysqlbilabonnementintern.mysql.database.azure.com
+jdbc:mysql://mysqlbilabonnementintern.mysql.database.azure.com:3306/BilabonnementDatabase
 
 Softwaremæssige forudsætninger:
 Dette er en dynamisk hjemmeside, hvor man har fuld adgang til koden via dette GitHub repository. Der kræver ingen yderligere installation af software for at køre denne applikation.
