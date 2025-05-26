@@ -15,7 +15,7 @@ import java.util.ArrayList;
 @Repository
 public class DataRegistrationRepository {
 
-    @Autowired // Spring annatation, som giver dig tilgang til en DataSource.
+    @Autowired // Spring annotation, som giver dig tilgang til en DataSource.
     private DataSource dataSource;
 
     // Denne metode bliver kaldt fra DateRegistrationController, og den skal bruges til at GEMME en ny leasing i databasen.
@@ -165,13 +165,14 @@ public class DataRegistrationRepository {
 
     public LocalDate calculateEndDate(LocalDate startDate, LocalDate givenEndDate, boolean status) throws IllegalArgumentException {
         if (status) {
-            // Limited subscription: fixed 5 months from startDate
+            // Limited subscription: Fast på 5 måneder fra startDate
             return startDate.plusMonths(5);
         } else {
-            // Unlimited subscription: given endDate if valid, else min 3 months
+            // Unlimited subscription: hvis status er unlimited, min 3 måneder.
             LocalDate minEndDate = startDate.plusMonths(3);
+            // Hvis der er fejl i dato.
             if (givenEndDate == null || givenEndDate.isBefore(minEndDate)) {
-                throw new IllegalArgumentException("Den rolle passer ikke til den side du prøvet at komme ind på");
+                throw new IllegalArgumentException("Datoen skal minimum være på 3 måneder fra startdatoen. Datoen er: " + givenEndDate);
             }
             return givenEndDate;
         }
