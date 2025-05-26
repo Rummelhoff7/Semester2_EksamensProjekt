@@ -62,7 +62,7 @@ public class AdvanceCarSaleRepository {
                         // her gange jeg exceeded med 0.75 for at få hvad ekstra det koster
                         "acs.exceeded_kilometers * 0.75 AS exceeded_km_cost, " +
                         //Her fjerner jeg det hele fra steel_price
-                        "(c.steel_price - SUM(COALESCE(di.cost, 0))) - (acs.exceeded_kilometers * 0.75) AS final_price " +
+                        "(c.registration_fee - (SUM(COALESCE(di.cost, 0)) + (acs.exceeded_kilometers * 0.75)) AS final_price " +
                         "FROM cars c " +
                         "    JOIN damagereport dr ON c.id = dr.car_id " +
                         "    JOIN advance_car_sale acs ON c.id = acs.car_id " +

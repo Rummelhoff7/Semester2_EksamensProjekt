@@ -192,3 +192,4 @@ INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, c
     (8,'Gratis vinterdæk', 2000, 510560.20, 'Garage C'),
     (10,'Gratis vinterdæk', 2050, 90560.20, 'Garage B')
 ;
+
