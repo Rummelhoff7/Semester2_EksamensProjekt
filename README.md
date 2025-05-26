@@ -18,9 +18,6 @@ Applikationen starter med en log-in side hvor vi har disse brugere:
 
 Tilgængelige bruger: 
 
-
-
-
   demo (admin)
   Mads (Dataregistration) 
   Güney (AutoRepair)
