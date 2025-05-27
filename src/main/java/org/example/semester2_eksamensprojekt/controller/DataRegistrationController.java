@@ -100,7 +100,13 @@ public class DataRegistrationController {
     //Mads
     @PostMapping("/deleteLeasing")
     public String deleteLeasing(@RequestParam("id") int id){
-        dataRegistrationRepository.delete(id);
+        // Laver en try catch til at slette objektet i databasen, dette er gjort ift. exception flow test.
+        try {
+            dataRegistrationRepository.delete(id);
+        } catch (Exception e) {
+            //
+            System.err.println("Kunne ikke slette leasing med id: " + id);
+        }
 
         return "redirect:/dataRegistrationAllLeasings?user_role=data_registration";
     }

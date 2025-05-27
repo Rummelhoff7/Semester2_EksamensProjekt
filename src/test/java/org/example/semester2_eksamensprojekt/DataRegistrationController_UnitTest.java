@@ -23,12 +23,13 @@ import static org.mockito.Mockito.*;
 public class DataRegistrationController_UnitTest {
 
     @Mock //SQL- strengen vil ikke integreres i unit test
+    // Vi mocker repositorien.
     private DataRegistrationRepository dataRegistrationRepository;
 
     @Mock
     private Model model;
 
-    @InjectMocks   //Fortæller mockito dette skal mockes, så den ved den ikke skal fungere som på normal vis.
+    @InjectMocks // Isolerer controlleren.
     private DataRegistrationController dataRegistrationController;
 
     @Test
@@ -38,12 +39,13 @@ public class DataRegistrationController_UnitTest {
             //Test data
         int leasingId = 1;
         //Execution
-            //Kalder den metode som skal testes
+            //Kalder den metode som skal testes.
         String result = dataRegistrationController.deleteLeasing(leasingId);
         // Validation
-            //
+            // Tjekker om controlleren har kalt metoden "delete()" i repositorien.
+            // Da repositorien er mocked, vil ingen "rigtig" leasing blive slettet.
         verify(dataRegistrationRepository).delete(leasingId);
-            // Assert'
+            // "Asserter" metoden returnerer den rigtige URL, som stemmer overens med controlleren.
         assertEquals("redirect:/dataRegistrationAllLeasings?user_role=data_registration", result);
     }
 
@@ -53,12 +55,14 @@ public class DataRegistrationController_UnitTest {
         // Assumptions
         int leasingId = 1;
 
+        doThrow(new RuntimeException("Database error")).when(dataRegistrationRepository).delete(leasingId);
+
         // Execution
         String result = dataRegistrationController.deleteLeasing(leasingId);
 
         // Validation
-        assertEquals( "redirect:/dataRegistrationAllLeasings?user_role=data_registration", result);
-        assertTrue(model.asMap().isEmpty(), "Model should be empty");
+        verify( dataRegistrationRepository).delete(leasingId);
+        assertEquals("redirect:/dataRegistrationAllLeasings?user_role=data_registration", result);
     }
 
     @Test
