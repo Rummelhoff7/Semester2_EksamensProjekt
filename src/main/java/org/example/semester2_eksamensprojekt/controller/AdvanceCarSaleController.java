@@ -24,6 +24,8 @@ public class AdvanceCarSaleController {
     @Autowired
     AdvanceCarSaleRepository advanceCarSaleRepository;
 
+
+    //Joakim
     @GetMapping("/advanceCarSaleShowing")
     public String advanceCarSaleShowingPage(@RequestParam ("user_role") String user_role, Model model) {
         //Tjekker om man er data_registration eller admin
@@ -45,13 +47,13 @@ public class AdvanceCarSaleController {
         }
     }
 
-
+    //Joakim
     @GetMapping("/advanceCarSale")
     public String advanceCarSalePage() {
         return "advanceCarSale";
     }
 
-
+    //Joakim
     @PostMapping("/saveCreateAdvanceCarSale")
     public String postCreateAdvanceCarSale(@RequestParam("car_id")int car_id,
                                             @RequestParam ("terms") String terms,
@@ -68,6 +70,7 @@ public class AdvanceCarSaleController {
 
     }
 
+    //Joakim
     @GetMapping("/advanceCarSalePrice")
     public String advanceCarSalePricePage(@RequestParam("car_id")int car_id, Model model) {
         // her har jeg lavet en ny model som jeg kan putte finalPrice og exceededKmCost ind i, så jeg ikke behøver at kalde funktionen flere gange.
@@ -91,6 +94,7 @@ public class AdvanceCarSaleController {
 
     }
 
+    //Joakim
     @PostMapping("/saveTotalPrice")
     public String saveTotalPrice(@RequestParam int car_id,
                                  @RequestParam double total_price) {

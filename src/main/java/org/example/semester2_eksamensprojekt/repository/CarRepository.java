@@ -17,6 +17,7 @@ public class CarRepository {
     @Autowired // Spring annatation, som giver dig tilgang til en DataSource.
     private DataSource dataSource;
 
+    //Joakim
     public ArrayList<Car> getAllLimitedLeasing() {
         ArrayList<Car> carList = new ArrayList<>();
         //Her tæller vi alle de biler som er blevet lejet ud
@@ -54,21 +55,4 @@ public class CarRepository {
 
         return carList;
     }
-
-    public String getImageUrlByCarId(int carId) {
-        String sql = "SELECT image_url FROM car WHERE id = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, carId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getString("image_url");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
 }

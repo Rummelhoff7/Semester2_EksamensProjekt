@@ -23,6 +23,7 @@ public class DataRegistrationController {
     @Autowired
     CarRepository carRepository;
 
+    //Mads
     @GetMapping("/dataRegistrationHomePage")
     public String mainPage(@RequestParam ("user_role") String user_role, Model model){
         // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
@@ -44,7 +45,7 @@ public class DataRegistrationController {
         }
     }
 
-
+        //Mads
         @GetMapping("/dataRegistration")
         public String dataRegistration(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
             // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
@@ -56,7 +57,7 @@ public class DataRegistrationController {
         }
     }
 
-
+    //Mads
     // PostMapping hånder HTTP Post-anmodninger. Her opretter vi en ny leasing og gemmer den i databasen.
     // Vi bruger en metode fra DataRegistrationRepository for at gemme.
     @PostMapping("/createLeasing")
@@ -96,7 +97,7 @@ public class DataRegistrationController {
         return "redirect:/dataRegistrationHomePage?user_role=data_registration";
     }
 
-
+    //Mads
     @PostMapping("/deleteLeasing")
     public String deleteLeasing(@RequestParam("id") int id){
         dataRegistrationRepository.delete(id);
@@ -104,7 +105,7 @@ public class DataRegistrationController {
         return "redirect:/dataRegistrationAllLeasings?user_role=data_registration";
     }
 
-
+    //Mads
     @PostMapping("/saveUpdateLeasing")
     public String postUpdateLeasing (@RequestParam("id") int id,
                                      @RequestParam("car_id") int car_id,
@@ -148,7 +149,7 @@ public class DataRegistrationController {
         return "redirect:/dataRegistrationAllLeasings?user_role=data_registration";
     }
 
-
+    //Mads
     @GetMapping("/dataRegistrationAllLeasings")
     public String dataRegistrationAllLeasings(@RequestParam ("user_role") String user_role, Model model){
         // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
@@ -171,7 +172,7 @@ public class DataRegistrationController {
     }
 
 
-
+    //Mads
     @GetMapping("/getUpdateLeasing")
     public String updateLeasing(@RequestParam("id") int id, Model model) {
         Leasing leasing = dataRegistrationRepository.getLeasingByID(id);

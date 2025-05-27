@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
+
     @Autowired
     UserRepository userRepository;
 
+    //Joakim
     @GetMapping("/admin")
     public String adminPage(@RequestParam ("user_role") String user_role, Model model) {
         //Her tjekker den om url har den rigtig user_role og sender en tilbage til start siden hvis den ikke har. Med en errorMessage
@@ -24,6 +26,7 @@ public class UserController {
         }
     }
 
+    //Joakim
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model) {
         String userRole = userRepository.authenticateUser(username, password);

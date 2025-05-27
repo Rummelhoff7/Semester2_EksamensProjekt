@@ -18,7 +18,7 @@ public class AutoRepairRepository {
     @Autowired
     private DataSource dataSource;
 
-
+    //Güney
     //Gemmer en ny skadesrapport i databasen og returnerer det ID, databasen har givet den.
 
     public int save(DamageReport damageReport) {
@@ -50,6 +50,7 @@ public class AutoRepairRepository {
         return generatedId;
     }
 
+    //Güney
     // Sletter en skadesrapport ud fra dens ID
     public void delete(int id) {
         String sql = "DELETE FROM damagereport WHERE id = ?";
@@ -63,6 +64,7 @@ public class AutoRepairRepository {
         }
     }
 
+    //Güney
     // Sletter alle skader der hører til en skadesrapport
     public void deleteDamageItem(int id) {
         String sql = "DELETE FROM damageitem WHERE dmg_id = ?";
@@ -76,6 +78,7 @@ public class AutoRepairRepository {
         }
     }
 
+    //Güney
     // Gemmer en enkelt skade i databasen
     public void saveDamageItem(DamageItem damageItem) {
         String sql = "INSERT INTO damageitem (dmg_id, description, cost) VALUES (?, ?, ?)";
@@ -94,6 +97,7 @@ public class AutoRepairRepository {
         }
     }
 
+    //Güney
     // Henter alle skadesrapporter fra databasen
     public List<DamageReport> getAllDamageReports() {
         List<DamageReport> reports = new ArrayList<>();
@@ -120,6 +124,7 @@ public class AutoRepairRepository {
         return reports;
     }
 
+    //Güney
     // Henter alle skader der hører til en bestemt rapport
     public List<DamageItem> getDamageItemsByReportId(int dmg_id) {
         List<DamageItem> damageItems = new ArrayList<>();
@@ -145,6 +150,7 @@ public class AutoRepairRepository {
         return damageItems;
     }
 
+    //Güney
     // Henter én enkelt skadesrapport baseret på ID
     public DamageReport getDamageReportById(int id) {
         DamageReport damageReport = null;
@@ -172,6 +178,7 @@ public class AutoRepairRepository {
         return damageReport;
     }
 
+    //Güney
     // Opdaterer en eksisterende skadesrapport med nye værdier
     public void updateDamageReport(DamageReport damageReport) {
         String sql = "UPDATE damagereport SET car_id = ?, date = ? WHERE id = ?";

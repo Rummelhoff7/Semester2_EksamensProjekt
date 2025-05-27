@@ -17,6 +17,7 @@ public class BusinessDeveloperRepository{
     @Autowired
     private DataSource dataSource;
 
+    //Joakim
     public int rentedcars() {
         //Her tæller vi alle de biler som er blevet lejet ud
         String sql = "SELECT COUNT(*) AS total_leased_cars FROM cars WHERE status = 'Udlejet'";
@@ -37,6 +38,7 @@ public class BusinessDeveloperRepository{
         return 0;
     }
 
+    //Joakim
     public double totalamount(){
         //her ligger vi alle price sammen, for udlejet biler
         String sql = "SELECT SUM(price) AS total_amount FROM leasing WHERE status = 'Udlejet'";
@@ -57,6 +59,7 @@ public class BusinessDeveloperRepository{
         return 0;
     }
 
+    //Mads
     // Denne metode bruges for Business Developer. Den returnerer en Arrayliste med biler, som er "Udlejet".
     // Denne metoder kalder en anden metode getCarFromResultSet(ResultSet resultSet). Metoden returnerer enten almindelige biler eller elbiler.
     public ArrayList<Car> getAllRentedCars(){
@@ -92,6 +95,7 @@ public class BusinessDeveloperRepository{
         return carList;
     }
 
+    //Mads
     // Denne metode bruges for Business Developer. Den returnerer en Arrayliste med biler, som er "Ledig".
     // Denne metoder kalder en anden metode getCarFromResultSet(ResultSet resultSet). Metoden returnerer enten almindelige biler eller elbiler.
     public ArrayList<Car> getAllAvailableCars() {
@@ -127,7 +131,7 @@ public class BusinessDeveloperRepository{
         return carList;
     }
 
-
+    //Mads
     // Denne metode bliver kaldt fra getAllAvaiableCars() og getAllRentedCars().
     // Formålet med denne metode er, at undgå redundans i koden, da begge metoder skal bruge indholdet af denne metode.
     // Metoden returnerer enten en bil (superklasse) eller en elbil (subklasse) baseret på data i ResultSet.

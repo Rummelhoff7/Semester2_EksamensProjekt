@@ -16,6 +16,7 @@ public class UserRepository {
     @Autowired
     private DataSource dataSource;
 
+    //Joakim
     public String authenticateUser(String name, String password) {
         //her finder den role ud fra name og password
         String sql = "SELECT role FROM user WHERE name = ? AND password = ?";

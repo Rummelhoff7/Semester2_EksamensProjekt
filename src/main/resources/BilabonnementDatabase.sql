@@ -4,7 +4,7 @@ CREATE DATABASE BilabonnementDatabase;
 
 USE BilabonnementDatabase;
 
-
+-- Güney
 CREATE TABLE cars(
                      id INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
                      framenumber VARCHAR(100) UNIQUE,
@@ -18,13 +18,12 @@ CREATE TABLE cars(
                      limited BOOLEAN,
                      status VARCHAR(50),
                      img VARCHAR(50)
-
 );
 
 
 
 
-
+-- Güney
 INSERT INTO cars(framenumber, color, brand, model, equipment_level, steel_price, registration_fee, CO2_emissions, limited, status, img) VALUES
     ('5YJSA1E26HF000001', 'Hvid', 'Tesla', 'Model Y', 1, 240000.00, 0.00, 0.00, TRUE, 'Udlejet', 'teslayhvid.jpeg'),
     ('WBA3A5C54DF000002', 'Blå', 'BMW', '3 Series', 3, 180000.00, 250000.00, 130.00, TRUE, 'Udlejet', 'bmw3blue.jpeg'),
@@ -53,6 +52,7 @@ INSERT INTO cars(framenumber, color, brand, model, equipment_level, steel_price,
     ('ZFF67NFA4D0200025', 'Sort', 'Ferrari', 'Portofino M', 4, 1000000.00, 1700000.00, 270.00, FALSE, 'Udlejet', 'ferrariblack.webp');
 ;
 
+-- Mads
 CREATE TABLE electric_car (
     id INT PRIMARY KEY,
     battery_capacity DECIMAL(5,2),
@@ -62,10 +62,12 @@ CREATE TABLE electric_car (
         REFERENCES cars(id)
 );
 
+-- Mads
 INSERT INTO electric_car (id, battery_capacity, charging_time, range_per_charge) VALUES
     (1, 78.1, 8.15,514),
     (14,100, 7, 529);
 
+-- Mads
 CREATE TABLE leasing (
                          id INT AUTO_INCREMENT PRIMARY KEY UNIQUE ,
                          car_id INT NOT NULL,
@@ -78,6 +80,7 @@ CREATE TABLE leasing (
                              REFERENCES cars(id)
 );
 
+-- Mads
 INSERT INTO leasing (car_id, start_date, end_date, price, status, customer_info) VALUES
                         (1, '2025-05-05', '2025-08-02',40000.00, false, 'Markus Johansen'),
                         (2, '2025-05-02', '2025-10-02',75000.00, false, 'Jakob Hansen'),
@@ -88,6 +91,7 @@ INSERT INTO leasing (car_id, start_date, end_date, price, status, customer_info)
                         (7, '2025-01-02', '2026-01-24',88000.00, false, 'Amir Zakariasen')
 ;
 
+-- Güney
 CREATE TABLE damagereport (
                               id INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
                               car_id INT NOT NULL,
@@ -99,7 +103,7 @@ CREATE TABLE damagereport (
 
 
 
-
+-- Güney
 INSERT INTO damagereport (car_id, date) VALUES
     (8,'2025-05-02'),
     (2,'2025-05-06'),
@@ -114,6 +118,7 @@ INSERT INTO damagereport (car_id, date) VALUES
     (20,'2025-08-10')
 ;
 
+-- Güney
 CREATE TABLE damageitem (
                             id INT AUTO_INCREMENT PRIMARY KEY UNIQUE ,
                             dmg_id INT,
@@ -123,6 +128,7 @@ CREATE TABLE damageitem (
                                 REFERENCES damagereport(id)
 );
 
+-- Güney
 INSERT INTO damageitem (dmg_id, description, cost) VALUES
     (1, 'Manglende sidespejl', 500.00),
     (1, 'Underlig lugt fra AC', 750.00),
@@ -154,20 +160,21 @@ INSERT INTO damageitem (dmg_id, description, cost) VALUES
     (4, 'Flækket vindueshvisker', 8000.00)
 ;
 
+-- Joakim
 CREATE TABLE user (
                       id INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
                       name VARCHAR(100) NOT NULL UNIQUE,
                       password VARCHAR(50) NOT NULL,
                       role VARCHAR(50) NOT NULL
 );
-
+-- Joakim
 INSERT INTO user(name, password, role) VALUES
                     ('demo', 'demo', 'admin'),
                     ('Mads','1234', 'data_registration'),
                     ('guney','1234','mechanic'),
                     ('thamied','1234','business_developer')
 ;
-
+-- Joakim
 CREATE TABLE advance_car_sale(
     id int AUTO_INCREMENT PRIMARY KEY UNIQUE ,
     car_id INT NOT NULL UNIQUE ,
@@ -180,7 +187,7 @@ CREATE TABLE advance_car_sale(
                          );
 
 
-
+-- Joakim
 INSERT INTO advance_car_sale(car_id, terms, exceeded_kilometers, buying_price, collection_point) VALUES
     (1,'Garanti op til 6 måned', 200, 20560.20, 'Garage A'),
     (3,'ingen', 1000, 30560.20, 'Garage A'),

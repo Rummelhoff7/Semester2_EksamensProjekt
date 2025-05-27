@@ -19,6 +19,7 @@ public class AdvanceCarSaleRepository {
     @Autowired
     private DataSource dataSource;
 
+    //Joakim
     public void save (AdvanceCarSale advanceCarSale) {
         //Her putter jeg alt anden end buying_price in i advance_car_sale
         String sql = "INSERT INTO advance_car_sale(car_id,terms, exceeded_kilometers, collection_point) VALUES ( ?, ?, ?, ?)";
@@ -36,6 +37,7 @@ public class AdvanceCarSaleRepository {
         }
     }
 
+    //Joakim
     // her sætter jeg total prisen ind i advance_car_sale
     public void saveTotalPrice(AdvanceCarSale advanceCarSale) {
         //Her putter jeg buying_price ind
@@ -54,6 +56,7 @@ public class AdvanceCarSaleRepository {
         }
     }
 
+    //Joakim
     public CarSalesInfo save_price(int car_id) {
         //Her laver jeg en sql sætning som joiner damagereport(dr) med cars(c), damageitem(di) med damagereport(dr) og advance_car_sale(acs) med cars(c).
         String sql = "SELECT SUM(COALESCE(di.cost, 0)) AS total_damage_cost, " +
@@ -86,6 +89,7 @@ public class AdvanceCarSaleRepository {
         return null;
     }
 
+    //Joakim
     public int exceeded_kilometers(int car_id){
         //Her finder jeg exceeded_kilometer så jeg kan vise der på advanceCarSalePrice.html
         String sql = "SELECT exceeded_kilometers FROM advance_car_sale WHERE id = ?";
@@ -110,6 +114,7 @@ public class AdvanceCarSaleRepository {
         return exceeded_kilometers;
     }
 
+    //Joakim
     public ArrayList<AdvanceCarSale> getallAdvanceCarSale(){
         ArrayList<AdvanceCarSale> AdvanceCarSaleList = new ArrayList<>();
 
@@ -134,6 +139,7 @@ public class AdvanceCarSaleRepository {
         return AdvanceCarSaleList;
     }
 
+    //Joakim
     public ArrayList<DamageItem> getAllDamageItemWithCarID(int car_id){
         ArrayList<DamageItem> DamageItemList = new ArrayList<>();
         //Her vælger vi alle de biler som har status Available

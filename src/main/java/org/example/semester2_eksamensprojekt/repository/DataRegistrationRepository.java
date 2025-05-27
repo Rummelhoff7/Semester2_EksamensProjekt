@@ -18,6 +18,7 @@ public class DataRegistrationRepository {
     @Autowired // Spring annotation, som giver dig tilgang til en DataSource.
     private DataSource dataSource;
 
+    //Mads
     // Denne metode bliver kaldt fra DateRegistrationController, og den skal bruges til at GEMME en ny leasing i databasen.
     public void save(Leasing leasing){
         // SQL string, der indsætter den nye leasings attributer i databasen.
@@ -52,6 +53,7 @@ public class DataRegistrationRepository {
         }
     }
 
+    //Mads
     // Denne metode bliver kaldt fra DateRegistrationController, og den skal bruges til SLETTE en leasing fra databasen
     public void delete(int id) {
         // SQL streng, der sletter en leasing hvor id matcher.
@@ -74,6 +76,7 @@ public class DataRegistrationRepository {
         }
     }
 
+    //Mads
     // Denne metode bliver kaldt fra DateRegistrationController, og den skal bruges til at OPDATERE en leasing i databasen.
     public void update (Leasing updatedLeasing) {
         // SQL-streng, der opdaterer alle de skrevne attributter fra leasing, som har dette id.
@@ -108,6 +111,7 @@ public class DataRegistrationRepository {
         }
     }
 
+    //Mads
     public ArrayList<Leasing> getAllLeasings() {
         ArrayList<Leasing> leasingList = new ArrayList<>();
         String sql = "SELECT * FROM leasing";
@@ -135,6 +139,7 @@ public class DataRegistrationRepository {
     }
 
 
+    //Mads
     public Leasing getLeasingByID (int id) {
         Leasing leasing = new Leasing();
         // sql "id" strengen henvender sig til databasen. ? Er der hvor vi sætter id i metoden
@@ -163,6 +168,7 @@ public class DataRegistrationRepository {
         return leasing;
     }
 
+    //Mads
     public LocalDate calculateEndDate(LocalDate startDate, LocalDate givenEndDate, boolean status) throws IllegalArgumentException {
         if (status) {
             // Limited subscription: Fast på 5 måneder fra startDate
@@ -178,6 +184,7 @@ public class DataRegistrationRepository {
         }
     }
 
+    //Mads
     public boolean leasingExistsForCar(int car_id) {
         String sql = "SELECT COUNT(*) FROM leasing WHERE car_id = ?";
 
@@ -196,6 +203,7 @@ public class DataRegistrationRepository {
         return false;
     }
 
+    //Mads
     public boolean carExists(int car_id) {
         String sql = "SELECT COUNT(*) FROM cars WHERE id = ?";
 
@@ -216,6 +224,7 @@ public class DataRegistrationRepository {
         return false;
     }
 
+    //Mads
     public boolean leasingExistsForCarExcludingId(int car_id, int excludeLeasingId) {
         String sql = "SELECT COUNT(*) FROM leasing WHERE car_id = ? AND id <> ?";
 

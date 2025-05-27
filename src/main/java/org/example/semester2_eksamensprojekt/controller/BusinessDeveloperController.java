@@ -17,7 +17,7 @@ public class BusinessDeveloperController {
     @Autowired
     private BusinessDeveloperRepository businessDeveloperRepository;
 
-
+    //Joakim
     @GetMapping("/businessDeveloper")
     public String businessDeveloperPage(@RequestParam("user_role") String user_role, Model model) {
         //Her tjekker den om url har den rigtig user_role og sender en tilbage til start siden hvis den ikke har. Med en errorMessage

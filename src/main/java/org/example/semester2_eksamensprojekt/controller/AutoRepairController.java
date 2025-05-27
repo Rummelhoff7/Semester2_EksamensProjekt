@@ -16,7 +16,7 @@ public class AutoRepairController {
 
     @Autowired
     AutoRepairRepository autoRepairRepository;
-
+    // Güney
     // Viser startsiden for autoværksted afhængigt af brugerrolle (admin eller mekaniker)
     @GetMapping("/autoRepairHomePage")
     public String autoRepairPage(@RequestParam("user_role") String user_role, Model model) {
@@ -36,6 +36,7 @@ public class AutoRepairController {
         }
     }
 
+    //Güney
     // Viser formular til opdatering af en eksisterende skadesrapport
     @GetMapping("/updateDamageReport")
     public String updateDamageReport(@RequestParam("id") int id, Model model) {
@@ -44,6 +45,7 @@ public class AutoRepairController {
         return "updateDamagereport";
     }
 
+    //Güney
     // Viser tom autioRepair-siden
     @GetMapping("/autoRepair")
     public String autoRepair(@RequestParam("user_role") String user_role, Model model) {
@@ -57,6 +59,7 @@ public class AutoRepairController {
         }
     }
 
+    //Güney
     // Viser alle skadesrapporter og tilføjer tilhørende skader til hver rapport
     @GetMapping("/showDamagereports")
     public String showAllDamageReports(@RequestParam("user_role") String user_role, Model model) {
@@ -75,6 +78,7 @@ public class AutoRepairController {
         return "showDamagereports";
     }
 
+    //Güney
     // Gemmer en ny skadesrapport i databasen og sender brugeren videre til damageItems-formularen
     @PostMapping("/saveDamageReport")
     public String saveDamageReport(@RequestParam("car_id") int car_id,
@@ -84,6 +88,7 @@ public class AutoRepairController {
         return "redirect:/damageItems?dmg_id=" + Damagereport_id;
     }
 
+    //Güney
     // Gemmer en enkelt skade til en bestemt rapport
     @PostMapping("/saveDamageItems")
     public String saveDamageItem(@RequestParam("dmg_id") int dmg_id,
@@ -95,6 +100,7 @@ public class AutoRepairController {
         return "redirect:/damageItems?dmg_id=" + dmg_id;
     }
 
+    //Güney
     // Viser formular til at tilføje skader
     @GetMapping("/damageItems")
     public String showDamageItemForm(@RequestParam("dmg_id") int dmg_id, Model model) {
@@ -102,6 +108,7 @@ public class AutoRepairController {
         return "damageItems";
     }
 
+    //Güney
     // Sletter en hel skadesrapport og tilknyttede skader
     @PostMapping("/deleteDamageReport")
     public String deleteDamageReport(@RequestParam("id") int id) {
@@ -110,6 +117,7 @@ public class AutoRepairController {
         return "redirect:/showDamagereports?user_role=admin";
     }
 
+    // Güney
     // Gemmer opdateringer til en eksisterende skadesrapport
     @PostMapping("/saveUpdateDamageReport")
     public String saveUpdateDamageReport(@RequestParam("id") int id,
