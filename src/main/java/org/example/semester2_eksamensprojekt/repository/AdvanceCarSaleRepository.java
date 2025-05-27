@@ -83,8 +83,6 @@ public class AdvanceCarSaleRepository {
         } catch (SQLException e){
             e.printStackTrace();
         }
-
-
         return null;
     }
 
@@ -133,8 +131,6 @@ public class AdvanceCarSaleRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
         return AdvanceCarSaleList;
     }
 

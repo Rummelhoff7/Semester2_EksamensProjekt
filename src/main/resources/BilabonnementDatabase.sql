@@ -154,9 +154,6 @@ INSERT INTO damageitem (dmg_id, description, cost) VALUES
     (4, 'Flækket vindueshvisker', 8000.00)
 ;
 
-;
-
-
 CREATE TABLE user (
                       id INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
                       name VARCHAR(100) NOT NULL UNIQUE,
