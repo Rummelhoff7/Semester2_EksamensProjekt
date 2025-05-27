@@ -44,12 +44,11 @@ public class DataRegistrationController {
             return "index";
         }
     }
-
         //Mads
-        @GetMapping("/dataRegistration")
-        public String dataRegistration(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
-            // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
-            if(user_role.equals("data_registration") || user_role.equals("admin")) {
+    @GetMapping("/dataRegistration")
+    public String dataRegistration(@RequestParam ("user_role") String user_role, org.springframework.ui.Model model){
+        // Tjekker den om url har den rigtige user_role og sender den tilbage til start hvis den ikke har. Med en errormessage
+        if(user_role.equals("data_registration") || user_role.equals("admin")) {
             return "dataRegistration";
         } else {
             model.addAttribute("errorMessage", "Den rolle passer ikke til den side du prøvet at komme ind på");
