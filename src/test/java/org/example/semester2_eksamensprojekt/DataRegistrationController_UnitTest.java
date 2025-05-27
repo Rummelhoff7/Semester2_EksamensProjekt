@@ -35,11 +35,15 @@ public class DataRegistrationController_UnitTest {
     @DisplayName("deleteLeasing Happy flow test")
     public void deleteLeasingHappyFlow_Test(){
         //Assumptions
+            //Test data
         int leasingId = 1;
         //Execution
+            //Kalder den metode som skal testes
         String result = dataRegistrationController.deleteLeasing(leasingId);
         // Validation
+            //
         verify(dataRegistrationRepository).delete(leasingId);
+            // Assert'
         assertEquals("redirect:/dataRegistrationAllLeasings?user_role=data_registration", result);
     }
 
@@ -48,7 +52,6 @@ public class DataRegistrationController_UnitTest {
     public void deleteLeasingExceptionFlow_Test(){
         // Assumptions
         int leasingId = 1;
-        //given(dataRegistrationController.deleteLeasing(leasingId)).willReturn(null);
 
         // Execution
         String result = dataRegistrationController.deleteLeasing(leasingId);
