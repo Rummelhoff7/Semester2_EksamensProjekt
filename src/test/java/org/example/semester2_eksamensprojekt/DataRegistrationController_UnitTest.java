@@ -53,15 +53,20 @@ public class DataRegistrationController_UnitTest {
     @DisplayName("deleteLeasing Exception flow test")
     public void deleteLeasingExceptionFlow_Test(){
         // Assumptions
+            //Test data
         int leasingId = 1;
-
+            // Vi kaster en exception i metoden "delete()" i mockobjektet(Mockito, når den skal slette testede leasing. (ExceptionFlow)
+            // Simulerer exception flow i metoden (Database error).
         doThrow(new RuntimeException("Database error")).when(dataRegistrationRepository).delete(leasingId);
 
         // Execution
+            //Kalder den metode som skal testes.
         String result = dataRegistrationController.deleteLeasing(leasingId);
 
         // Validation
+            // Tjekker at controlleren har kalt metoden "delete()" i repositorien.
         verify( dataRegistrationRepository).delete(leasingId);
+            // Tjekker at metoden returnerer den rigtige URL.
         assertEquals("redirect:/dataRegistrationAllLeasings?user_role=data_registration", result);
     }
 
