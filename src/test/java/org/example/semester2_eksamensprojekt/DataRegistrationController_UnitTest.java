@@ -36,16 +36,16 @@ public class DataRegistrationController_UnitTest {
     @DisplayName("deleteLeasing Happy flow test")
     public void deleteLeasingHappyFlow_Test(){
         //Assumptions
-            //Test data
+        //Test data
         int leasingId = 1;
         //Execution
-            //Kalder den metode som skal testes.
+        //Kalder den metode som skal testes.
         String result = dataRegistrationController.deleteLeasing(leasingId);
         // Validation
-            // Tjekker om controlleren har kalt metoden "delete()" i repositorien.
-            // Da repositorien er mocked, vil ingen "rigtig" leasing blive slettet.
+        // Tjekker om controlleren har kalt metoden "delete()" i repositorien.
+        // Da repositorien er mocked, vil ingen "rigtig" leasing blive slettet.
         verify(dataRegistrationRepository).delete(leasingId);
-            // "Asserter" metoden returnerer den rigtige URL, som stemmer overens med controlleren.
+        // "Asserter" metoden returnerer den rigtige URL, som stemmer overens med controlleren.
         assertEquals("redirect:/dataRegistrationAllLeasings?user_role=data_registration", result);
     }
 
@@ -53,23 +53,22 @@ public class DataRegistrationController_UnitTest {
     @DisplayName("deleteLeasing Exception flow test")
     public void deleteLeasingExceptionFlow_Test(){
         // Assumptions
-            //Test data
+        //Test data
         int leasingId = 1;
-            // Vi kaster en exception i metoden "delete()" i mockobjektet(Mockito, når den skal slette testede leasing. (ExceptionFlow)
-            // Simulerer exception flow i metoden (Database error).
+        // Vi kaster en exception i metoden "delete()" i mockobjektet(Mockito, når den skal slette testede leasing. (ExceptionFlow)
+        // Simulerer exception flow i metoden (Database error).
         doThrow(new RuntimeException("Database error")).when(dataRegistrationRepository).delete(leasingId);
 
         // Execution
-            //Kalder den metode som skal testes.
+        //Kalder den metode som skal testes.
         String result = dataRegistrationController.deleteLeasing(leasingId);
 
         // Validation
-            // Tjekker at controlleren har kalt metoden "delete()" i repositorien.
+        // Tjekker at controlleren har kalt metoden "delete()" i repositorien.
         verify( dataRegistrationRepository).delete(leasingId);
-            // Tjekker at metoden returnerer den rigtige URL.
+        // Tjekker at metoden returnerer den rigtige URL.
         assertEquals("redirect:/dataRegistrationAllLeasings?user_role=data_registration", result);
     }
-
     @Test
     @DisplayName("Update Leasing Happy Flow Test")
     public void updateLeasingHappyFlow_Test() {

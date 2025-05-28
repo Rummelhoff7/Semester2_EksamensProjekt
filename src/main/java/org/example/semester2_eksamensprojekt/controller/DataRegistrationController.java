@@ -99,7 +99,7 @@ public class DataRegistrationController {
     //Mads
     @PostMapping("/deleteLeasing")
     public String deleteLeasing(@RequestParam("id") int id){
-        // Laver en try catch til at slette objektet i databasen, dette er gjort ift. exception flow test.
+        // Laver en try catch til at slette objektet i databasen, dette er gjort ift. exception flow test eksempel.
         try {
             dataRegistrationRepository.delete(id);
         } catch (Exception e) {
