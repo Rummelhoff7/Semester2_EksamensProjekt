@@ -1,4 +1,6 @@
 package org.example.semester2_eksamensprojekt.model;
+// Vi er klar over Java konventionen er f.eks. = buyingPrice og ikke buying_price.
+// Vi har valgt at beholde det sådan, da vi ikke kan refactor det hele om ift. html siderne. Det er ikke tiden værd for os at rette manuelt alle steder.
 
 import java.time.LocalDate;
 
@@ -12,14 +14,6 @@ public class Leasing {
     private String customer_info; // for- og efternavn på kunden. obs. ikke personfølsomt.
 
     public Leasing(int car_id, LocalDate start_date, LocalDate end_date, double price, boolean status, String customer) {
-        /*
-        if (end_date.isBefore(start_date)) {
-            throw new IllegalArgumentException("End date cannot be before start date");
-        }
-        if (price < 0) {
-            throw new IllegalArgumentException("Price cannot be negative");
-        }
-         */
         this.car_id = car_id;
         this.start_date = start_date;
         this.end_date = end_date;

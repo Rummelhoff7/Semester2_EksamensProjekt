@@ -23,6 +23,8 @@ public class DataRegistrationController {
     @Autowired
     CarRepository carRepository;
 
+    // user.Role håndtering -> = Joakim
+
     //Mads
     @GetMapping("/dataRegistrationHomePage")
     public String mainPage(@RequestParam ("user_role") String user_role, Model model){
@@ -69,17 +71,18 @@ public class DataRegistrationController {
                                 @RequestParam ("customer_info") String customer,
                                 Model model) {
 
-        // Metode der tjekker om bilen findes.
+        // Metode, der tjekker om bilen findes.
         if (!dataRegistrationRepository.carExists(car_id)) {
             model.addAttribute("errorMessage", "Der findes ikke en bil med dette vognnummer");
             return "dataRegistration";
         }
-        // Metode der tjekker om leasing allerede findes
+        // Metode, der tjekker om leasing allerede findes
         if (dataRegistrationRepository.leasingExistsForCar(car_id)) {
             model.addAttribute("errorMessage", "Der findes allerede en leasing på denne bil");
             return "dataRegistration";
         }
 
+        // Metode, som tjekker om regner slutdato ud ift. abonnement.
         try {
             end_date = dataRegistrationRepository.calculateEndDate(start_date, end_date, status);
         } catch (IllegalArgumentException e) {
@@ -103,7 +106,7 @@ public class DataRegistrationController {
         try {
             dataRegistrationRepository.delete(id);
         } catch (Exception e) {
-            //
+            // error println.
             System.err.println("Kunne ikke slette leasing med id: " + id);
         }
 
@@ -124,21 +127,22 @@ public class DataRegistrationController {
                                      @RequestParam(value = "status", defaultValue = "false") boolean status,
                                      @RequestParam("customer_info") String customer_info,
                                      Model model){
-
+        // Her er det nødvendigt at tilføje ny leasing på alle disse metoder, da objektet ikke skal forsvinde, hvis metoderne bliver kaldt.
+        // Metode, der tjekker om bilen findes.
         if (!dataRegistrationRepository.carExists(car_id)) {
             model.addAttribute("errorMessage", "Der findes ikke en bil med dette vognnummer");
             model.addAttribute("leasing", new Leasing(id, car_id, start_date, end_date, price, status, customer_info));
             return "dataRegistrationUpdateLeasing";
         }
 
-
+        // Metode, som tjekker om regner slutdato ud ift. abonnement.
         if (dataRegistrationRepository.leasingExistsForCarExcludingId(car_id, id)) {
             model.addAttribute("errorMessage", "Der findes allerede en leasing på denne bil");
             model.addAttribute("leasing", new Leasing(id, car_id, start_date, end_date, price, status, customer_info));
             return "dataRegistrationUpdateLeasing";
         }
 
-
+        // Opretter en ny Leasing-objekt, som indeholder de nye attributer.
         try {
             end_date = dataRegistrationRepository.calculateEndDate(start_date, end_date, status);
         } catch (IllegalArgumentException e) {
@@ -147,7 +151,7 @@ public class DataRegistrationController {
             return "dataRegistrationUpdateLeasing";
         }
 
-
+        // Opretter ny leasing objekt, og sætter ind i database.
         Leasing leasing = new Leasing (id, car_id, start_date, end_date, price, status, customer_info);
         dataRegistrationRepository.update(leasing);
 
@@ -162,7 +166,7 @@ public class DataRegistrationController {
             ArrayList<Leasing> leasingList;
             leasingList = dataRegistrationRepository.getAllLeasings();
 
-            //bruges med exception flow test.
+            //bruges ift. exception flow test.
             if (leasingList == null || leasingList.isEmpty() ) {
                 return "redirect:/dataRegistrationHomePage?user_role=" + user_role;
             }
@@ -178,12 +182,15 @@ public class DataRegistrationController {
 
 
     //Mads
+    // GetMapping for opdater leasing. Den skal have et id, som bliver fundet af metode.
+    // Hvis leasing ikke bliver eksisterer, redirecter vi til http siden med alle leasingerne.
     @GetMapping("/getUpdateLeasing")
     public String updateLeasing(@RequestParam("id") int id, Model model) {
         Leasing leasing = dataRegistrationRepository.getLeasingByID(id);
         if (leasing == null) {
             return "redirect:/dataRegistrationAllLeasings?user_role=data_registration";
         }
+        // Leasing objektet bliver hentet fra database, og tilføjes til model. Gøres tilgængelig i html (spring)
         model.addAttribute("leasing",leasing);
         return "dataRegistrationUpdateLeasing";
     }

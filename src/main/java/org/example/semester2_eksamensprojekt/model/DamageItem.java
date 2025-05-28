@@ -1,4 +1,6 @@
 package org.example.semester2_eksamensprojekt.model;
+// Vi er klar over Java konventionen er f.eksk = buyingPrice og ikke buying_price.
+// Vi har valgt at beholde det sådan, da vi ikke kan refactor det hele om ift. html siderne. Det er ikke tiden værd for os at rette manuelt alle steder.
 
 public class DamageItem {
     private int id;

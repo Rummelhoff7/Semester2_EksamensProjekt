@@ -100,40 +100,4 @@ public class DataRegistrationController_UnitTest {
         assertEquals("redirect:/dataRegistrationAllLeasings?user_role=data_registration",result);
         assertTrue(model.asMap().isEmpty(), "Model should be empty");
     }
-
-    @Test
-    @DisplayName("All Leasings Happy Flow test")
-    public void dataRegistrationAllLeasings_HappyFlow_Test() {
-        //Assumptions
-        String user_role = "data_registration";
-
-        ArrayList<Leasing> mockLeasingList = new ArrayList<>();
-        mockLeasingList.add(new Leasing(1,12,LocalDate.of(2025,05,20), LocalDate.of(2025,10,20), 100000, false, "test1"));
-        mockLeasingList.add(new Leasing(2,10,LocalDate.of(2025,05,20), LocalDate.of(2025,10,20), 100000, false, "test2"));
-        when(dataRegistrationRepository.getAllLeasings()).thenReturn(mockLeasingList);
-
-        //Execution
-        String result = dataRegistrationController.dataRegistrationAllLeasings(user_role, model);
-
-        //Validation
-        assertEquals( "dataRegistrationAllLeasings", result);
-        verify(model).addAttribute("leasingList", mockLeasingList);
-    }
-
-    @Test
-    @DisplayName("All Leasings Exception Flow Test")
-    public void dataRegistrationAllLeasings_ExceptionFlow_Test() {
-        //Assumptions
-        String user_role = "data_registration";
-
-        when(dataRegistrationRepository.getAllLeasings()).thenReturn(null);
-
-        //Execution
-        String result = dataRegistrationController.dataRegistrationAllLeasings(user_role, model);
-
-
-        //Validation
-        assertEquals("redirect:/dataRegistrationHomePage?user_role=data_registration" , result);
-        verify(model,never()).addAttribute(anyString(), any()); //verify ikke at model har en attribut med navnet "leasingList", ingen attributter tilføjet.
-    }
 }

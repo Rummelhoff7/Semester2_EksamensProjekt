@@ -56,24 +56,25 @@ public class DataRegistrationRepository_IntegrationTest {
         assertTrue(foundTestLeasing, "Should find the test leasing in the list");
     }
 
+    //Denne test tjekker om en leasing allerede eksisterer på en bil
     @Test
     @DisplayName("Check if a leasing already exist for a car")
     public void LeasingExistsForCar_HappyFlow_Test() {
         // Assumptions
+            // Test data.
         int testCarId = 1;
         LocalDate startDate = LocalDate.now();
+            // Opretter ny leasingobjekt leasingTest.
         Leasing leasingTest = new Leasing(testCarId, startDate, startDate.plusMonths(5), 3500.0, true, "Test");
 
         // Execution
+            // Gemmer leasingtest i repository (integration)
         dataRegistrationRepository.save(leasingTest);
 
         // Validations
+            // assertTrue = den oprettede leasingtest burde findes med dette testid.
         assertTrue(dataRegistrationRepository.leasingExistsForCar(testCarId), "Leasing should exist for car");
+            // assertFalse = Der burde ikke være en leasing med dette test id, da det ikke findes i databasen.
         assertFalse(dataRegistrationRepository.leasingExistsForCar(1001230344), "Leasing should not exist for car");
     }
-
-
-
-
-
 }

@@ -1,5 +1,5 @@
 package org.example.semester2_eksamensprojekt.model;
-
+//Mads
 // Bilabonnement leaser også Elbiler.
 // Her nedarver ElectricCar fra Car (det er et it-is forhold)
 // ElectricCar har samme attributter som Car, dog med lidt ekstra som giver mening for en elbil.
