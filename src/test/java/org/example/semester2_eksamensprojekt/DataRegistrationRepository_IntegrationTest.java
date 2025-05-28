@@ -23,6 +23,7 @@ public class DataRegistrationRepository_IntegrationTest {
     private DataRegistrationRepository dataRegistrationRepository;
 
     // Denne test tjekker getAllLeasing() fra DataRegRepository, som vi forventer et happy flow.
+    //Mads
     @Test
     @DisplayName("Get all leasings happy flow integration test")
     public void getAllLeasing_HappyFlow_Test() {
@@ -57,6 +58,7 @@ public class DataRegistrationRepository_IntegrationTest {
     }
 
     //Denne test tjekker om en leasing allerede eksisterer på en bil
+    //Mads
     @Test
     @DisplayName("Check if a leasing already exist for a car")
     public void LeasingExistsForCar_HappyFlow_Test() {
